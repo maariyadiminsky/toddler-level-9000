@@ -7,9 +7,9 @@
 * **Are you waking up from restless nights desperately wishing** your child could be as awesome as Vegeta!?
 
 
-##### WELL LOOK NO FURTHER.
+#### WELL LOOK NO FURTHER.
 
-Play more 10+ fun family games and activities in one simple app! Get your baby's brain to **Toddler Level 9000**! 
+Play more than 10+ fun-filled family games and activities in one simple app! Get your baby's brain to **Toddler Level 9000**! 
 
 Well more specifically—
 
