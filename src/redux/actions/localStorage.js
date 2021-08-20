@@ -5,22 +5,23 @@ import {
 
 // note: localStorage check exists to makes sure browser 
 // has a localStorage / user not using incognito mode
-export const getLocalStorageStateAndSetInRedux = (userId) => {
+export const getLocalStorageStateAndSetInRedux = () => {
     if (window.localStorage) {
-        const localStorageReduxStateForUser = window.localStorage.getItem(userId);
+        return async(dispatch, getState) => {
+            const localStorageReduxStateForUser = window.localStorage.getItem(getState().auth.currentUserId);
 
-        return ({
-            type: GET_LOCAL_STORAGE_REDUX_STATE,
-            payload: localStorageReduxStateForUser ? JSON.parse(window.localStorage.getItem(userId)) : {}
-        });
+            dispatch({
+                type: GET_LOCAL_STORAGE_REDUX_STATE,
+                payload: localStorageReduxStateForUser ? JSON.parse(localStorageReduxStateForUser) : {}
+            });
+        }
     } else showLocalStorageMissingErrorInBrowser();
 }
 
-export const setLocalStorageStateAndSetInRedux = (userId) => {
+export const setLocalStorageStateAndSetInRedux = () => {
     if (window.localStorage) {
         return async(dispatch, getState) => {
-            console.log("in set localstorage", JSON.stringify(getState()));
-            window.localStorage.setItem(userId, JSON.stringify(getState()));
+            window.localStorage.setItem(getState().auth.currentUserId, JSON.stringify(getState()));
     
             dispatch({
                 type: SET_LOCAL_STORAGE_REDUX_STATE

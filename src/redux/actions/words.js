@@ -1,0 +1,1 @@
+import { GET_WORD_DATA } from "./types";
