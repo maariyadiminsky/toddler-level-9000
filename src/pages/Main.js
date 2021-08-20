@@ -3,8 +3,8 @@ import React  from "react";
 import { useGetLocalStorageReduxState, useSetLocalStorageReduxState } from "../hooks/localStorage";
 
 const Main = () => {
-    useGetLocalStorageReduxState();
-    
+    // useGetLocalStorageReduxState("add user id here eventually");
+
     return (
         <div>Main</div>
     );
