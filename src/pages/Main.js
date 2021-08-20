@@ -1,10 +1,10 @@
 import React  from "react";
 
-import { useGetLocalStorageStateIntoRedux } from "../hooks/localStorage";
+import { useGetLocalStorageReduxState, useSetLocalStorageReduxState } from "../hooks/localStorage";
 
 const Main = () => {
-    useGetLocalStorageStateIntoRedux();
-
+    useGetLocalStorageReduxState();
+    
     return (
         <div>Main</div>
     );
