@@ -28,7 +28,11 @@ const AuthButton = () => {
   );
 
   return (
-    <button onClick={handleButtonClick}>{renderButtonText()}</button>
+    <button 
+      className="font-poppins"
+      onClick={handleButtonClick}>
+        {renderButtonText()}
+    </button>
   );
 };
 

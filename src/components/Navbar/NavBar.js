@@ -11,7 +11,7 @@ const NavBar = () => {
                 <Link to="/">
                     <img className="w-40" src={logo} alt="logo" />
                 </Link>
-                {/* <AuthButton /> */}
+                <AuthButton />
             </div>
         </nav>
     )
