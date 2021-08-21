@@ -18,6 +18,6 @@ export const dictionaryAPI = axios.create({
     baseURL: DICTIONARY_API_BASE_URL
 });
 
-export const toddlerSocialWordsApi = axios.create({
+export const toddlerSocialWordsAPI = axios.create({
     baseURL: TODDLER_SOCIAL_WORDS_API_BASE_URL
 });

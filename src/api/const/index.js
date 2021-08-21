@@ -8,3 +8,6 @@ export const DICTIONARY_WORD_ENDPOINT = (word) => `/${word}`;
 
 // toddlerSocialWords API endpoints
 export const TODDLER_SOCIAL_WORDS_API_BASE_URL = "https://toddler-social-words-api.herokuapp.com";
+export const TODDLER_SOCIAL_WORDS_FIRST_WORDS_ENDPOINT = "/first-ten-words";
+export const TODDLER_SOCIAL_WORDS_SECOND_WORDS_ENDPOINT = "/second-ten-words";
+export const TODDLER_SOCIAL_WORDS_THIRD_WORDS_ENDPOINT = "/third-ten-words";

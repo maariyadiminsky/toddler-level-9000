@@ -6,12 +6,12 @@ import { useGetLocalStorageReduxState } from "../hooks/localStorage";
 
 const Main = () => {
     // useGetLocalStorageReduxState("add user id here eventually");
-    const [word, setWord] = useState("yellow");
+    const [word, setWord] = useState("red");
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // dispatch(fetchWordData("colors", word))
+        // dispatch(fetchWordData("social"))
     }, [word])
 
     return (
