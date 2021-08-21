@@ -9,7 +9,7 @@ import {
 export const unsplashAPI = axios.create({
     baseURL: UNSPLASH_API_BASE_URL,
     headers: {
-        Authorization: process.env.REACT_APP_UNSPLASH_CLIENT_ID,
+        Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_CLIENT_ID}`,
         "Accept-Version": "v1"
     }
 });

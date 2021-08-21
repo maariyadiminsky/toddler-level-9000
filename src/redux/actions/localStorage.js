@@ -1,30 +1,35 @@
 import {
-    GET_LOCAL_STORAGE_REDUX_STATE,
-    SET_LOCAL_STORAGE_REDUX_STATE
+    GET_LOCAL_STORAGE_DATA,
+    SET_LOCAL_STORAGE_DATA
 } from "./types";
 
 // note: localStorage check exists to makes sure browser 
 // has a localStorage / user not using incognito mode
-export const getLocalStorageStateAndSetInRedux = () => {
+export const getLocalStorageData = () => {
     if (window.localStorage) {
         return async(dispatch, getState) => {
-            const localStorageReduxStateForUser = window.localStorage.getItem(getState().auth.currentUserId);
+            const { auth } = getState();
+            const localStorageReduxStateForUser = window.localStorage.getItem(auth.currentUserId);
+            const data = localStorageReduxStateForUser ? JSON.parse(localStorageReduxStateForUser) : {};
 
             dispatch({
-                type: GET_LOCAL_STORAGE_REDUX_STATE,
-                payload: localStorageReduxStateForUser ? JSON.parse(localStorageReduxStateForUser) : {}
+                type: GET_LOCAL_STORAGE_DATA,
+                payload: data
             });
+
+            return data;
         }
     } else showLocalStorageMissingErrorInBrowser();
 }
 
-export const setLocalStorageStateAndSetInRedux = () => {
+export const setLocalStorageData = () => {
     if (window.localStorage) {
         return async(dispatch, getState) => {
-            window.localStorage.setItem(getState().auth.currentUserId, JSON.stringify(getState()));
+            const { localStorage } = getState();
+            window.localStorage.setItem(getState().auth.currentUserId, JSON.stringify(localStorage));
     
             dispatch({
-                type: SET_LOCAL_STORAGE_REDUX_STATE
+                type: SET_LOCAL_STORAGE_DATA
             });
         }
     } else showLocalStorageMissingErrorInBrowser();
