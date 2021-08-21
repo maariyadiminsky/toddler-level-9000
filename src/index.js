@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import Auth0ProviderWithHistory from "./components/hoc/Auth0ProviderWithHistory";
+import Auth0ProviderWithHistory from "./components/hoc/auth/Auth0ProviderWithHistory";
 
 import store from "./redux/store";
 
