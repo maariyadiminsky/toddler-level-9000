@@ -4,6 +4,9 @@ import { useDispatch } from "react-redux";
 import { fetchWordData } from "../redux/actions/words";
 import { useGetLocalStorageReduxState } from "../hooks/localStorage";
 
+import AuthButton from "../components/AuthButton";
+import User from "../components/User";
+
 const Main = () => {
     // useGetLocalStorageReduxState("add user id here eventually");
     const [word, setWord] = useState("red");
@@ -15,7 +18,11 @@ const Main = () => {
     }, [word])
 
     return (
-        <div>Main</div>
+        <div>
+            <AuthButton />
+            <br />
+            <User />
+        </div>
     );
 }
 
