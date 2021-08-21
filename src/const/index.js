@@ -8,9 +8,3 @@ export const SOCIAL_TYPE = "social";
 export const SOCIAL_TYPE_FIRST = "firstTenWords";
 export const SOCIAL_TYPE_SECOND = "secondTenWords";
 export const SOCIAL_TYPE_THIRD = "thirdTenWords";
-
-// errors
-
-export const FETCH_ERROR_TYPES = {
-    WORD_DOES_NOT_EXIST: "No data exists for that word!"
-}

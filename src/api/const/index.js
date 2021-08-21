@@ -11,3 +11,8 @@ export const TODDLER_SOCIAL_WORDS_API_BASE_URL = "https://toddler-social-words-a
 export const TODDLER_SOCIAL_WORDS_FIRST_WORDS_ENDPOINT = "/first-ten-words";
 export const TODDLER_SOCIAL_WORDS_SECOND_WORDS_ENDPOINT = "/second-ten-words";
 export const TODDLER_SOCIAL_WORDS_THIRD_WORDS_ENDPOINT = "/third-ten-words";
+
+// errors
+export const FETCH_ERROR_TYPES = {
+    WORD_DOES_NOT_EXIST: "No data exists for that word!"
+}
