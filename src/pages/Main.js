@@ -1,27 +1,20 @@
-import React, { useState, useEffect }  from "react";
-import { useDispatch } from "react-redux";
-
-import { fetchWordData } from "../redux/actions/words";
-import { useGetLocalStorageReduxState } from "../hooks/localStorage";
+import React from "react";
+import { useGetLocalStorageData } from "../hooks/localStorage";
 
 import AuthButton from "../components/AuthButton";
-import User from "../components/User";
 
 const Main = () => {
-    // useGetLocalStorageReduxState("add user id here eventually");
-    const [word, setWord] = useState("red");
+    // gets localStorage when userId exists
+    useGetLocalStorageData();
 
-    const dispatch = useDispatch();
+    // later show Loading in modal while userId is not created and why localStorage data has not be populated
 
-    useEffect(() => {
-        // dispatch(fetchWordData("social"))
-    }, [word])
+    // dispatch(fetchWordData("social"); import { fetchWordData } from "../redux/actions/words";
 
     return (
         <div>
             <AuthButton />
             <br />
-            <User />
         </div>
     );
 }

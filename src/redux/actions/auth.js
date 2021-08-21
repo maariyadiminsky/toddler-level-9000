@@ -1,7 +1,8 @@
-import { GET_CURRENT_USER_ID } from "./types";
+import { SET_USER_ID } from "./types";
 
 // todo: setup auth later with Google Auth or 0Auth.
 
-const signIn = () => {
-    // send userID to reducer
-}
+export const setUserId = (userId) => ({
+    type: SET_USER_ID,
+    payload: userId.includes("|") ? userId.split("|").pop() : userId
+});

@@ -1,13 +1,13 @@
-import { GET_CURRENT_USER_ID } from "../actions/types";
+import { SET_USER_ID } from "../actions/types";
 
 const INITIAL_STATE = {
-    currentUserId: ""
+    userId: ""
 };
 
 export default (state = INITIAL_STATE, { type, payload }) => {
     switch(type) {
-        case GET_CURRENT_USER_ID:
-            return { ...state, currentUserId: payload }
+        case SET_USER_ID:
+            return { ...state, userId: payload }
         default: 
             return state;
     }

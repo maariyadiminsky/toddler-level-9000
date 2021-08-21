@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react"; 
 
+import { setUserId } from "../redux/actions/auth"
+
 const AuthButton = () => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user && user.sub) {
+      dispatch(setUserId(user.sub));
+    }
+  }, [user, dispatch])
 
   const handleButtonClick = () => {
     if (isAuthenticated) {
       logout({ returnTo: window.location.origin });
     } else {
-      console.log("calling loginWithRedirect");
       loginWithRedirect();
     }
   }

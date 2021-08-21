@@ -1,0 +1,1 @@
+export const getUserIdSelector = ({ auth: { userId }}) => userId;
