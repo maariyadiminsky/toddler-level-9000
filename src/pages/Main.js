@@ -11,7 +11,7 @@ const Main = () => {
     // if they try to click parent section, make sure they have a code, if not ask them to create one
 
     return (
-        <div>
+        <div className="min-h-screen bg-indigo-500">
             <NavBar />
             <br />
         </div>
