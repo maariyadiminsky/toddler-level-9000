@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        poppins: ["Poppins", ...defaultTheme.fontFamily.sans]
+        poppins: ["Poppins", ...defaultTheme.fontFamily.sans],
       },
       container: {
         center: true,

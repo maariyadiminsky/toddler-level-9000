@@ -23,7 +23,7 @@ const AuthButton = () => {
 
   return (
     <button 
-      className="font-poppins"
+      className="font-poppins font-bold tracking-wide text-2xl text-blue-300"
       onClick={handleButtonClick}>
         Parents
     </button>
