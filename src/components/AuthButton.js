@@ -16,22 +16,16 @@ const AuthButton = () => {
   }, [user, dispatch])
 
   const handleButtonClick = () => {
-    if (isAuthenticated) {
-      logout({ returnTo: window.location.origin });
-    } else {
+    if (!isAuthenticated) {
       loginWithRedirect();
     }
   }
-
-  const renderButtonText = () => (
-    isAuthenticated ? "Log out" : "Log in"
-  );
 
   return (
     <button 
       className="font-poppins"
       onClick={handleButtonClick}>
-        {renderButtonText()}
+        Parents
     </button>
   );
 };

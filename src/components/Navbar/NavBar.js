@@ -9,7 +9,11 @@ const NavBar = () => {
         <nav className="p-4 bg-indigo-600">
             <div className="md:container px-4 md:px-0 mx-auto flex justify-between">
                 <Link to="/">
-                    <img className="w-40" src={logo} alt="logo" />
+                    <img 
+                        className="w-40" 
+                        src={logo} 
+                        alt="logo"
+                    />
                 </Link>
                 <AuthButton />
             </div>

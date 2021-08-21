@@ -2,7 +2,11 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
 
-import { AUTH0_AUDIENCE, AUTH0_SCOPE } from "../../../const";
+import { 
+  AUTH0_AUDIENCE, 
+  AUTH0_SCOPE,
+  AUTH0_REDIRECT_URI_AFTER_LOGIN
+} from "../../../const";
 
 const Auth0ProviderWithHistory = ({ children }) => {
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;
@@ -18,7 +22,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      redirectUri={window.location.origin}
+      redirectUri={AUTH0_REDIRECT_URI_AFTER_LOGIN}
       onRedirectCallback={onRedirectCallback}    
       audience={AUTH0_AUDIENCE}
       scope={AUTH0_SCOPE}
