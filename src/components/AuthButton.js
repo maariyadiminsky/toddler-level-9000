@@ -23,7 +23,9 @@ const AuthButton = () => {
     }
   }
 
-  const renderButtonText = () => isAuthenticated ? "Log out" : "Log in";
+  const renderButtonText = () => (
+    isAuthenticated ? "Log out" : "Log in"
+  );
 
   return (
     <button onClick={handleButtonClick}>{renderButtonText()}</button>

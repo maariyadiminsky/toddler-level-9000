@@ -1,26 +1,18 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchWordData } from "../redux/actions/words";
+import React from "react";
 import { useGetLocalStorageData } from "../hooks/localStorage";
 
-import AuthButton from "../components/AuthButton";
+import NavBar from "../components/Navbar/NavBar";
 
 const Main = () => {
     // gets localStorage when userId exists
-    useGetLocalStorageData();
+    // useGetLocalStorageData();
 
-    // later show Loading in modal while userId is not created and why localStorage data has not be populated
-
-    // dispatch(fetchWordData("social"); import { fetchWordData } from "../redux/actions/words";
-
-    // const dispatch = useDispatch();
-    // useEffect(() => {
-    //     dispatch(fetchWordData("social"));
-    // }, [dispatch])
+    // check if user is authenticated when they try to click parent section or a game
+    // if they try to click parent section, make sure they have a code, if not ask them to create one
 
     return (
         <div>
-            <AuthButton />
+            <NavBar />
             <br />
         </div>
     );
