@@ -10,7 +10,7 @@ import {
     TODDLER_SOCIAL_WORDS_SECOND_WORDS_ENDPOINT,
     TODDLER_SOCIAL_WORDS_THIRD_WORDS_ENDPOINT,
 
-    FETCH_ERROR_TYPES
+        FETCH_ERROR_TYPES
 } from "../../api/const";
 import { 
     GET_MAIN_WORD_DATA,
@@ -61,9 +61,9 @@ export const fetchWordData = (
 const fetchMainWords = (wordType, word) => (
     async(dispatch) => {
         // first fetch image data
-        const imageData = await findImageDataForMainWord(word, dispatch);
+        const imageData = await fetchImageDataForMainWord(word, dispatch);
         // second fetch audio data
-        const audioData = await findAudioDataForMainWord(word, dispatch);
+        const audioData = await fetchAudioDataForMainWord(word, dispatch);
 
         // set the data in redux
         if (imageData && audioData) {
@@ -83,7 +83,7 @@ const fetchMainWords = (wordType, word) => (
 const fetchSocialWords = ({ socialType }) => (
     async(dispatch) => {
         const endpoint = findEndpointForSocialWordType(socialType);
-        const data = await findSocialWordsData(endpoint, dispatch);
+        const data = await fetchSocialWordsData(endpoint, dispatch);
         
         // set the data in redux
         if (data) {
@@ -95,7 +95,7 @@ const fetchSocialWords = ({ socialType }) => (
     }
 )
 
-const findImageDataForMainWord = (word, dispatch) => (
+const fetchImageDataForMainWord = (word, dispatch) => (
     unsplashAPI.get(UNSPLASH_SEARCH_PHOTOS_ENDPOINT, {
         params: {
             "query": word,
@@ -120,7 +120,7 @@ const findImageDataForMainWord = (word, dispatch) => (
     })
 );
 
-const findAudioDataForMainWord = (word, dispatch) => (
+const fetchAudioDataForMainWord = (word, dispatch) => (
     dictionaryAPI.get(DICTIONARY_WORD_ENDPOINT(word))
         .then(({ data }) => {
             if (data && data[0].phonetics && data[0].phonetics.length > 0) {
@@ -138,7 +138,7 @@ const findAudioDataForMainWord = (word, dispatch) => (
         })
 );
 
-const findSocialWordsData = (endpoint, dispatch) => (
+const fetchSocialWordsData = (endpoint, dispatch) => (
     toddlerSocialWordsAPI.get(endpoint)
     .then(({ data }) => {
         if (!data || data.length === 0) {
