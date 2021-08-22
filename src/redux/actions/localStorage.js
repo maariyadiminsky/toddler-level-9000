@@ -3,7 +3,9 @@ import {
     SET_LOCAL_STORAGE_DATA,
     ERROR_FETCHING_LOCAL_STORAGE_DATA,
 
-    FETCH_ERROR_TYPES
+    FETCH_ERROR_TYPES,
+    RESPONSE_SUCCESS,
+    RESPONSE_ERROR
 } from "./types";
 
 // note: localStorage check exists to makes sure browser 
@@ -22,6 +24,10 @@ export const getLocalStorageData = (userId) => {
                         type: GET_LOCAL_STORAGE_DATA,
                         payload: data
                     });
+
+                    return {
+                        status: RESPONSE_SUCCESS
+                    }
                 } else {
                     throw new Error(FETCH_ERROR_TYPES.USER_ID_DOES_NOT_EXIST);
                 }
@@ -29,6 +35,11 @@ export const getLocalStorageData = (userId) => {
                 dispatch({
                     type: ERROR_FETCHING_LOCAL_STORAGE_DATA
                 });
+
+                return {
+                    status: RESPONSE_ERROR,
+                    error
+                }
             }
 
             return data;
@@ -48,6 +59,10 @@ export const setLocalStorageData = (userId) => {
                     dispatch({
                         type: SET_LOCAL_STORAGE_DATA
                     });
+
+                    return {
+                        status: RESPONSE_SUCCESS
+                    }
                 } else {
                     throw new Error(FETCH_ERROR_TYPES.USER_ID_DOES_NOT_EXIST);
                 }
@@ -55,6 +70,12 @@ export const setLocalStorageData = (userId) => {
                 dispatch({
                     type: ERROR_FETCHING_LOCAL_STORAGE_DATA
                 });
+
+
+                return {
+                    status: RESPONSE_ERROR,
+                    error
+                }
             }
         }
     } else showLocalStorageMissingErrorInBrowser();

@@ -1,26 +1,35 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useAuth } from "./auth";
 
 import { 
     getLocalStorageData, 
     setLocalStorageData 
 } from "../redux/actions/localStorage";
-import { getUserIdSelector } from "../redux/selectors/auth";
 
 export const useGetLocalStorageData = () => {
+    const [response, setResponse] = useState({});
+
     const dispatch = useDispatch();
-    const userId = useSelector(getUserIdSelector);
+
+    const { userId } = useAuth();
 
     useEffect(() => {
         if (userId) {
             dispatch(getLocalStorageData(userId))
+                .then(response => {
+                    setResponse(response);
+                })
         }
     }, [dispatch, userId]);
+
+    return response;
 }
 
 export const useSetLocalStorageData = () => {
     const dispatch = useDispatch();
-    const userId = useSelector(getUserIdSelector);
+
+    const { userId } = useAuth();
 
     useEffect(() => {
         if (userId) {

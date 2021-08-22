@@ -15,7 +15,10 @@ import {
 import { 
     GET_MAIN_WORD_DATA,
     GET_SOCIAL_WORD_DATA,
-    ERROR_FETCHING_DATA
+    ERROR_FETCHING_DATA,
+
+    RESPONSE_SUCCESS,
+    RESPONSE_ERROR
 } from "./types";
 import { 
     COLOR_TYPE,
@@ -35,6 +38,12 @@ const fetchWordDataUnsplashParamOptions = {
     "content_filter": "high", // make sure results are child-appropriate,
     "orientation": "squarish" // all images come back with same orientation
 }
+
+const initial_response = {
+    status: RESPONSE_ERROR,
+    data: {},
+    error: ""
+}
 export const fetchWordData = (
     wordType, 
     word = "", 
@@ -47,27 +56,40 @@ export const fetchWordData = (
     async(dispatch) => {
         if (word.length === 0) return;
     
+        let response = initial_response;
         switch(wordType) {
             case COLOR_TYPE:
             case ANIMAL_TYPE:
             case NUMBER_TYPE:
             case FOOD_TYPE:
-                dispatch(fetchMainWords(wordType, word))
+                await dispatch(fetchMainWord(wordType, word))
                 .then(data => {
-                    console.log("data", data);
-                    return data;
+                    response = {
+                        ...response,
+                        data,
+                        status: RESPONSE_SUCCESS
+                    }
                 })
                 break;
             case SOCIAL_TYPE:
-                dispatch(fetchSocialWords(options));
+                await dispatch(fetchSocialWords(options))
+                .then(data => {
+                    response = {
+                        ...response,
+                        data,
+                        status: RESPONSE_SUCCESS
+                    }
+                })
                 break;
             default:
                 break;
         }
+
+        return response;
     }
 )
 
-const fetchMainWords = (wordType, word) => (
+const fetchMainWord = (wordType, word) => (
     async(dispatch, getState) => {
         // first fetch image data
         const imageData = await fetchImageDataForMainWord(word, dispatch);
@@ -87,13 +109,12 @@ const fetchMainWords = (wordType, word) => (
                 }
             });
 
-            const { userId, localStorage } = getState();
+            const { auth: { userId }, localStorage } = getState();
 
             // then set updated data in localStorage
             dispatch(setLocalStorageData(userId));
 
-            console.log("in fetch words", localStorage[wordType]);
-            return localStorage[wordType];
+            return localStorage[wordType][word];
         }
     }
 );
@@ -110,7 +131,7 @@ const fetchSocialWords = ({ socialType }) => (
                 payload: data
             });
 
-            const { userId, localStorage } = getState();
+            const { auth: { userId }, localStorage } = getState();
 
             // then set updated data in localStorage
             dispatch(setLocalStorageData(userId));

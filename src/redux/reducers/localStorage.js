@@ -15,7 +15,7 @@ const INITIAL_STATE = {
         food: [],
         social: []
     },
-    colors: { green: { yo: "here" }},
+    colors: {},
     animals: {},
     numbers: {},
     food: {},
@@ -27,7 +27,6 @@ export default (state = INITIAL_STATE, { type, payload }) => {
         case GET_LOCAL_STORAGE_DATA:
             return { ...state, ...payload };
         case GET_MAIN_WORD_DATA:
-            console.log(payload.word, state.colors);
             return {
                 ...state,
                 [payload.wordType]: {

@@ -16,3 +16,7 @@ export const ERROR_FETCHING_DATA = "words/errorFetchingData";
 export const FETCH_ERROR_TYPES = {
     USER_ID_DOES_NOT_EXIST: "You need a User ID to get/update user data!"
 }
+
+// response types
+export const RESPONSE_SUCCESS = "SUCCESS";
+export const RESPONSE_ERROR = "ERROR";

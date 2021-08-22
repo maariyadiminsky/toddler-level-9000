@@ -1,10 +1,9 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAuth0 } from "@auth0/auth0-react"; 
 import isEmpty from "lodash/isEmpty";
 
 import { fetchWordData } from "../redux/actions/words";
-import { setUserId } from "../redux/actions/auth"
+import { getUserIdSelector } from "../redux/selectors/auth";
 import { getWordTypeDataSelector } from "../redux/selectors/localStorage";
 import { SOCIAL_TYPE_FIRST } from "../const";
 
@@ -12,45 +11,51 @@ export const useFetchWordData = (
     wordType, 
     word, 
     options = { 
-        socialType: SOCIAL_TYPE_FIRST, 
-        handleSuccess: null 
+        isLocalStorageUpdatedWithData: false,
+        socialType: SOCIAL_TYPE_FIRST
     }
 ) => {
-    const [state, setState] = useState({
+    const [state, setState] = useState({ 
         loading: true,
-        errors: "",
+        errors: "" 
     });
 
     const dispatch = useDispatch();
 
-    const { user } = useAuth0();
-    const userId = "";
-
-    console.log("use auth", user);
-
+    const userId = useSelector(getUserIdSelector);
     const wordData = useSelector((state) => getWordTypeDataSelector(state, wordType, word));
-    const hasWordData = () => wordData || !isEmpty(wordData);
+    
+    const shouldFetchWordData = useCallback(() => 
+        options.isLocalStorageUpdatedWithData && userId && (!wordData || isEmpty(wordData))
+    ,[options.isLocalStorageUpdatedWithData, userId, wordData]);
 
-    console.log("should fetch?", wordData, isEmpty(wordData), hasWordData());
     useEffect(() => {
-        setState(({ loading: true, error: "" }));
+        setState(({ loading: true, errors: "" }));
 
         // if word type doesn't exist in localStorage then fetch it
-        if (userId && !hasWordData()) {
-            console.log("yes fetch!", wordData);
-
+        if (shouldFetchWordData()) {
             dispatch(fetchWordData(wordType, word, options))
-            .then((res) => {
-                console.log("res", res);
-                // setState({ loading: false, error: "" });
-                // options.handleSuccess && options.handleSuccess(res);
-            })
-            .catch((error) => {
-                console.log(`ERROR FETCHING WORD TYPE DATA: ${error}`);
-                setState(({ loading: false, errors: `${error}` }));
-            });
+                .then(() => {
+                    setState(({ 
+                        loading: 
+                        false, errors: ""  
+                    }));
+                }).catch((error) => {
+                    console.log(`ERROR FETCHING WORD DATA: ${error}`);
+                    setState(({ 
+                        loading: false, 
+                        errors: `${error}` 
+                    }));
+                });
         }
-    }, [dispatch, userId, word, wordType]);
+    }, 
+    [
+        dispatch, 
+        shouldFetchWordData,
+        userId,
+        word,
+        wordType,
+    ]);
 
     return {
         ...state,

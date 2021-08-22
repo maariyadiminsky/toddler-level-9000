@@ -5,12 +5,12 @@ import { useGetLocalStorageData } from "../hooks/localStorage";
 
 const Game = () => {
     // gets localStorage when userId exists
-    useGetLocalStorageData();
+    // useGetLocalStorageData();
 
     return (
         <WhatIsThisGame 
-            wordType="colors" 
-            initialWord="yellow" 
+            wordType="animals" 
+            initialWord="bunny" 
         />
     );
 }

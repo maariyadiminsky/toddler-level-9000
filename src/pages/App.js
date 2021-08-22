@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div>
       <Route path="/" exact component={Main} />
-      <Route path="/game" exact component={Game} />
+      <Route path="/games" exact component={Game} />
       {/* <Route path="/" exact component={Main} /> */}
       <ProtectedRoute path="/parent" exact component={() => <div>some component here</div>} />
     </div>

@@ -1,15 +1,16 @@
 import React from "react";
-
+import { useGetLocalStorageData } from "../../hooks/localStorage";
 import { useFetchWordData } from "../../hooks/words";
+import { RESPONSE_SUCCESS } from "../../redux/actions/types";
+
 
 const WhatIsThisGame = ({ wordType, initialWord }) => {
-
-    const { wordData, loading, errors } = useFetchWordData(wordType, initialWord);
-
-    console.log("In whatIsThisGame", wordData, loading, errors);
-    // get game data
-    // todo: checks if word data exists first in state via selector
-    // fetch if it doesnt exist
+    const LocalStorageDataUpdatedResponse = useGetLocalStorageData();
+    
+    const fetchWordDataOptions = { 
+        isLocalStorageUpdatedWithData: (LocalStorageDataUpdatedResponse.status === RESPONSE_SUCCESS)
+    };
+    const { loading, errors, wordData } = useFetchWordData(wordType, initialWord, fetchWordDataOptions);
 
     return (
         <div>
