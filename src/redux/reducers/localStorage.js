@@ -10,6 +10,7 @@ const INITIAL_STATE = {
     starsEarned: 0, // earn stars when completing tasks / understanding words
     masteredWords: {
         colors: [],
+        animals: [],
         numbers: [],
         food: [],
         social: []

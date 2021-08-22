@@ -3,7 +3,7 @@ export const AUTH0_AUDIENCE = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/api
 export const AUTH0_SCOPE = "read:current_user";
 export const AUTH0_REDIRECT_URI_AFTER_LOGIN = `${window.location.origin}/parents`;
 
-// game types
+// word types
 export const COLOR_TYPE = "colors";
 export const ANIMAL_TYPE = "animals";
 export const NUMBER_TYPE = "numbers";
