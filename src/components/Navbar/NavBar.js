@@ -18,7 +18,7 @@ const NavBar = () => {
                 <AuthButton />
             </div>
         </nav>
-    )
-}
+    );
+};
 
 export default NavBar;

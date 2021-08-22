@@ -2,6 +2,7 @@ import React from "react";
 import { useGetLocalStorageData } from "../hooks/localStorage";
 
 import NavBar from "../components/Navbar/NavBar";
+import GameArena from "../components/GameArena/GameArena";
 
 const Main = () => {
     // gets localStorage when userId exists
@@ -13,6 +14,7 @@ const Main = () => {
     return (
         <div className="min-h-screen bg-indigo-500">
             <NavBar />
+            <GameArena />
             <br />
         </div>
     );
