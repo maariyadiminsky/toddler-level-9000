@@ -1,0 +1,13 @@
+@layer components {
+    .game-arena-item {
+        @apply 
+        p-4 bg-white rounded-2xl 
+        shadow-lg hover:shadow-xl hover:scale-105
+        transform transition duration-300
+    }
+
+    .game-arena-item > img {
+        @apply 
+        m-auto
+    }
+}
