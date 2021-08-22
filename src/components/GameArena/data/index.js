@@ -43,7 +43,7 @@ export const gameArenaData = [
         imageUrl: apple,
         altText: "apple",
         customDivClass: "",
-        customImgClass: "w-80"
+        customImgClass: ""
     },
     {
         imageUrl: basket,
