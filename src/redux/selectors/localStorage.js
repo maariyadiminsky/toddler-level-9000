@@ -1,4 +1,4 @@
-export const getWordData = ({ localStorage }, wordType) => localStorage[wordType];
-export const getParentCode = ({ localStorage: { parentCode }}) => parentCode;
-export const getStarsEarned = ({ localStorage: { starsEarned }}) => starsEarned;
-export const getMasteredWords = ({ localStorage: { masteredWords }}, wordType) => masteredWords[wordType];
+export const getWordTypeDataSelector = ({ localStorage }, wordType, word) => localStorage[wordType][word];
+export const getParentCodeSelector = ({ localStorage: { parentCode }}) => parentCode;
+export const getStarsEarnedSelector = ({ localStorage: { starsEarned }}) => starsEarned;
+export const getMasteredWordsSelector = ({ localStorage: { masteredWords }}, wordType) => masteredWords[wordType];

@@ -12,13 +12,15 @@ const GameArena = () => {
     }
 
     const renderGameArenaItems = () => (
-        gameArenaData.map(({ 
+        gameArenaData.map(({
+            id, 
             imageUrl, 
             altText, 
             customDivClass, 
             customImgClass
         }) => (
             <GameArenaItem
+                key={id}
                 imageUrl={imageUrl}
                 altText={altText}
                 customDivClass={customDivClass}

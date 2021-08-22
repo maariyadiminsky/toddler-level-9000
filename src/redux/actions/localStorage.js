@@ -48,6 +48,8 @@ export const setLocalStorageData = (userId) => {
                     dispatch({
                         type: SET_LOCAL_STORAGE_DATA
                     });
+                } else {
+                    throw new Error(FETCH_ERROR_TYPES.USER_ID_DOES_NOT_EXIST);
                 }
             } catch(error) {
                 dispatch({

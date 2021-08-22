@@ -15,7 +15,7 @@ const INITIAL_STATE = {
         food: [],
         social: []
     },
-    colors: {},
+    colors: { green: { yo: "here" }},
     animals: {},
     numbers: {},
     food: {},

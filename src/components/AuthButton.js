@@ -1,23 +1,16 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useAuth0 } from "@auth0/auth0-react"; 
-
-import { setUserId } from "../redux/actions/auth"
+import React from "react";
+import { useAuth } from "../hooks/auth";
 
 const AuthButton = () => {
-  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (user && user.sub) {
-      dispatch(setUserId(user.sub));
-    }
-  }, [user, dispatch])
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth();
 
   const handleButtonClick = () => {
     if (!isAuthenticated) {
       loginWithRedirect();
+    } 
+    // temporary: todo move logout button into parent dashboard
+    else {
+      logout();
     }
   }
 

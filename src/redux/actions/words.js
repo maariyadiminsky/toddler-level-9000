@@ -28,6 +28,8 @@ import {
     SOCIAL_TYPE_THIRD
 } from "../../const";
 
+import { setLocalStorageData } from "./localStorage";
+
 const fetchWordDataUnsplashParamOptions = {
     "per_page": 5, // number of items returned
     "content_filter": "high", // make sure results are child-appropriate,
@@ -37,17 +39,24 @@ export const fetchWordData = (
     wordType, 
     word = "", 
     options = {
-        socialType: SOCIAL_TYPE_FIRST 
+        // there are 3 endpoints, each with 10 words
+        // this lets them know which 10 words you want
+        socialType: SOCIAL_TYPE_FIRST
     } 
 ) => (
     async(dispatch) => {
+        if (word.length === 0) return;
+    
         switch(wordType) {
             case COLOR_TYPE:
             case ANIMAL_TYPE:
             case NUMBER_TYPE:
             case FOOD_TYPE:
-                if (word.length === 0) return;
-                dispatch(fetchMainWords(wordType, word));
+                dispatch(fetchMainWords(wordType, word))
+                .then(data => {
+                    console.log("data", data);
+                    return data;
+                })
                 break;
             case SOCIAL_TYPE:
                 dispatch(fetchSocialWords(options));
@@ -59,7 +68,7 @@ export const fetchWordData = (
 )
 
 const fetchMainWords = (wordType, word) => (
-    async(dispatch) => {
+    async(dispatch, getState) => {
         // first fetch image data
         const imageData = await fetchImageDataForMainWord(word, dispatch);
         // second fetch audio data
@@ -67,6 +76,7 @@ const fetchMainWords = (wordType, word) => (
 
         // set the data in redux
         if (imageData && audioData) {
+            // set data in redux
             dispatch({
                 type: GET_MAIN_WORD_DATA,
                 payload: { 
@@ -76,21 +86,36 @@ const fetchMainWords = (wordType, word) => (
                     audioData
                 }
             });
+
+            const { userId, localStorage } = getState();
+
+            // then set updated data in localStorage
+            dispatch(setLocalStorageData(userId));
+
+            console.log("in fetch words", localStorage[wordType]);
+            return localStorage[wordType];
         }
     }
 );
 
 const fetchSocialWords = ({ socialType }) => (
-    async(dispatch) => {
+    async(dispatch, getState) => {
         const endpoint = findEndpointForSocialWordType(socialType);
         const data = await fetchSocialWordsData(endpoint, dispatch);
         
-        // set the data in redux
         if (data) {
+            // set data in redux
             dispatch({
                 type: GET_SOCIAL_WORD_DATA,
                 payload: data
             });
+
+            const { userId, localStorage } = getState();
+
+            // then set updated data in localStorage
+            dispatch(setLocalStorageData(userId));
+
+            return localStorage[SOCIAL_TYPE];
         }
     }
 )
