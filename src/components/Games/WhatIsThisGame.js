@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useCallback } from "react";
+import React, { useEffect, useReducer } from "react";
 import omit from "lodash/omit";
 
 import { useGetLocalStorageData } from "../../hooks/localStorage";
@@ -14,6 +14,7 @@ import {
     SET_CURRENT_WORD,
     COMPLETE_ROUND,
     START_NEW_ROUND,
+    COMPLETE_ALL_ROUNDS,
 
     ERROR_IN_TYPES,
 } from "./types";
@@ -70,7 +71,13 @@ const WhatIsThisGame = ({ wordType }) => {
     // checks if data is in local storage, otherwise fetch from API
     const { loading, errors, wordData } = useFetchWordData(wordType, currentWord, fetchWordDataOptions(LocalStorageDataUpdatedResponse));
 
-    // start new round if no word exists or complete game
+    const handleCompleteRound = () =>(
+        dispatch({
+            type: COMPLETE_ROUND
+        })
+    );
+
+    // if rounds left
     useEffect(() => {
         if (roundStarted) return;
 
@@ -92,7 +99,7 @@ const WhatIsThisGame = ({ wordType }) => {
             }
         } else {
             dispatch({
-                type: COMPLETE_ROUND
+                type: COMPLETE_ALL_ROUNDS
             })
         }
     }, [
