@@ -17,8 +17,8 @@ export const useGetLocalStorageData = () => {
     useEffect(() => {
         if (userId) {
             dispatch(getLocalStorageData(userId))
-                .then(response => {
-                    setResponse(response);
+                .then(res => {
+                    setResponse(res);
                 })
         }
     }, [dispatch, userId]);

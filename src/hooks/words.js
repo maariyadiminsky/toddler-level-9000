@@ -28,6 +28,10 @@ export const useFetchWordData = (
     const shouldFetchWordData = useCallback(() => 
         options.isLocalStorageUpdatedWithData && userId && (!wordData || isEmpty(wordData))
     ,[options.isLocalStorageUpdatedWithData, userId, wordData]);
+    
+    const stopLoading = useCallback((errors = "") => {
+        setState(({ loading: false, errors: errors }));
+    }, [state.loading]);
 
     useEffect(() => {
         setState(({ loading: true, errors: "" }));
@@ -35,19 +39,12 @@ export const useFetchWordData = (
         // if word type doesn't exist in localStorage then fetch it
         if (shouldFetchWordData()) {
             dispatch(fetchWordData(wordType, word, options))
-                .then(() => {
-                    setState(({ 
-                        loading: 
-                        false, errors: ""  
-                    }));
-                }).catch((error) => {
+                .then(() => stopLoading())
+                .catch((error) => {
                     console.log(`ERROR FETCHING WORD DATA: ${error}`);
-                    setState(({ 
-                        loading: false, 
-                        errors: `${error}` 
-                    }));
+                    stopLoading(error);
                 });
-        }
+        } else stopLoading();
     }, 
     [
         dispatch, 
@@ -55,6 +52,7 @@ export const useFetchWordData = (
         userId,
         word,
         wordType,
+        stopLoading
     ]);
 
     return {

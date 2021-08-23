@@ -1,49 +1,114 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer, useCallback } from "react";
+import omit from "lodash/omit";
+
 import { useGetLocalStorageData } from "../../hooks/localStorage";
 import { useFetchWordData } from "../../hooks/words";
 import { RESPONSE_SUCCESS } from "../../redux/actions/types";
+import { 
+    getNewWordsArray,
+    getRandomWord 
+} from "../../utils/words";
 
 import {
-    SET_WORD_DATA,
-    GET_RANDOM_WORD,
-    REMOVE_WORD,
+    SET_WORDS,
+    SET_CURRENT_WORD,
+    COMPLETE_ROUND,
+    START_NEW_ROUND,
 
-    ERROR_IN_TYPES
+    ERROR_IN_TYPES,
 } from "./types";
 
 const INITIAL_STATE = {
-    rounds: 5, // for 5 words
-    wordData: {},
-    wordsPracticed: [],
-    currentWord: {}
+    roundStarted: false,
+    roundsLeft: 5, // for 5 words
+    words: [],
+    currentWord: ""
 };
 
 const reducer = (state, { type, payload}) => {
   switch (type) {
-    case SET_WORD_DATA:
-          return {...state, wordData: payload };
-    case GET_RANDOM_WORD:
-      return {}
-    case REMOVE_WORD:
-      return {}
+    case SET_WORDS:
+        return { 
+            ...state, 
+            words: [...payload] 
+        }
+    case SET_CURRENT_WORD:
+        return { 
+            ...state,
+            currentWord: payload,
+            words: omit(state.words, state.currentWord)
+        }
+    case START_NEW_ROUND:
+        return { 
+            ...state, 
+            roundStarted: true,
+            roundsLeft: state.roundsLeft - 1, 
+        }
+    case COMPLETE_ROUND: {
+        return { 
+            ...state, 
+            roundStarted: false,
+            currentWord: ""
+        }
+    }
     default:
       throw new Error(ERROR_IN_TYPES.TYPE_DOES_NOT_EXIST("WhatIsThisGame"));
   }
 }
 
+const fetchWordDataOptions = (localStorageResponse) => ({
+    isLocalStorageUpdatedWithData: (localStorageResponse.status === RESPONSE_SUCCESS)
+});
 const WhatIsThisGame = ({ wordType }) => {
+    // local reducer since this data doesn't need to be in global state
+    // but too complicated for simple useState
+    const [{ roundsLeft, roundStarted, words, currentWord }, dispatch] = useReducer(reducer, INITIAL_STATE);
+
+    // fetch data from local storage
     const LocalStorageDataUpdatedResponse = useGetLocalStorageData();
     
-    const fetchWordDataOptions = { 
-        isLocalStorageUpdatedWithData: (LocalStorageDataUpdatedResponse.status === RESPONSE_SUCCESS)
-    };
-    // const { loading, errors, wordData } = useFetchWordData(wordType, initialWord, fetchWordDataOptions);
+    // checks if data is in local storage, otherwise fetch from API
+    const { loading, errors, wordData } = useFetchWordData(wordType, currentWord, fetchWordDataOptions(LocalStorageDataUpdatedResponse));
 
-    const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+    // start new round if no word exists or complete game
+    useEffect(() => {
+        if (roundStarted) return;
 
-    if (!wordData) {
+        if (roundsLeft) {
+            if (!words || words.length === 0) {
+                dispatch({ 
+                    type: SET_WORDS,
+                    payload: getNewWordsArray(wordType)
+                })
+            } else if (!currentWord && words && words.length !== 0) {
+                dispatch({
+                    type: SET_CURRENT_WORD,
+                    payload: getRandomWord(words)
+                })
+            } if (currentWord && wordData) {
+                dispatch({ 
+                    type: START_NEW_ROUND 
+                })
+            }
+        } else {
+            dispatch({
+                type: COMPLETE_ROUND
+            })
+        }
+    }, [
+        roundStarted, roundsLeft,
+        words, wordType, wordData, currentWord
+    ]);
+
+    // show this if there is no word data
+    // do not show this if there are no more rounds
+    if (loading && roundsLeft) {
         return (
             <div>Loading...</div>
+        );
+    } else if (errors) {
+        return (
+            <div>{errors}</div>
         );
     }
 
