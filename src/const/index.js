@@ -47,3 +47,8 @@ export const BODY_WORDS = [
     "Eyes", "Nose", "Lips", "Mouth", "Ears",
     "Hair", "Hands", "Fingers", "Legs", "Feet"
 ];
+
+// errors
+export const WORD_TYPE_ERRORS = {
+    WORD_TYPE_DOES_NOT_EXIST: (type) => `${type.toUppercase()} does not exist not a valid word type.`
+}
