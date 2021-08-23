@@ -7,9 +7,9 @@ import { getUserIdSelector } from "../redux/selectors/auth";
 
 export const useAuth = () => {
     const dispatch = useDispatch();
-    const userId = useSelector(getUserIdSelector);
 
     const { user } = useAuth0();
+    const userId = useSelector(getUserIdSelector);
 
     useEffect(() => {
         if (user && user.sub && !userId) {
