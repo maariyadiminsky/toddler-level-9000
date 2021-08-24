@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useCallback } from "react";
 import omit from "lodash/omit";
 
 import { useGetLocalStorageData } from "../../hooks/localStorage";
@@ -15,6 +15,7 @@ import {
     COMPLETE_ROUND,
     START_NEW_ROUND,
     COMPLETE_ALL_ROUNDS,
+    SET_WORDS_TO_CHOOSE_FROM,
 
     ERROR_IN_TYPES,
 } from "./types";
@@ -23,7 +24,8 @@ const INITIAL_STATE = {
     roundStarted: false,
     roundsLeft: 5, // for 5 words
     words: [],
-    currentWord: ""
+    currentWord: "",
+    wordsToChooseFrom: [],
 };
 
 const reducer = (state, { type, payload}) => {
@@ -49,7 +51,14 @@ const reducer = (state, { type, payload}) => {
         return { 
             ...state, 
             roundStarted: false,
-            currentWord: ""
+            currentWord: "",
+            wordsToChooseFrom: null
+        }
+    }
+    case SET_WORDS_TO_CHOOSE_FROM: {
+        return {
+            ...state,
+            wordsToChooseFrom: [...payload]
         }
     }
     default:
@@ -61,9 +70,14 @@ const fetchWordDataOptions = (localStorageResponse) => ({
     isLocalStorageUpdatedWithData: (localStorageResponse.status === RESPONSE_SUCCESS)
 });
 const WhatIsThisGame = ({ wordType }) => {
+    // ===================================> data fetching
+
     // local reducer since this data doesn't need to be in global state
     // but too complicated for simple useState
-    const [{ roundsLeft, roundStarted, words, currentWord }, dispatch] = useReducer(reducer, INITIAL_STATE);
+    const [{ 
+        roundsLeft, roundStarted, 
+        words, currentWord, wordsToChooseFrom 
+    }, dispatch] = useReducer(reducer, INITIAL_STATE);
 
     // fetch data from local storage
     const LocalStorageDataUpdatedResponse = useGetLocalStorageData();
@@ -71,28 +85,48 @@ const WhatIsThisGame = ({ wordType }) => {
     // checks if data is in local storage, otherwise fetch from API
     const { loading, errors, wordData } = useFetchWordData(wordType, currentWord, fetchWordDataOptions(LocalStorageDataUpdatedResponse));
 
-    const handleCompleteRound = () =>(
-        dispatch({
-            type: COMPLETE_ROUND
-        })
-    );
+    // ===================================> setup
+
+    const getWordsToPractice = useCallback(() => {
+        // set words child will practice
+        if (!words || words.length === 0) {
+            dispatch({ 
+                type: SET_WORDS,
+                payload: getNewWordsArray(wordType)
+            })
+        }
+    }, [words, wordType]);
+
+    const generateWordToPractice = useCallback(() => {
+        // generate a random word child will need to choose correctly
+        if (words && words.length !== 0) {
+            dispatch({
+                type: SET_CURRENT_WORD,
+                payload: getRandomWord(words)
+            })
+        }
+    }, [words]);
+
+    const generateWordsToChooseFrom = useCallback(() => {
+        // give child words to choose from
+        // the correct word is within them
+        if (currentWord) {
+
+        }
+    }, [currentWord]);
 
     // if rounds left
     useEffect(() => {
         if (roundStarted) return;
 
         if (roundsLeft) {
-            if (!words || words.length === 0) {
-                dispatch({ 
-                    type: SET_WORDS,
-                    payload: getNewWordsArray(wordType)
-                })
-            } else if (!currentWord && words && words.length !== 0) {
-                dispatch({
-                    type: SET_CURRENT_WORD,
-                    payload: getRandomWord(words)
-                })
-            } if (currentWord && wordData) {
+            // initial setup
+            if (!words) getWordsToPractice();
+            if (!currentWord) generateWordToPractice()
+            if (!wordsToChooseFrom) generateWordsToChooseFrom();
+
+            // start round
+            if (currentWord && wordsToChooseFrom && wordData) {
                 dispatch({ 
                     type: START_NEW_ROUND 
                 })
@@ -104,8 +138,19 @@ const WhatIsThisGame = ({ wordType }) => {
         }
     }, [
         roundStarted, roundsLeft,
-        words, wordType, wordData, currentWord
+        words, currentWord, wordsToChooseFrom, wordData,
+        getWordsToPractice, generateWordToPractice, generateWordsToChooseFrom
     ]);
+
+    // ===================================> handlers
+
+    const handleCompleteRound = () =>(
+        dispatch({
+            type: COMPLETE_ROUND
+        })
+    );
+
+    // ===================================> UI
 
     // show this if there is no word data
     // do not show this if there are no more rounds
