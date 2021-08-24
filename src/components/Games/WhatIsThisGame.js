@@ -1,13 +1,17 @@
-import React, { useEffect, useReducer, useCallback } from "react";
-import omit from "lodash/omit";
+import React, { useEffect, useRef, useReducer, useCallback } from "react";
+import without from "lodash/without";
 
 import { useGetLocalStorageData } from "../../hooks/localStorage";
 import { useFetchWordData } from "../../hooks/words";
 import { RESPONSE_SUCCESS } from "../../redux/actions/types";
 import { 
     getNewWordsArray,
-    getRandomWord 
+    generateRandomWord,
+    generateWords,
+    getWordAmountToShowAtOneTime
 } from "../../utils/words";
+
+import { isArrayExistAndNotEmpty } from "../../utils/";
 
 import {
     SET_WORDS,
@@ -39,7 +43,7 @@ const reducer = (state, { type, payload}) => {
         return { 
             ...state,
             currentWord: payload,
-            words: omit(state.words, state.currentWord)
+            words: without(state.words, payload)
         }
     case START_NEW_ROUND:
         return { 
@@ -52,7 +56,7 @@ const reducer = (state, { type, payload}) => {
             ...state, 
             roundStarted: false,
             currentWord: "",
-            wordsToChooseFrom: null
+            wordsToChooseFrom: []
         }
     }
     case SET_WORDS_TO_CHOOSE_FROM: {
@@ -87,50 +91,76 @@ const WhatIsThisGame = ({ wordType }) => {
 
     // ===================================> setup
 
+    const hasWords = useCallback(() => isArrayExistAndNotEmpty(words), [words]);
+    const hasWordsToChooseFrom = useCallback(() => isArrayExistAndNotEmpty(wordsToChooseFrom), [wordsToChooseFrom]);
+
     const getWordsToPractice = useCallback(() => {
         // set words child will practice
-        if (!words || words.length === 0) {
+        if (!hasWords()) {
             dispatch({ 
                 type: SET_WORDS,
                 payload: getNewWordsArray(wordType)
             })
         }
-    }, [words, wordType]);
+    }, [hasWords, wordType]);
 
     const generateWordToPractice = useCallback(() => {
         // generate a random word child will need to choose correctly
-        if (words && words.length !== 0) {
+        if (hasWords() && !currentWord) {
             dispatch({
                 type: SET_CURRENT_WORD,
-                payload: getRandomWord(words)
+                payload: generateRandomWord(words)
             })
         }
-    }, [words]);
+    }, [currentWord, words, hasWords]);
 
+    const wordAmountToShowAtOneTime = useRef(getWordAmountToShowAtOneTime(wordType));
+    const wordsToChooseFromGenerated = useRef(false);
     const generateWordsToChooseFrom = useCallback(() => {
+        // to avoid re-renders in a utils method
+        if (wordsToChooseFromGenerated.current) return;
+
         // give child words to choose from
         // the correct word is within them
-        if (currentWord) {
+        if (!hasWordsToChooseFrom() && hasWords() && currentWord) {
+            wordsToChooseFromGenerated.current = true;
 
+            dispatch({
+                type: SET_WORDS_TO_CHOOSE_FROM,
+                payload: generateWords(currentWord, words, wordAmountToShowAtOneTime.current)
+            })
         }
-    }, [currentWord]);
+    }, [currentWord, words, hasWordsToChooseFrom, hasWords]);
+
+    // ===================================> handlers
+
+    const hasCompletedRound = useCallback(() => {
+        if (currentWord && hasWords() && hasWordsToChooseFrom()) {
+            dispatch({ 
+                type: START_NEW_ROUND 
+            })
+        }
+    }, [currentWord, hasWords, hasWordsToChooseFrom]);
+
+    const handleCompleteRound = () =>(
+        dispatch({
+            type: COMPLETE_ROUND
+        })
+    );    
 
     // if rounds left
     useEffect(() => {
         if (roundStarted) return;
 
         if (roundsLeft) {
+            // console.log("in useeffect", words, currentWord, wordsToChooseFrom, roundsLeft);
             // initial setup
-            if (!words) getWordsToPractice();
-            if (!currentWord) generateWordToPractice()
-            if (!wordsToChooseFrom) generateWordsToChooseFrom();
+            getWordsToPractice();
+            generateWordToPractice();
+            generateWordsToChooseFrom();
 
             // start round
-            if (currentWord && wordsToChooseFrom && wordData) {
-                dispatch({ 
-                    type: START_NEW_ROUND 
-                })
-            }
+            hasCompletedRound();
         } else {
             dispatch({
                 type: COMPLETE_ALL_ROUNDS
@@ -139,16 +169,8 @@ const WhatIsThisGame = ({ wordType }) => {
     }, [
         roundStarted, roundsLeft,
         words, currentWord, wordsToChooseFrom, wordData,
-        getWordsToPractice, generateWordToPractice, generateWordsToChooseFrom
+        getWordsToPractice, generateWordToPractice, generateWordsToChooseFrom, hasCompletedRound
     ]);
-
-    // ===================================> handlers
-
-    const handleCompleteRound = () =>(
-        dispatch({
-            type: COMPLETE_ROUND
-        })
-    );
 
     // ===================================> UI
 

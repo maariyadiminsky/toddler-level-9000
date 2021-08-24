@@ -26,7 +26,8 @@ export const getLocalStorageData = (userId) => {
                     });
 
                     return {
-                        status: RESPONSE_SUCCESS
+                        status: RESPONSE_SUCCESS,
+                        data
                     }
                 } else {
                     throw new Error(FETCH_ERROR_TYPES.USER_ID_DOES_NOT_EXIST);
@@ -38,11 +39,10 @@ export const getLocalStorageData = (userId) => {
 
                 return {
                     status: RESPONSE_ERROR,
-                    error
+                    error,
+                    data
                 }
             }
-
-            return data;
         }
     } else showLocalStorageMissingErrorInBrowser();
 }

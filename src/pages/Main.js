@@ -6,7 +6,7 @@ import GameArena from "../components/GameArena/GameArena";
 
 const Main = () => {
     // gets localStorage when userId exists
-    // useGetLocalStorageData();
+    useGetLocalStorageData();
 
     // check if user is authenticated when they try to click parent section or a game
     // if they try to click parent section, make sure they have a code, if not ask them to create one

@@ -15,10 +15,7 @@ export const useFetchWordData = (
         socialType: SOCIAL_TYPE_FIRST
     }
 ) => {
-    const [state, setState] = useState({ 
-        loading: true,
-        errors: "" 
-    });
+    const [state, setState] = useState({ loading: true, errors: ""  });
 
     const dispatch = useDispatch();
 

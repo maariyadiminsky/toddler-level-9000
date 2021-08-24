@@ -16,7 +16,6 @@ import {
     WORD_TYPE_ERRORS
 } from "../const";
 
-// words
 export const getNewWordsArray = (wordType) => {
     switch(wordType) {
         case NUMBER_TYPE:
@@ -36,6 +35,39 @@ export const getNewWordsArray = (wordType) => {
     }
 }
 
-export const getRandomWord = (words) => {
-    return words[Math.floor(Math.random() * words.length)];
+export const getWordAmountToShowAtOneTime = (wordType) => {
+    switch(wordType) {
+        case NUMBER_TYPE:
+        case FOOD_TYPE:
+        case COLOR_TYPE:
+        case ANIMAL_TYPE:
+        case SOCIAL_TYPE:
+        case BODY_TYPE:
+            return 5;
+        default:
+            throw new Error(WORD_TYPE_ERRORS.WORD_TYPE_DOES_NOT_EXIST(wordType));
+    }
+}
+
+export const generateRandomWord = (words) => {
+    return words[generateRandomNumber(words)];
+}
+
+const generateRandomNumber = (words) => {
+    return Math.floor(Math.random() * words.length);
+}
+
+export const generateWords = (correctWord, words, amount) => {
+    let result = [];
+
+    // picks random words in words array
+    while(result.length !== amount) {
+        result = [...result, generateRandomWord(words)];
+    }
+
+    // replace a word randomly in the array with the correct word
+    const randomIndex = generateRandomNumber(words);
+    result[randomIndex] = correctWord;
+
+    return result;
 }
