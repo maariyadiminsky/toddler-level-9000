@@ -28,7 +28,7 @@ const INITIAL_STATE = {
     roundStarted: false,
     roundsLeft: 5, // for 5 words
     words: [],
-    currentWord: "",
+    currentWord: "green",
     wordsToChooseFrom: [],
 };
 
