@@ -49,6 +49,28 @@ export const getWordAmountToShowAtOneTime = (wordType) => {
     }
 }
 
+export const getCustomCSSForWordsToChooseFrom = (wordType, word) => {
+    switch(wordType) {
+        case COLOR_TYPE:
+            switch(word) {
+                case "black":
+                    return "from-gray-800 to-gray-900 text-white";
+                case "white":
+                    return "from-gray-50 to-gray-100 text-gray-600";
+                case "orange":
+                    return "from-yellow-400 to-yellow-600 text-white";
+                case "brown":
+                    return "from-yellow-700 to-yellow-900 text-white";
+                case "yellow":
+                    return "from-yellow-300 to-yellow-400 text-white";
+                default:
+                    return `from-${word}-300 to-${word}-600 text-white`;
+            }
+        default:
+            throw new Error(WORD_TYPE_ERRORS.WORD_TYPE_DOES_NOT_EXIST(wordType));
+    }
+}
+
 export const generateRandomItem = (items, removeDuplicates = false) => {
     let randomNum = generateRandomNumber(items.length);
 
@@ -85,7 +107,7 @@ export const generateRandomItems = (items, amount, includeThisItem = null) => {
 
     // replace a word randomly in the array with the correct word
     if (includeThisItem && !result.includes(includeThisItem)) {
-        const randomIndex = generateRandomNumber(items.length - 1);
+        const randomIndex = generateRandomNumber(amount - 1);
 
         result[randomIndex] =  includeThisItem;
     }

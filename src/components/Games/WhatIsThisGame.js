@@ -8,7 +8,8 @@ import {
     getNewWordsArray,
     generateRandomItem,
     generateRandomItems,
-    getWordAmountToShowAtOneTime
+    getWordAmountToShowAtOneTime,
+    getCustomCSSForWordsToChooseFrom
 } from "../../utils/words";
 
 import { 
@@ -128,9 +129,8 @@ const WhatIsThisGame = ({ wordType }) => {
         if (!hasWordsToChooseFrom() && hasWords() && currentWord) {
             isWordsToChooseFromGenerated.current = true;
 
-            console.log("wordAmount: ", wordAmountToShowAtOneTime.current, getWordAmountToShowAtOneTime(wordType));
             const randomWordsToChooseFrom = generateRandomItems(words, wordAmountToShowAtOneTime.current, currentWord);
-            console.log("randomWordsToChooseFrom: ", randomWordsToChooseFrom.length);
+            
             dispatch({
                 type: SET_WORDS_TO_CHOOSE_FROM,
                 payload: randomWordsToChooseFrom
@@ -230,8 +230,10 @@ const WhatIsThisGame = ({ wordType }) => {
     );
 
     const renderChoiceItems = () => (
-        isArrayExistAndNotEmpty(wordsToChooseFrom) && wordsToChooseFrom.map(item => (
-            <div>{item}</div>
+        isObjectExistAndNotEmpty(wordData) && isArrayExistAndNotEmpty(wordsToChooseFrom) && wordsToChooseFrom.map(item => (
+            <div key={item} className={`m-auto flex justify-center items-center content-center h-36 w-36 rounded-full fill-current bg-gradient-to-br ${getCustomCSSForWordsToChooseFrom(wordType, item)} shadow-lg hover:shadow-2xl`}>
+                {item}
+            </div>
         ))
     );
 
@@ -239,7 +241,7 @@ const WhatIsThisGame = ({ wordType }) => {
         <div>
             {renderImagesWrapper()}
             <div className="container">
-                <div className={`cursor-pointer grid grid-cols-${wordAmountToShowAtOneTime.current} gap-y-5 gap-x-10`}>
+                <div className={`mt-16 mx-72 cursor-pointer grid grid-cols-${wordAmountToShowAtOneTime.current} gap-x-10`}>
                     {renderChoiceItems()}
                 </div>
             </div>
