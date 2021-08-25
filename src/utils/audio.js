@@ -88,25 +88,22 @@ export const manGameCompleteAudio = [
     WowYouGotThemAll_Man,
     YouDidIt_Man
 ];
-export const findGameCompleteAudioOptions = (wordType) => {
+export const getGameCompleteAudioOptions = (wordType) => {
     switch(wordType) {
         case COLOR_TYPE:
             return boyGameCompleteAudio;
-            break;
         case ANIMAL_TYPE:
         case SOCIAL_TYPE:
             return girlGameCompleteAudio;
-            break;
         case NUMBER_TYPE:
         case FOOD_TYPE:
             return manGameCompleteAudio;
-            break;
         case BODY_TYPE:
             // todo add here when this game type is ready
             break;
             // todo add match time audio here as well.
         default:
-            break;
+            return [];
     }
 }
 export const generateGameCompleteAudio = (audioOptionsArr) => {
