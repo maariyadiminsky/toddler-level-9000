@@ -44,7 +44,7 @@ import Loader from "../Loader";
 const INITIAL_STATE = {
     gameStarted: false,
     roundStarted: false,
-    roundsLeft: 5, // for 5 words
+    roundsLeft: 5,
     words: [],
     currentWord: "green",
     wordsToChooseFrom: [],
@@ -59,7 +59,8 @@ const reducer = (state, { type, payload}) => {
     case START_NEW_GAME: 
         return {
             ...state,
-            gameStarted: true
+            gameStarted: true,
+            roundsLeft: payload
         }
     case START_NEW_ROUND:
         return { 
@@ -195,7 +196,9 @@ const WhatIsThisGame = ({ wordType }) => {
             wait(2000)
                 .then(() => (
                     dispatch({ 
-                        type: START_NEW_GAME
+                        type: START_NEW_GAME,
+                        // note: round amount determined by how many words are being tested
+                        payload: wordAmountToShowAtOneTime.current
                     })
                 ));
         }
@@ -208,7 +211,7 @@ const WhatIsThisGame = ({ wordType }) => {
                 type: START_NEW_ROUND 
             })
 
-            wait(1000).then(() => startAudio.play());
+            wait(1000).then(() => shouldPlayStartAudio() && startAudio.play());
         }
     }, [gameStarted, currentWord, hasWords, hasWordsToChooseFrom, startAudio]);
 
@@ -224,6 +227,9 @@ const WhatIsThisGame = ({ wordType }) => {
                 ));
         }
     }  
+
+    // play the start audio only once at the start of the game;
+    const shouldPlayStartAudio = () => roundsLeft === wordAmountToShowAtOneTime.current;
 
     // ==========> audio 
 
