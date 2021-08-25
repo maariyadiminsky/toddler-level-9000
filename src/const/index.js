@@ -19,6 +19,7 @@ export const NUMBER_WORDS = [
     1, 2, 3, 4, 5, 
     6, 7, 8, 9, 10 
 ];
+
 export const COLOR_WORDS = [
     "red", "blue", "yellow", "white", "black",
     "pink", "purple", "brown", "orange", "green"

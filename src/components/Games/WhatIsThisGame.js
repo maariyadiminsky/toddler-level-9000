@@ -28,6 +28,8 @@ import {
     ERROR_IN_TYPES,
 } from "./types";
 
+import { COLOR_TYPE } from "../../const";
+
 const INITIAL_STATE = {
     roundStarted: false,
     roundsLeft: 5, // for 5 words
@@ -185,7 +187,7 @@ const WhatIsThisGame = ({ wordType }) => {
     // ===================================> UI
     const randomImages = useRef([]);
     
-    if (loading && roundsLeft || randomImages.length === 0) {
+    if ((loading && roundsLeft) || randomImages.length === 0) {
         return (
             <div>Loading...</div>
         );
@@ -229,10 +231,12 @@ const WhatIsThisGame = ({ wordType }) => {
         ))
     );
 
+    const shouldRenderWord = () => wordType !== COLOR_TYPE;
+
     const renderChoiceItems = () => (
         isObjectExistAndNotEmpty(wordData) && isArrayExistAndNotEmpty(wordsToChooseFrom) && wordsToChooseFrom.map(item => (
             <div key={item} className={`m-auto flex justify-center items-center content-center h-36 w-36 rounded-full fill-current bg-gradient-to-br ${getCustomCSSForWordsToChooseFrom(wordType, item)} shadow-lg hover:shadow-2xl`}>
-                {item}
+                {shouldRenderWord() && item}
             </div>
         ))
     );
