@@ -14,17 +14,17 @@ const getSmileSVG = (color) => (
     </svg>
 );
 const Loader = () => {
-    const mainClass = "h-10 w-10 m-6 rounded-full";
+    const mainClass = "h-10 w-10 m-6 mr-1 rounded-full";
 
     return (
         <div className="flex justify-center mt-12 h-96 flex-wrap content-center animate-pulse">
-            <div className={`${mainClass} bg-pink-500 mr-1 animate-bounce`}>
+            <div className={`${mainClass} bg-pink-500 animate-bounce`}>
                 {getSmileSVG("pink-600")}
             </div>
-            <div className={`${mainClass} bg-yellow-200 mr-1 animate-bounce200`}>
+            <div className={`${mainClass} bg-yellow-200 animate-bounce200`}>
                 {getSmileSVG("yellow-400")}
             </div>
-            <div className={`${mainClass} bg-green-300 mr-1 animate-bounce400`}>
+            <div className={`${mainClass} bg-green-300 animate-bounce400`}>
                 {getSmileSVG("green-400")}
             </div>
         </div>
