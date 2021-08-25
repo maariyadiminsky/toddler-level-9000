@@ -20,6 +20,8 @@ import YesYouGotThemAll_Boy from "../components/Games/audio/YesYouGotThemAll_Boy
 import YouDidIt_Boy from "../components/Games/audio/YouDidIt_Boy.mp3";
 import YouDidIt_Man from "../components/Games/audio/YouDidIt_Man.mp3";
 
+import { generateRandomNumber } from "./words";
+
 import {
     COLOR_TYPE,
     ANIMAL_TYPE,
@@ -87,27 +89,21 @@ let manGameCompleteAudio = [
     WowYouGotThemAll_Man,
     YouDidIt_Man
 ];
+let gameCompleteAudio = [];
 export const getRandomGameCompleteAudio = (wordType) => {
+    gameCompleteAudio = [];
+
     switch(wordType) {
         case COLOR_TYPE:
-            welcomeAudio = LetsPlayAGame_Boy;
-            startAudio = WhatColorDoYouSee_Boy;
+            gameCompleteAudio = boyGameCompleteAudio;
             break;
         case ANIMAL_TYPE:
-            welcomeAudio = LetsPlayAGame_Girl;
-            startAudio = WhatAnimalDoYouSee_Girl;
+        case SOCIAL_TYPE:
+            gameCompleteAudio = girlGameCompleteAudio;
             break;
         case NUMBER_TYPE:
-            welcomeAudio = LetsPlayAGame_Man;
-            startAudio = WhatNumberIsThat_Man;
-            break;
         case FOOD_TYPE:
-            welcomeAudio = LetsPlayAGame_Man;
-            startAudio = WhatFoodItemDoYouSee_Man;
-            break;
-        case SOCIAL_TYPE:
-            welcomeAudio = LetsPlayAGame_Girl;
-            startAudio = LetsLearnSomeSocialWords_Girl;
+            gameCompleteAudio = manGameCompleteAudio;
             break;
         case BODY_TYPE:
             // todo add here when this game type is ready
@@ -116,6 +112,8 @@ export const getRandomGameCompleteAudio = (wordType) => {
         default:
             break;
     }
+
+    return gameCompleteAudio[generateRandomNumber(girlGameCompleteAudio.length)];
 }
 
 export const getCorrectAudioUrl = (sound, wordType) => {
