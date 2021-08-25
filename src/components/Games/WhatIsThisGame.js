@@ -11,7 +11,12 @@ import {
     getWordAmountToShowAtOneTime,
     getCustomCSSForWordsToChooseFrom
 } from "../../utils/words";
-import { getCorrectAudioUrl } from "../../utils/audio";
+import { 
+    getCorrectAudioUrl,
+    getGameStartAudio,
+    findGameCompleteAudioOptions,
+    generateGameCompleteAudio
+} from "../../utils/audio";
 import { 
     isArrayExistAndNotEmpty,
     isObjectExistAndNotEmpty 
@@ -23,6 +28,7 @@ import {
     START_NEW_ROUND,
     COMPLETE_ALL_ROUNDS,
     SET_WORDS_TO_CHOOSE_FROM,
+    SET_AUDIO,
 
     ERROR_IN_TYPES,
 } from "./types";
@@ -33,6 +39,11 @@ const INITIAL_STATE = {
     words: [],
     currentWord: "green",
     wordsToChooseFrom: [],
+    gameStartAudio: {
+        welcomeAudio: "",
+        startAudio: ""
+    },
+    gameCompleteAudio: [],
 };
 
 const reducer = (state, { type, payload}) => {
@@ -83,7 +94,10 @@ const WhatIsThisGame = ({ wordType }) => {
     // but too complicated for simple useState
     const [{ 
         roundsLeft, roundStarted, 
-        words, currentWord, wordsToChooseFrom 
+        words, currentWord, wordsToChooseFrom,
+        gameStartAudio: { 
+            welcomeAudio, startAudio, endAudio 
+        }, gameCompleteAudio
     }, dispatch] = useReducer(reducer, INITIAL_STATE);
 
     // fetch data from local storage
@@ -92,7 +106,7 @@ const WhatIsThisGame = ({ wordType }) => {
     // checks if data is in local storage, otherwise fetch from API
     const { loading, errors, wordData } = useFetchWordData(wordType, currentWord, fetchWordDataOptions(LocalStorageDataUpdatedResponse));
 
-    const hasAudio = useCallback(() => wordData && isArrayExistAndNotEmpty(wordData.audio), [wordData]);
+    const hasWordAudio = useCallback(() => wordData && isArrayExistAndNotEmpty(wordData.audio), [wordData]);
 
     // ===================================> setup
 
@@ -143,15 +157,7 @@ const WhatIsThisGame = ({ wordType }) => {
         }
     }, [currentWord, words, hasWordsToChooseFrom, hasWords]);
 
-    const wordAudio = useRef("");
-    useEffect(()=> {
-        if (hasAudio() && wordAudio.current === "") {
-            wordAudio.current = new Audio(getCorrectAudioUrl(wordData.audio[0]));
-        }
-
-    }, [wordData?.audio, hasAudio])
-
-    // ===================================> handlers
+    // ==========> words
 
     const startNewRound = useCallback(() => {
         wordAudio.current = "";
@@ -196,7 +202,21 @@ const WhatIsThisGame = ({ wordType }) => {
         getWordsToPractice, generateWordToPractice, generateWordsToChooseFrom, startNewRound
     ]);
 
-    // ===================================> UI
+    // ==========> audio 
+
+    const wordAudio = useRef("");
+    useEffect(()=> {
+        if (hasWordAudio() && wordAudio.current === "") {
+            wordAudio.current = new Audio(getCorrectAudioUrl(wordData.audio[0]));
+        }
+
+    }, [wordData?.audio, hasWordAudio])
+
+    useEffect(() => {
+
+    })
+
+    // ==========>  UI
     const randomImages = useRef([]);
     
     if ((loading && roundsLeft) || randomImages.length === 0) {

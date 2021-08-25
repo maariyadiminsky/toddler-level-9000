@@ -31,79 +31,75 @@ import {
     BODY_TYPE
 } from "../const";
 
-let welcomeAudio;
-let startAudio;
-export const getGameStartAudio = (wordType) => {
-    welcomeAudio = "";
-    startAudio = "";
-
+export const getWelcomeAudio = (wordType) => {
     switch(wordType) {
         case COLOR_TYPE:
-            welcomeAudio = LetsPlayAGame_Boy;
-            startAudio = WhatColorDoYouSee_Boy;
-            break;
+            return LetsPlayAGame_Boy;
         case ANIMAL_TYPE:
-            welcomeAudio = LetsPlayAGame_Girl;
-            startAudio = WhatAnimalDoYouSee_Girl;
-            break;
-        case NUMBER_TYPE:
-            welcomeAudio = LetsPlayAGame_Man;
-            startAudio = WhatNumberIsThat_Man;
-            break;
-        case FOOD_TYPE:
-            welcomeAudio = LetsPlayAGame_Man;
-            startAudio = WhatFoodItemDoYouSee_Man;
-            break;
         case SOCIAL_TYPE:
-            welcomeAudio = LetsPlayAGame_Girl;
-            startAudio = LetsLearnSomeSocialWords_Girl;
-            break;
+            return LetsPlayAGame_Girl;
+        case NUMBER_TYPE:
+        case FOOD_TYPE:
+            return LetsPlayAGame_Man;
         case BODY_TYPE:
             // todo add here when this game type is ready
             break;
             // todo add match time audio here as well.
         default:
-            break;
+            return "";
     }
-
-    return {
-        welcomeAudio,
-        startAudio
-    };
 }
 
-let boyGameCompleteAudio = [
+export const getStartAudio = (wordType) => {
+    switch(wordType) {
+        case COLOR_TYPE:
+            return WhatColorDoYouSee_Boy;
+        case ANIMAL_TYPE:
+            return WhatAnimalDoYouSee_Girl;
+        case NUMBER_TYPE:
+            return WhatNumberIsThat_Man;
+        case FOOD_TYPE:
+            return WhatFoodItemDoYouSee_Man;
+        case SOCIAL_TYPE:
+            return LetsLearnSomeSocialWords_Girl;
+        case BODY_TYPE:
+            // todo add here when this game type is ready
+            break;
+            // todo add match time audio here as well.
+        default:
+            return "";
+    }
+}
+
+export const boyGameCompleteAudio = [
     GoodJob_Boy,
     WowNiceJob_Boy,
     YesYouGotThemAll_Boy,
     YouDidIt_Boy
 ];
-let girlGameCompleteAudio = [
+export const girlGameCompleteAudio = [
     HoorayYouGotThemAll_Girl,
     NiceJob_Girl,
     WowNiceWork_Girl,
     YayYouDidIt_Girl
 ];
-let manGameCompleteAudio = [
+export const manGameCompleteAudio = [
     NiceJob_Man,
     WowYouGotThemAll_Man,
     YouDidIt_Man
 ];
-let gameCompleteAudio = [];
-export const getRandomGameCompleteAudio = (wordType) => {
-    gameCompleteAudio = [];
-
+export const findGameCompleteAudioOptions = (wordType) => {
     switch(wordType) {
         case COLOR_TYPE:
-            gameCompleteAudio = boyGameCompleteAudio;
+            return boyGameCompleteAudio;
             break;
         case ANIMAL_TYPE:
         case SOCIAL_TYPE:
-            gameCompleteAudio = girlGameCompleteAudio;
+            return girlGameCompleteAudio;
             break;
         case NUMBER_TYPE:
         case FOOD_TYPE:
-            gameCompleteAudio = manGameCompleteAudio;
+            return manGameCompleteAudio;
             break;
         case BODY_TYPE:
             // todo add here when this game type is ready
@@ -112,8 +108,9 @@ export const getRandomGameCompleteAudio = (wordType) => {
         default:
             break;
     }
-
-    return gameCompleteAudio[generateRandomNumber(girlGameCompleteAudio.length)];
+}
+export const generateGameCompleteAudio = (audioOptionsArr) => {
+    return audioOptionsArr[generateRandomNumber(audioOptionsArr.length)];
 }
 
 export const getCorrectAudioUrl = (sound, wordType) => {
