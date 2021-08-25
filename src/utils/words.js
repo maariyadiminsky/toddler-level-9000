@@ -71,12 +71,12 @@ export const getCustomCSSForWordsToChooseFrom = (wordType, word) => {
     }
 }
 
-export const generateRandomItem = (items, removeDuplicates = false) => {
-    let randomNum = generateRandomNumber(items.length);
+export const generateRandomItem = (items, removeDuplicates = false, randomNumberLimit = items?.length) => {
+    let randomNum = generateRandomNumber(randomNumberLimit);
 
     if (removeDuplicates) {
         while (indexAlreadyAddedInResultArr[randomNum]) {
-            randomNum = generateRandomNumber(items.length)
+            randomNum = generateRandomNumber(randomNumberLimit)
         }
 
         indexAlreadyAddedInResultArr[randomNum] = true;
@@ -107,7 +107,7 @@ export const generateRandomItems = (items, amount, includeThisItem = null) => {
 
     // replace a word randomly in the array with the correct word
     if (includeThisItem && !result.includes(includeThisItem)) {
-        const randomIndex = generateRandomNumber(amount - 1);
+        const randomIndex = generateRandomNumber(amount);
 
         result[randomIndex] =  includeThisItem;
     }
