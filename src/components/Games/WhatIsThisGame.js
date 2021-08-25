@@ -130,7 +130,7 @@ const WhatIsThisGame = ({ wordType }) => {
             isWordsToChooseFromGenerated.current = true;
 
             const randomWordsToChooseFrom = generateRandomItems(words, wordAmountToShowAtOneTime.current, currentWord);
-            
+
             dispatch({
                 type: SET_WORDS_TO_CHOOSE_FROM,
                 payload: randomWordsToChooseFrom
@@ -144,7 +144,7 @@ const WhatIsThisGame = ({ wordType }) => {
 
     // ===================================> handlers
 
-    const hasCompletedRound = useCallback(() => {
+    const startNewRound = useCallback(() => {
         if (currentWord && hasWords() && hasWordsToChooseFrom()) {
             dispatch({ 
                 type: START_NEW_ROUND 
@@ -170,7 +170,7 @@ const WhatIsThisGame = ({ wordType }) => {
             generateWordsToChooseFrom();
 
             // start round
-            hasCompletedRound();
+            startNewRound();
         } else {
             dispatch({
                 type: COMPLETE_ALL_ROUNDS
@@ -179,7 +179,7 @@ const WhatIsThisGame = ({ wordType }) => {
     }, [
         roundStarted, roundsLeft,
         words, currentWord, wordsToChooseFrom, wordData,
-        getWordsToPractice, generateWordToPractice, generateWordsToChooseFrom, hasCompletedRound
+        getWordsToPractice, generateWordToPractice, generateWordsToChooseFrom, startNewRound
     ]);
 
     // ===================================> UI
