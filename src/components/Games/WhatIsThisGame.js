@@ -8,7 +8,6 @@ import {
     getNewWordsArray,
     generateRandomItem,
     generateRandomItems,
-    generateRandomNumberBetween,
     getWordAmountToShowAtOneTime
 } from "../../utils/words";
 
@@ -129,8 +128,9 @@ const WhatIsThisGame = ({ wordType }) => {
         if (!hasWordsToChooseFrom() && hasWords() && currentWord) {
             isWordsToChooseFromGenerated.current = true;
 
+            console.log("wordAmount: ", wordAmountToShowAtOneTime.current, getWordAmountToShowAtOneTime(wordType));
             const randomWordsToChooseFrom = generateRandomItems(words, wordAmountToShowAtOneTime.current, currentWord);
-
+            console.log("randomWordsToChooseFrom: ", randomWordsToChooseFrom.length);
             dispatch({
                 type: SET_WORDS_TO_CHOOSE_FROM,
                 payload: randomWordsToChooseFrom
@@ -194,9 +194,8 @@ const WhatIsThisGame = ({ wordType }) => {
             <div>{errors}</div>
         );
     }
-    console.log("yds", !isObjectExistAndNotEmpty(wordData), wordData && !isArrayExistAndNotEmpty(wordData.images));
 
-    const renderWrapper = () => {
+    const renderImagesWrapper = () => {
         if (!isObjectExistAndNotEmpty(wordData) || !isArrayExistAndNotEmpty(wordData.images)) return;
 
         // generates 3 - 5 random images out of the 10 returned from the API
@@ -205,8 +204,8 @@ const WhatIsThisGame = ({ wordType }) => {
         if (randomImages.current.length === 0) return;
 
         return (
-            <div className={`container px-36`}>
-                <div className={`cursor-pointer grid grid-cols-3 gap-y-5 gap-x-10`}>
+            <div className="container px-36">
+                <div className="cursor-pointer grid grid-cols-3 gap-y-5 gap-x-10">
                     {renderImageItems(randomImages.current)}
                 </div>
             </div>
@@ -230,13 +229,20 @@ const WhatIsThisGame = ({ wordType }) => {
         ))
     );
 
-    const renderChoiceItems = () => {
-        // words && word.length !== 0
-    }
+    const renderChoiceItems = () => (
+        isArrayExistAndNotEmpty(wordsToChooseFrom) && wordsToChooseFrom.map(item => (
+            <div>{item}</div>
+        ))
+    );
 
     return (
         <div>
-            {renderWrapper()}
+            {renderImagesWrapper()}
+            <div className="container">
+                <div className={`cursor-pointer grid grid-cols-${wordAmountToShowAtOneTime.current} gap-y-5 gap-x-10`}>
+                    {renderChoiceItems()}
+                </div>
+            </div>
         </div>
     );
 }

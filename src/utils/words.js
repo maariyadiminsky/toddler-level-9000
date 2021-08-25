@@ -84,8 +84,9 @@ export const generateRandomItems = (items, amount, includeThisItem = null) => {
     }
 
     // replace a word randomly in the array with the correct word
-    if (includeThisItem) {
-        const randomIndex = generateRandomNumber(items.length);
+    if (includeThisItem && !result.includes(includeThisItem)) {
+        const randomIndex = generateRandomNumber(items.length - 1);
+
         result[randomIndex] =  includeThisItem;
     }
 
