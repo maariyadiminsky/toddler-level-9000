@@ -30,7 +30,7 @@ const GameArena = () => {
     );
 
     return (
-        <div className="container my-16">
+        <div className="container py-16">
             <div className="grid grid-cols-3 gap-y-5 gap-x-7">
                 {renderGameArenaItems()}
             </div>

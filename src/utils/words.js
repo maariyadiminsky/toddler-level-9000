@@ -49,25 +49,45 @@ export const getWordAmountToShowAtOneTime = (wordType) => {
     }
 }
 
-export const generateRandomWord = (words) => {
-    return words[generateRandomNumber(words)];
+export const generateRandomItem = (items, removeDuplicates = false) => {
+    let randomNum = generateRandomNumber(items.length);
+
+    if (removeDuplicates) {
+        while (indexAlreadyAddedInResultArr[randomNum]) {
+            randomNum = generateRandomNumber(items.length)
+        }
+
+        indexAlreadyAddedInResultArr[randomNum] = true;
+    }
+
+    return items[randomNum];
 }
 
-const generateRandomNumber = (words) => {
-    return Math.floor(Math.random() * words.length);
+export const generateRandomNumber = (limit) => {
+    return Math.floor(Math.random() * limit);
 }
 
-export const generateWords = (correctWord, words, amount) => {
+// so 0 - 5 would include 0 and 5
+export const generateRandomNumberBetween = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// to make sure the same item isn't added twice
+let indexAlreadyAddedInResultArr = {};
+export const generateRandomItems = (items, amount, includeThisItem = null) => {
     let result = [];
+    indexAlreadyAddedInResultArr = {};
 
     // picks random words in words array
     while(result.length !== amount) {
-        result = [...result, generateRandomWord(words)];
+        result = [...result, generateRandomItem(items, true)];
     }
 
     // replace a word randomly in the array with the correct word
-    const randomIndex = generateRandomNumber(words);
-    result[randomIndex] = correctWord;
+    if (includeThisItem) {
+        const randomIndex = generateRandomNumber(items.length);
+        result[randomIndex] =  includeThisItem;
+    }
 
     return result;
 }

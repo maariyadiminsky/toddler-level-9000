@@ -34,7 +34,7 @@ import {
 import { setLocalStorageData } from "./localStorage";
 
 const fetchWordDataUnsplashParamOptions = {
-    "per_page": 5, // number of items returned
+    "per_page": 10, // number of items returned
     "content_filter": "high", // make sure results are child-appropriate,
     "orientation": "squarish" // all images come back with same orientation
 }
@@ -151,7 +151,7 @@ const fetchImageDataForMainWord = (word, dispatch) => (
         results.map(item => ({
             id: item.id,
             altText: item.alt_description,
-            sizeUrls: item.urls,
+            imageUrl: item.urls.small,
             credits: {
                 name: item.user.name,
                 profileLink: item.user.links.html,

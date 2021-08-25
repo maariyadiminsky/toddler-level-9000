@@ -6,12 +6,16 @@ import { useFetchWordData } from "../../hooks/words";
 import { RESPONSE_SUCCESS } from "../../redux/actions/types";
 import { 
     getNewWordsArray,
-    generateRandomWord,
-    generateWords,
+    generateRandomItem,
+    generateRandomItems,
+    generateRandomNumberBetween,
     getWordAmountToShowAtOneTime
 } from "../../utils/words";
 
-import { isArrayExistAndNotEmpty } from "../../utils/";
+import { 
+    isArrayExistAndNotEmpty,
+    isObjectExistAndNotEmpty 
+} from "../../utils/";
 
 import {
     SET_WORDS,
@@ -109,26 +113,32 @@ const WhatIsThisGame = ({ wordType }) => {
         if (hasWords() && !currentWord) {
             dispatch({
                 type: SET_CURRENT_WORD,
-                payload: generateRandomWord(words)
+                payload: generateRandomItem(words, true)
             })
         }
     }, [currentWord, words, hasWords]);
 
     const wordAmountToShowAtOneTime = useRef(getWordAmountToShowAtOneTime(wordType));
-    const wordsToChooseFromGenerated = useRef(false);
+    const isWordsToChooseFromGenerated = useRef(false);
     const generateWordsToChooseFrom = useCallback(() => {
         // to avoid re-renders in a utils method
-        if (wordsToChooseFromGenerated.current) return;
+        if (isWordsToChooseFromGenerated.current) return;
 
         // give child words to choose from
         // the correct word is within them
         if (!hasWordsToChooseFrom() && hasWords() && currentWord) {
-            wordsToChooseFromGenerated.current = true;
+            isWordsToChooseFromGenerated.current = true;
+
+            const randomWordsToChooseFrom = generateRandomItems(words, wordAmountToShowAtOneTime.current, currentWord);
 
             dispatch({
                 type: SET_WORDS_TO_CHOOSE_FROM,
-                payload: generateWords(currentWord, words, wordAmountToShowAtOneTime.current)
-            })
+                payload: randomWordsToChooseFrom
+            });
+
+            if (randomWordsToChooseFrom.length !== 0) {
+                isWordsToChooseFromGenerated.current = false;
+            }
         }
     }, [currentWord, words, hasWordsToChooseFrom, hasWords]);
 
@@ -185,12 +195,43 @@ const WhatIsThisGame = ({ wordType }) => {
             <div>{errors}</div>
         );
     }
+    console.log("yds", !isObjectExistAndNotEmpty(wordData), wordData && !isArrayExistAndNotEmpty(wordData.images));
+
+    const renderWordItems = () => {
+        if (!isObjectExistAndNotEmpty(wordData) || !isArrayExistAndNotEmpty(wordData.images)) return;
+
+        // generates 3 - 5 random images out of the 10 returned from the API
+        const randomImages = generateRandomItems(wordData.images, generateRandomNumberBetween(3, 5));
+
+        console.log("here", randomImages, randomImages.length);
+
+        if (randomImages.length === 0) return;
+
+        return randomImages.map(({ id, altText, imageUrl }) => (
+            <div>
+                <div 
+                    key={id} 
+                    className={"p-3 bg-white rounded-2xl shadow-lg hover:animate-ping hover:shadow-2xl hover:rotate-45 hover:scale-75 transform transition duration-300"}
+                >
+                <img
+                    className="min-w-full self-auto"
+                    src={imageUrl} 
+                    alt={altText}
+                />
+            </div>
+            </div>
+        ))
+     };
+
+    const renderChoiceItems = () => {
+        // words && word.length !== 0
+    }
 
     return (
-        <div>
-            hi
+        <div className="cursor-pointer grid grid-cols-5 gap-y-5 gap-x-3 flex items-stretch">
+            {renderWordItems()}
         </div>
-    )
+    );
 }
 
 export default WhatIsThisGame;

@@ -5,7 +5,7 @@ import ProtectedRoute from "../components/hoc/auth/ProtectedRoute";
 import { useGetLocalStorageData } from "../hooks/localStorage";
 
 import NavBar from "../components/NavBar/NavBar";
-import GameArena from "../components/GameArena/GameArena";
+import GameArena from "./GameArena/GameArena";
 import Game from "./Game";
 
 const App = () => {
@@ -18,7 +18,6 @@ const App = () => {
       <NavBar />
       <Route path="/" exact component={GameArena} />
       <Route path="/games" exact component={Game} />
-      {/* <Route path="/" exact component={Main} /> */}
       <ProtectedRoute path="/parent" exact component={() => <div>some component here</div>} />
     </div>
   );
