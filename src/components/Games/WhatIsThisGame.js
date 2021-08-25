@@ -163,8 +163,8 @@ const WhatIsThisGame = ({ wordType }) => {
         }
     }, [currentWord, hasWords, hasWordsToChooseFrom]);
 
-    const handleCompleteRound = (item) => {
-        if (wordAudio.current !== "") {
+    const handleCompleteRound = (word) => {
+        if (word === currentWord && wordAudio.current !== "") {
             wordAudio.current.play();
         }
 
