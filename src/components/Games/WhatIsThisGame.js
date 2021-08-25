@@ -13,8 +13,8 @@ import {
 } from "../../utils/words";
 import { 
     getCorrectAudioUrl,
-    getGameStartAudio,
-    findGameCompleteAudioOptions,
+    getWelcomeAudio,
+    getStartAudio,
     generateGameCompleteAudio
 } from "../../utils/audio";
 import { 
@@ -39,11 +39,9 @@ const INITIAL_STATE = {
     words: [],
     currentWord: "green",
     wordsToChooseFrom: [],
-    gameStartAudio: {
-        welcomeAudio: "",
-        startAudio: ""
-    },
-    gameCompleteAudio: [],
+    welcomeAudio: null,
+    startAudio: null,
+    gameCompleteAudio: null,
 };
 
 const reducer = (state, { type, payload}) => {
@@ -79,6 +77,13 @@ const reducer = (state, { type, payload}) => {
             wordsToChooseFrom: [...payload]
         }
     }
+    case SET_AUDIO:
+        return { 
+            ...state, 
+            welcomeAudio: payload.welcomeAudio,
+            startAudio: payload.startAudio,
+            gameCompleteAudio: payload.gameCompleteAudio
+        };
     default:
       throw new Error(ERROR_IN_TYPES.TYPE_DOES_NOT_EXIST("WhatIsThisGame"));
   }
@@ -95,9 +100,7 @@ const WhatIsThisGame = ({ wordType }) => {
     const [{ 
         roundsLeft, roundStarted, 
         words, currentWord, wordsToChooseFrom,
-        gameStartAudio: { 
-            welcomeAudio, startAudio, endAudio 
-        }, gameCompleteAudio
+        welcomeAudio, startAudio, gameCompleteAudio
     }, dispatch] = useReducer(reducer, INITIAL_STATE);
 
     // fetch data from local storage
@@ -157,8 +160,6 @@ const WhatIsThisGame = ({ wordType }) => {
         }
     }, [currentWord, words, hasWordsToChooseFrom, hasWords]);
 
-    // ==========> words
-
     const startNewRound = useCallback(() => {
         wordAudio.current = "";
 
@@ -166,6 +167,8 @@ const WhatIsThisGame = ({ wordType }) => {
             dispatch({ 
                 type: START_NEW_ROUND 
             })
+
+            // 
         }
     }, [currentWord, hasWords, hasWordsToChooseFrom]);
 
@@ -179,6 +182,8 @@ const WhatIsThisGame = ({ wordType }) => {
         // })
     }  
 
+    // ==========> words
+    
     // if rounds left
     useEffect(() => {
         if (roundStarted) return;
@@ -213,10 +218,20 @@ const WhatIsThisGame = ({ wordType }) => {
     }, [wordData?.audio, hasWordAudio])
 
     useEffect(() => {
-
+        if (startAudio === "") {
+            dispatch({
+                type: SET_AUDIO,
+                payload: {
+                    welcomeAudio: new Audio(getWelcomeAudio(wordType)),
+                    startAudio: new Audio(getStartAudio(wordType)),
+                    gameComplete: new Audio(generateGameCompleteAudio(wordType))
+                }
+            })
+        }
     })
 
     // ==========>  UI
+    
     const randomImages = useRef([]);
     
     if ((loading && roundsLeft) || randomImages.length === 0) {
