@@ -11,12 +11,11 @@ import {
     getWordAmountToShowAtOneTime,
     getCustomCSSForWordsToChooseFrom
 } from "../../utils/words";
-
+import { getCorrectAudioUrl } from "../../utils/audio";
 import { 
     isArrayExistAndNotEmpty,
     isObjectExistAndNotEmpty 
 } from "../../utils/";
-
 import {
     SET_WORDS,
     SET_CURRENT_WORD,
@@ -27,8 +26,6 @@ import {
 
     ERROR_IN_TYPES,
 } from "./types";
-
-import { COLOR_TYPE } from "../../const";
 
 const INITIAL_STATE = {
     roundStarted: false,
@@ -95,11 +92,13 @@ const WhatIsThisGame = ({ wordType }) => {
     // checks if data is in local storage, otherwise fetch from API
     const { loading, errors, wordData } = useFetchWordData(wordType, currentWord, fetchWordDataOptions(LocalStorageDataUpdatedResponse));
 
+    const hasAudio = useCallback(() => wordData && isArrayExistAndNotEmpty(wordData.audio), [wordData]);
+
     // ===================================> setup
 
     const hasWords = useCallback(() => isArrayExistAndNotEmpty(words), [words]);
     const hasWordsToChooseFrom = useCallback(() => isArrayExistAndNotEmpty(wordsToChooseFrom), [wordsToChooseFrom]);
-
+    
     const getWordsToPractice = useCallback(() => {
         // set words child will practice
         if (!hasWords()) {
@@ -144,9 +143,19 @@ const WhatIsThisGame = ({ wordType }) => {
         }
     }, [currentWord, words, hasWordsToChooseFrom, hasWords]);
 
+    const wordAudio = useRef("");
+    useEffect(()=> {
+        if (hasAudio() && wordAudio.current === "") {
+            wordAudio.current = new Audio(getCorrectAudioUrl(wordData.audio[0]));
+        }
+
+    }, [wordData?.audio, hasAudio])
+
     // ===================================> handlers
 
     const startNewRound = useCallback(() => {
+        wordAudio.current = "";
+
         if (currentWord && hasWords() && hasWordsToChooseFrom()) {
             dispatch({ 
                 type: START_NEW_ROUND 
@@ -154,18 +163,21 @@ const WhatIsThisGame = ({ wordType }) => {
         }
     }, [currentWord, hasWords, hasWordsToChooseFrom]);
 
-    const handleCompleteRound = () =>(
-        dispatch({
-            type: COMPLETE_ROUND
-        })
-    );    
+    const handleCompleteRound = (item) => {
+        if (wordAudio.current !== "") {
+            wordAudio.current.play();
+        }
+
+        // dispatch({
+        //     type: COMPLETE_ROUND
+        // })
+    }  
 
     // if rounds left
     useEffect(() => {
         if (roundStarted) return;
 
         if (roundsLeft) {
-            // console.log("in useeffect", words, currentWord, wordsToChooseFrom, roundsLeft);
             // initial setup
             getWordsToPractice();
             generateWordToPractice();
@@ -231,12 +243,10 @@ const WhatIsThisGame = ({ wordType }) => {
         ))
     );
 
-    const shouldRenderWord = () => wordType !== COLOR_TYPE;
-
     const renderChoiceItems = () => (
         isObjectExistAndNotEmpty(wordData) && isArrayExistAndNotEmpty(wordsToChooseFrom) && wordsToChooseFrom.map(item => (
-            <div key={item} className={`m-auto flex justify-center items-center content-center h-36 w-36 rounded-full fill-current bg-gradient-to-br ${getCustomCSSForWordsToChooseFrom(wordType, item)} shadow-lg hover:shadow-2xl`}>
-                {shouldRenderWord() && item}
+            <div key={item} onClick={() => handleCompleteRound(item)} className={`m-auto flex justify-center items-center content-center h-36 w-36 rounded-full fill-current bg-gradient-to-br ${getCustomCSSForWordsToChooseFrom(wordType, item)} shadow-lg hover:shadow-2xl`}>
+                {item}
             </div>
         ))
     );
