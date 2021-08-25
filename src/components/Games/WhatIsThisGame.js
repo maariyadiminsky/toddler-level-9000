@@ -215,11 +215,14 @@ const WhatIsThisGame = ({ wordType }) => {
     const handleCompleteRound = (word) => {
         if (currentWordAudio && word === currentWord) {
             currentWordAudio.play();
-        }
 
-        // dispatch({
-        //     type: COMPLETE_ROUND
-        // })
+            wait(1000)
+                .then(() => (
+                    dispatch({
+                        type: COMPLETE_ROUND
+                    })
+                ));
+        }
     }  
 
     // ==========> audio 
