@@ -19,21 +19,28 @@ import {
 } from "../../utils/audio";
 import { 
     isArrayExistAndNotEmpty,
-    isObjectExistAndNotEmpty 
+    isObjectExistAndNotEmpty,
+    wait
 } from "../../utils/";
 import {
+    START_NEW_GAME,
+    START_NEW_ROUND,
+    COMPLETE_ROUND,
+    COMPLETE_ALL_ROUNDS,
+
     SET_WORDS,
     SET_CURRENT_WORD,
-    COMPLETE_ROUND,
-    START_NEW_ROUND,
-    COMPLETE_ALL_ROUNDS,
     SET_WORDS_TO_CHOOSE_FROM,
+
     SET_AUDIO,
 
     ERROR_IN_TYPES,
 } from "./types";
 
+import Loader from "../Loader";
+
 const INITIAL_STATE = {
+    gameStarted: false,
     roundStarted: false,
     roundsLeft: 5, // for 5 words
     words: [],
@@ -46,16 +53,10 @@ const INITIAL_STATE = {
 
 const reducer = (state, { type, payload}) => {
   switch (type) {
-    case SET_WORDS:
-        return { 
-            ...state, 
-            words: [...payload] 
-        }
-    case SET_CURRENT_WORD:
-        return { 
+    case START_NEW_GAME: 
+        return {
             ...state,
-            currentWord: payload,
-            words: without(state.words, payload)
+            gameStarted: true
         }
     case START_NEW_ROUND:
         return { 
@@ -71,6 +72,23 @@ const reducer = (state, { type, payload}) => {
             wordsToChooseFrom: []
         }
     }
+    case COMPLETE_ALL_ROUNDS: {
+        return { 
+            ...state, 
+            ...INITIAL_STATE
+        }
+    }
+    case SET_WORDS:
+        return { 
+            ...state, 
+            words: [...payload] 
+        }
+    case SET_CURRENT_WORD:
+        return { 
+            ...state,
+            currentWord: payload,
+            words: without(state.words, payload)
+        }
     case SET_WORDS_TO_CHOOSE_FROM: {
         return {
             ...state,
@@ -98,6 +116,7 @@ const WhatIsThisGame = ({ wordType }) => {
     // local reducer since this data doesn't need to be in global state
     // but too complicated for simple useState
     const [{ 
+        gameStarted,
         roundsLeft, roundStarted, 
         words, currentWord, wordsToChooseFrom,
         welcomeAudio, startAudio, gameCompleteAudio
@@ -160,17 +179,21 @@ const WhatIsThisGame = ({ wordType }) => {
         }
     }, [currentWord, words, hasWordsToChooseFrom, hasWords]);
 
-    const startNewRound = useCallback(() => {
-        wordAudio.current = "";
+    const startNewGame = () => {
+        dispatch({ 
+            type: START_NEW_GAME
+        })
+    }
 
+    const startNewRound = useCallback(() => {
         if (currentWord && hasWords() && hasWordsToChooseFrom()) {
+            wordAudio.current = "";
+
             dispatch({ 
                 type: START_NEW_ROUND 
             })
-
-            // 
         }
-    }, [currentWord, hasWords, hasWordsToChooseFrom]);
+    }, [currentWord, hasWords, hasWordsToChooseFrom, startAudio, welcomeAudio]);
 
     const handleCompleteRound = (word) => {
         if (word === currentWord && wordAudio.current !== "") {
@@ -181,6 +204,32 @@ const WhatIsThisGame = ({ wordType }) => {
         //     type: COMPLETE_ROUND
         // })
     }  
+
+    // ==========> audio 
+
+    const wordAudio = useRef("");
+    useEffect(()=> {
+        if (hasWordAudio() && wordAudio.current === "") {
+            wordAudio.current = new Audio(getCorrectAudioUrl(wordData.audio[0]));
+        }
+
+    }, [wordData?.audio, hasWordAudio])
+
+    useEffect(() => {
+        if (!welcomeAudio) {
+            console.log("audio!!", getWelcomeAudio(wordType));
+            const t = new Audio(getWelcomeAudio(wordType));
+            dispatch({
+                type: SET_AUDIO,
+                payload: {
+                    welcomeAudio: new Audio(getWelcomeAudio(wordType)),
+                    startAudio: new Audio(getStartAudio(wordType)),
+                    gameComplete: new Audio(generateGameCompleteAudio(wordType))
+                }
+            })
+        }
+    }, [welcomeAudio, wordType])
+    
 
     // ==========> words
     
@@ -207,36 +256,20 @@ const WhatIsThisGame = ({ wordType }) => {
         getWordsToPractice, generateWordToPractice, generateWordsToChooseFrom, startNewRound
     ]);
 
-    // ==========> audio 
-
-    const wordAudio = useRef("");
-    useEffect(()=> {
-        if (hasWordAudio() && wordAudio.current === "") {
-            wordAudio.current = new Audio(getCorrectAudioUrl(wordData.audio[0]));
-        }
-
-    }, [wordData?.audio, hasWordAudio])
-
-    useEffect(() => {
-        if (startAudio === "") {
-            dispatch({
-                type: SET_AUDIO,
-                payload: {
-                    welcomeAudio: new Audio(getWelcomeAudio(wordType)),
-                    startAudio: new Audio(getStartAudio(wordType)),
-                    gameComplete: new Audio(generateGameCompleteAudio(wordType))
-                }
-            })
-        }
-    })
-
     // ==========>  UI
-    
+
     const randomImages = useRef([]);
     
-    if ((loading && roundsLeft) || randomImages.length === 0) {
+    const loadForce = true;
+    if (loadForce || (loading && roundsLeft) || randomImages.length === 0) {
+        return <Loader />
+
         return (
-            <div>Loading...</div>
+            <div className="flex items-center justify-center space-x-2">
+                <div className="bg-pink-500 rounded-full motion-reduce:animate-bounce w-6 h-6"></div>
+                <div className="w-6 h-6 bg-green-300 rounded-full "></div>
+                <div className="w-6 h-6 bg-indigo-300 rounded-full animate-bounce"></div>
+            </div>
         );
     } else if (errors) {
         return (

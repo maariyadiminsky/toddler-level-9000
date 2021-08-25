@@ -1,4 +1,22 @@
 import isEmpty from "lodash/isEmpty";
 
 export const isArrayExistAndNotEmpty = (arr) => arr && arr.length !== 0;
+
 export const isObjectExistAndNotEmpty = (obj) => obj !== undefined && !isEmpty(obj);
+
+/* 
+    - use case example: 
+        const waitTwoSeconds = async() => {
+            console.log("this will be called");
+            await wait(2000);
+            console.log("this will be called after two seconds");
+        }
+    
+    - another use case example: 
+        wait(2000)
+        .then(() => // do something after 2 seconds)
+*/
+export const wait = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+};
+

@@ -89,9 +89,10 @@ export const manGameCompleteAudio = [
     YouDidIt_Man
 ];
 
+let audioOptions = [];
 export const generateGameCompleteAudio = (wordType) => {
-    const audioOptions = [];
-
+    audioOptions = [];
+    
     switch(wordType) {
         case COLOR_TYPE:
             audioOptions = boyGameCompleteAudio;
