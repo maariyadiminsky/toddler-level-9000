@@ -183,10 +183,9 @@ const WhatIsThisGame = ({ wordType }) => {
     ]);
 
     // ===================================> UI
-
-    // show this if there is no word data
-    // do not show this if there are no more rounds
-    if (loading && roundsLeft) {
+    const randomImages = useRef([]);
+    
+    if (loading && roundsLeft || randomImages.length === 0) {
         return (
             <div>Loading...</div>
         );
@@ -197,39 +196,47 @@ const WhatIsThisGame = ({ wordType }) => {
     }
     console.log("yds", !isObjectExistAndNotEmpty(wordData), wordData && !isArrayExistAndNotEmpty(wordData.images));
 
-    const renderWordItems = () => {
+    const renderWrapper = () => {
         if (!isObjectExistAndNotEmpty(wordData) || !isArrayExistAndNotEmpty(wordData.images)) return;
 
         // generates 3 - 5 random images out of the 10 returned from the API
-        const randomImages = generateRandomItems(wordData.images, generateRandomNumberBetween(3, 5));
+        randomImages.current = generateRandomItems(wordData.images, 3);
 
-        console.log("here", randomImages, randomImages.length);
+        if (randomImages.current.length === 0) return;
 
-        if (randomImages.length === 0) return;
-
-        return randomImages.map(({ id, altText, imageUrl }) => (
-            <div>
-                <div 
-                    key={id} 
-                    className={"p-3 bg-white rounded-2xl shadow-lg hover:animate-ping hover:shadow-2xl hover:rotate-45 hover:scale-75 transform transition duration-300"}
-                >
-                <img
-                    className="min-w-full self-auto"
-                    src={imageUrl} 
-                    alt={altText}
-                />
+        return (
+            <div className={`container px-36`}>
+                <div className={`cursor-pointer grid grid-cols-3 gap-y-5 gap-x-10`}>
+                    {renderImageItems(randomImages.current)}
+                </div>
             </div>
+        );
+    }
+
+    const renderImageItems = (images) => (
+        images.map(({ id, altText, imageUrl }) => (
+            <div key={id}>
+                <div 
+                    className={"bg-white rounded-2xl shadow-lg hover:animate-ping hover:shadow-2xl hover:rotate-45 hover:scale-75 transform transition duration-300"}
+                >
+                    <img
+                        key={id}
+                        className="min-w-full rounded-2xl"
+                        src={imageUrl} 
+                        alt={altText}
+                    />
+                </div>
             </div>
         ))
-     };
+    );
 
     const renderChoiceItems = () => {
         // words && word.length !== 0
     }
 
     return (
-        <div className="cursor-pointer grid grid-cols-5 gap-y-5 gap-x-3 flex items-stretch">
-            {renderWordItems()}
+        <div>
+            {renderWrapper()}
         </div>
     );
 }
