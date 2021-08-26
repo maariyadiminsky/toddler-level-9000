@@ -20,6 +20,10 @@ import YesYouGotThemAll_Boy from "../components/Games/audio/YesYouGotThemAll_Boy
 import YouDidIt_Boy from "../components/Games/audio/YouDidIt_Boy.mp3";
 import YouDidIt_Man from "../components/Games/audio/YouDidIt_Man.mp3";
 
+import Complete_1 from "../components/Games/audio/Complete_1.mp3";
+import Complete_2 from "../components/Games/audio/Complete_1.mp3";
+import Complete_3 from "../components/Games/audio/Complete_1.mp3";
+
 import { generateRandomNumber } from "./words";
 
 import {
@@ -122,6 +126,15 @@ export const generateGameCompleteAudio = (wordType) => {
 
 const generateRandomAudioFromArr = (audioOptionsArr) => {
     return audioOptionsArr[generateRandomNumber(audioOptionsArr.length)];
+}
+
+const completeGameSoundEffects = [
+    Complete_1,
+    Complete_2,
+    Complete_3
+];
+export const generateCompleteSoundEffect = () => {
+    return completeGameSoundEffects[generateRandomNumber(completeGameSoundEffects.length)];
 }
 
 export const getCorrectAudioUrl = (sound, wordType) => {
