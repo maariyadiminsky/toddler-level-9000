@@ -7,9 +7,9 @@ export const isObjectExistAndNotEmpty = (obj) => obj !== undefined && !isEmpty(o
 /* 
     - use case example: 
         const waitTwoSeconds = async() => {
-            console.log("this will be called");
+            // this will be called first
             await wait(2000);
-            console.log("this will be called after two seconds");
+            // this will be called after two seconds
         }
     
     - another use case example: 
