@@ -4,6 +4,7 @@ import Confetti from "react-confetti";
 
 import { setStarsEarned } from "../../redux/actions/stars";
 import { generateRandomItemInArray } from "../../utils";
+import { generateCompleteSoundEffect } from "../../utils/audio";
 
 import catCelebrate from "./images/catCelebrate.png";
 import catCool from "./images/catCool.png";
@@ -13,12 +14,14 @@ import catLove from "./images/catLove.png";
 const celebrateImageOptions = [catCelebrate, catCool, catHappy, catLove];
 const GameCompleteModal = ({ starsEarned = 0 }) => {
     const celebrateImage = useRef(generateRandomItemInArray(celebrateImageOptions));
+    const celebrateSoundEffect = useRef(new Audio(generateCompleteSoundEffect()));
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (starsEarned > 0) {
             dispatch(setStarsEarned(starsEarned));
+            celebrateSoundEffect.current.play();
         }
 
     }, [dispatch, starsEarned]);

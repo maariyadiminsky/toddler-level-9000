@@ -21,8 +21,8 @@ import YouDidIt_Boy from "../components/Games/audio/YouDidIt_Boy.mp3";
 import YouDidIt_Man from "../components/Games/audio/YouDidIt_Man.mp3";
 
 import Complete_1 from "../components/Games/audio/Complete_1.mp3";
-import Complete_2 from "../components/Games/audio/Complete_1.mp3";
-import Complete_3 from "../components/Games/audio/Complete_1.mp3";
+import Complete_2 from "../components/Games/audio/Complete_2.mp3";
+import Complete_3 from "../components/Games/audio/Complete_3.mp3";
 
 import { generateRandomItemInArray } from "./index";
 
