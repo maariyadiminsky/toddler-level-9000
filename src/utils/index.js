@@ -20,3 +20,10 @@ export const wait = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 };
 
+export const generateRandomNumber = (limit) => {
+    return Math.floor(Math.random() * limit);
+}
+
+export const generateRandomItemInArray = (arr) => (
+    arr[generateRandomNumber(arr.length)]
+);

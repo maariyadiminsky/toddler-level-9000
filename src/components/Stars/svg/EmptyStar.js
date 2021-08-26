@@ -11,7 +11,7 @@ export default (size = 14, fillStar = false, id=1, shouldAnimate = true) => {
         <svg 
             key={id}
             xmlns="http://www.w3.org/2000/svg" 
-            className={`h-${size} w-${size} text-yellow-300 ${animationCSS}`} 
+            className={`h-${size} w-${size} text-yellow-300 ${animationCSS()}`} 
             fill="none" 
             viewBox="0 0 24 24" 
             stroke="currentColor"

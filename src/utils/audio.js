@@ -24,7 +24,7 @@ import Complete_1 from "../components/Games/audio/Complete_1.mp3";
 import Complete_2 from "../components/Games/audio/Complete_1.mp3";
 import Complete_3 from "../components/Games/audio/Complete_1.mp3";
 
-import { generateRandomNumber } from "./words";
+import { generateRandomItemInArray } from "./index";
 
 import {
     COLOR_TYPE,
@@ -125,7 +125,7 @@ export const generateGameCompleteAudio = (wordType) => {
 }
 
 const generateRandomAudioFromArr = (audioOptionsArr) => {
-    return audioOptionsArr[generateRandomNumber(audioOptionsArr.length)];
+    return generateRandomItemInArray(audioOptionsArr);
 }
 
 const completeGameSoundEffects = [
@@ -134,7 +134,7 @@ const completeGameSoundEffects = [
     Complete_3
 ];
 export const generateCompleteSoundEffect = () => {
-    return completeGameSoundEffects[generateRandomNumber(completeGameSoundEffects.length)];
+    return generateRandomItemInArray(completeGameSoundEffects);
 }
 
 export const getCorrectAudioUrl = (sound, wordType) => {

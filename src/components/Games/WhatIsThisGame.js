@@ -41,7 +41,7 @@ import {
 
 import StarsToEarn from "../Stars/StarsToEarn";
 import StartGameButton from "../StartGameButton";
-import GameCompleteModal from "../GameCompleteModal";
+import GameCompleteModal from "../GameCompleteModal/GameCompleteModal";
 import Loader from "../Loader";
 
 const INITIAL_STATE = {
@@ -289,10 +289,10 @@ const WhatIsThisGame = ({ wordType }) => {
 
     const randomImages = useRef([]);
 
-    if (true) {
-        return <GameCompleteModal />
-    }
-    else if ((loading && roundsLeft) || randomImages.length === 0) {
+    // if (true) {
+    //     return <GameCompleteModal />
+    // }
+    if ((loading && roundsLeft) || randomImages.length === 0) {
         return <Loader />
     } else if (!gameStarted) {
         return <StartGameButton handleButtonClick={handleStartNewGame}/>

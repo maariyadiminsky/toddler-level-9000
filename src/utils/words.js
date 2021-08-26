@@ -16,6 +16,8 @@ import {
     WORD_TYPE_ERRORS
 } from "../const";
 
+import { generateRandomNumber } from "./";
+
 export const getNewWordsArray = (wordType) => {
     switch(wordType) {
         case NUMBER_TYPE:
@@ -83,10 +85,6 @@ export const generateRandomItem = (items, removeDuplicates = false, randomNumber
     }
 
     return items[randomNum];
-}
-
-export const generateRandomNumber = (limit) => {
-    return Math.floor(Math.random() * limit);
 }
 
 // so 0 - 5 would include 0 and 5
