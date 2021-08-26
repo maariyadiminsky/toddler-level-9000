@@ -114,3 +114,12 @@ export const generateRandomItems = (items, amount, includeThisItem = null) => {
 
     return result;
 }
+
+export const getCorrectImageURL = (url, wordType) => {
+    switch(wordType) {
+        case SOCIAL_TYPE:
+            return `https://docs.google.com/uc?export=open&id=${url}`;
+        default:
+            return url;
+    }
+}

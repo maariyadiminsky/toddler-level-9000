@@ -9,7 +9,8 @@ import {
     generateRandomItem,
     generateRandomItems,
     getWordAmountToShowAtOneTime,
-    getCustomCSSForWordsToChooseFrom
+    getCustomCSSForWordsToChooseFrom,
+    getCorrectImageURL
 } from "../../utils/words";
 import { 
     getCorrectAudioUrl,
@@ -323,7 +324,7 @@ const WhatIsThisGame = ({ wordType }) => {
                     <img
                         key={id}
                         className="min-w-full rounded-2xl"
-                        src={imageUrl} 
+                        src={getCorrectImageURL(imageUrl, wordType)} 
                         alt={altText}
                     />
                 </div>
