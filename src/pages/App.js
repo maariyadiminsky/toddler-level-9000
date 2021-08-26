@@ -1,7 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import ProtectedRoute from "../components/hoc/auth/ProtectedRoute";
-// import { useGetLocalStorageData } from "../hooks/localStorage";
 import {
   ROOT_PATH,
   CHOICE_GAME_PATH,

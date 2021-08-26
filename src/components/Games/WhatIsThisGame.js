@@ -116,8 +116,8 @@ const reducer = (state, { type, payload}) => {
   }
 }
 
-const fetchWordDataOptions = (localStorageResponse) => ({
-    isLocalStorageUpdatedWithData: (localStorageResponse.status === RESPONSE_SUCCESS)
+const fetchWordDataOptions = (status) => ({
+    isLocalStorageUpdatedWithData: (status === RESPONSE_SUCCESS)
 });
 const WhatIsThisGame = ({ wordType }) => {
     // ===================================> data fetching
@@ -132,10 +132,10 @@ const WhatIsThisGame = ({ wordType }) => {
     }, dispatch] = useReducer(reducer, INITIAL_STATE);
 
     // fetch data from local storage
-    const LocalStorageDataUpdatedResponse = useGetLocalStorageData();
+    const { status } = useGetLocalStorageData();
     
     // checks if data is in local storage, otherwise fetch from API
-    const { loading, errors, wordData } = useFetchWordData(wordType, currentWord, fetchWordDataOptions(LocalStorageDataUpdatedResponse));
+    const { loading, errors, wordData } = useFetchWordData(wordType, currentWord, fetchWordDataOptions(status));
 
     const hasWordAudio = useCallback(() => wordData && isArrayExistAndNotEmpty(wordData.audio), [wordData]);
 
@@ -211,7 +211,7 @@ const WhatIsThisGame = ({ wordType }) => {
                 type: START_NEW_ROUND 
             })
 
-            wait(1000).then(() => shouldPlayStartAudio() && startAudio.play());
+            wait(500).then(() => shouldPlayStartAudio() && startAudio.play());
         }
     }, [gameStarted, currentWord, hasWords, hasWordsToChooseFrom, startAudio]);
 

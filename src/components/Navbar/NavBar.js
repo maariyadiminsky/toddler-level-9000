@@ -10,7 +10,7 @@ import logo from "./logo.png";
 
 const NavBar = () => {
     const { pathname } = useLocation();
-    const [shouldShowStars, setShouldShowStars] = useState(false);
+    const [shouldShowStars, setShouldShowStars] = useState(() => false);
 
     useEffect(() => {
         setShouldShowStars(!pathname.includes(GAME_PATH));
