@@ -7,6 +7,9 @@ export const SET_LOCAL_STORAGE_DATA = "localStorage/setLocalStorageData";
 export const ERROR_FETCHING_LOCAL_STORAGE_DATA = "localStorage/errorFetchingLocalStorageData";
 export const ERROR_SETTING_LOCAL_STORAGE_DATA = "localStorage/errorSettingLocalStorageData";
 
+// stars
+export const SET_STARS_EARNED = "stars/setStarsEarned";
+
 // words
 export const GET_MAIN_WORD_DATA = "words/getMainWordData";
 export const GET_SOCIAL_WORD_DATA = "words/getSocialWordData";

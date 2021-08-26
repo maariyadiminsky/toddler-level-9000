@@ -1,7 +1,10 @@
 import {
     GET_LOCAL_STORAGE_DATA,
+
     GET_MAIN_WORD_DATA,
-    GET_SOCIAL_WORD_DATA
+    GET_SOCIAL_WORD_DATA,
+
+    SET_STARS_EARNED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -45,6 +48,12 @@ export default (state = INITIAL_STATE, { type, payload }) => {
                     ...payload
                 }
             };
+        case SET_STARS_EARNED:
+            return {
+                ...state,
+                starsEarned: payload
+            }
+            break;
         default:
             return state;
     }
