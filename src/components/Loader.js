@@ -13,6 +13,7 @@ const getSmileSVG = (color) => (
          />
     </svg>
 );
+
 const Loader = () => {
     const mainClass = "h-10 w-10 m-6 mr-1 rounded-full";
 

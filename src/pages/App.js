@@ -12,7 +12,6 @@ const App = () => {
     // gets localStorage when userId exists
     useGetLocalStorageData();
 
-
   return (
     <div className="min-h-screen bg-indigo-500">
       <NavBar />

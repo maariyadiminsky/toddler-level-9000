@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AuthButton from "../AuthButton";
+import StarsEarned from "../Stars/StarsEarned";
 
 import logo from "./logo.png";
 
@@ -15,6 +16,7 @@ const NavBar = () => {
                         alt="logo"
                     />
                 </Link>
+                <StarsEarned />
                 <AuthButton />
             </div>
         </nav>

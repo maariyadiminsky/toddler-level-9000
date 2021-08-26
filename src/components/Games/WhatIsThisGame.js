@@ -285,7 +285,7 @@ const WhatIsThisGame = ({ wordType }) => {
     // ==========>  UI
 
     const randomImages = useRef([]);
-    
+
     if ((loading && roundsLeft) || randomImages.length === 0) {
         return <Loader />
     } else if (!gameStarted) {
