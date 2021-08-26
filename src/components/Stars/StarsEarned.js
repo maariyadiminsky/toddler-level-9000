@@ -15,15 +15,11 @@ const StarsEarned = () => {
     
     const [shouldShow, setShouldShow] = useState(false);
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         setShouldShow(status === RESPONSE_SUCCESS);
     }, [status])
-
-    const renderPoints = () => (
-        <div className="mt-3 font-poppins font-bold tracking-wide text-4xl text-blue-300">
-            x <span className="underline inline-block align-middle">{starsEarned}</span>
-        </div>
-    );
 
     return shouldShow && (
         <div className="flex justify-center flex-wrap content-center">
