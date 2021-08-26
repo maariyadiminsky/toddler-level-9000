@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import EmptyStar from "./svg/EmptyStar";
 
 import { useGetLocalStorageData } from "../../hooks/localStorage";
@@ -14,8 +14,6 @@ const StarsEarned = () => {
     const starsEarned = useSelector(getStarsEarnedSelector);
     
     const [shouldShow, setShouldShow] = useState(false);
-
-    const dispatch = useDispatch();
 
     useEffect(() => {
         setShouldShow(status === RESPONSE_SUCCESS);

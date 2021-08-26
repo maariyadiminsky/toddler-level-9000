@@ -38,6 +38,7 @@ import {
     ERROR_IN_TYPES,
 } from "./types";
 
+import StarsToEarn from "../Stars/StarsToEarn";
 import StartGameButton from "../StartGameButton";
 import Loader from "../Loader";
 
@@ -340,6 +341,7 @@ const WhatIsThisGame = ({ wordType }) => {
 
     return (
         <div>
+            <StarsToEarn starsTotal={wordAmountToShowAtOneTime.current} emptyStars={roundsLeft + 1} />
             {renderImagesWrapper()}
             <div className="container">
                 <div className={`mt-16 mx-72 cursor-pointer grid grid-cols-${wordAmountToShowAtOneTime.current} gap-x-10`}>

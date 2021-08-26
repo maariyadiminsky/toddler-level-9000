@@ -15,7 +15,7 @@ import {
 const Game = () => {
     // todo get game type based on url params
     return (
-        <div className="container py-16">
+        <div className="container pb-28 pt-10 h-screen">
             <WhatIsThisGame wordType={COLOR_TYPE} />
         </div>
     );

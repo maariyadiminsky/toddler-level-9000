@@ -1,8 +1,34 @@
 import React from "react";
 
-const StarsToEarn = () => {
+import EmptyStar from "./svg/EmptyStar";
+
+const STAR_SIZE = 20;
+const FullStar = (i) => EmptyStar(STAR_SIZE, true, i);
+const StarsToEarn = ({ starsTotal, emptyStars }) => {
+    const findFullStarAmount = () => starsTotal - emptyStars;
+
+    const renderStars = () => {
+        let stars = []
+        const fullStarAmount = findFullStarAmount();
+        let currentFullStarAmount = 0;
+
+        for (var i = 0; i < starsTotal; i++) {
+            if (currentFullStarAmount === fullStarAmount) {
+                stars.push(<div>{EmptyStar(STAR_SIZE, false, i, false)}</div>);
+            } else {
+                stars.push(<div>{FullStar(i)}</div>);
+
+                currentFullStarAmount++;
+            }
+        }
+
+        return stars;
+    }
+
     return (
-        <div>Stars to earn</div>
+        <div className="pb-10 flex justify-center flex-wrap">
+            {renderStars()}
+        </div>
     );
 }
 
