@@ -10,6 +10,8 @@ import {
     SOCIAL_TYPE
 } from "../const";
 
+// todo: to find wordType, useParams
+
 const Game = () => {
     // todo get game type based on url params
     return (

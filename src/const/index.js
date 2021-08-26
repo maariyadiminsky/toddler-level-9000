@@ -3,6 +3,12 @@ export const AUTH0_AUDIENCE = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/api
 export const AUTH0_SCOPE = "read:current_user";
 export const AUTH0_REDIRECT_URI_AFTER_LOGIN = window.location.origin;
 
+// paths
+export const ROOT_PATH = "/";
+// later change to something like /games/:id
+export const GAME_PATH = "/games";
+export const CHOICE_GAME_PATH = (type) => `${GAME_PATH}/${type}`;
+
 // word types
 export const COLOR_TYPE = "colors";
 export const ANIMAL_TYPE = "animals";
