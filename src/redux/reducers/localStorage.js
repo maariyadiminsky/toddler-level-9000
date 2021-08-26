@@ -52,8 +52,7 @@ export default (state = INITIAL_STATE, { type, payload }) => {
             return {
                 ...state,
                 starsEarned: payload
-            }
-            break;
+            };
         default:
             return state;
     }

@@ -1,6 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Confetti from "react-confetti";
 
+import { setStarsEarned } from "../../redux/actions/stars";
 import { generateRandomItemInArray } from "../../utils";
 
 import catCelebrate from "./images/catCelebrate.png";
@@ -11,6 +13,16 @@ import catLove from "./images/catLove.png";
 const celebrateImageOptions = [catCelebrate, catCool, catHappy, catLove];
 const GameCompleteModal = ({ starsEarned = 0 }) => {
     const celebrateImage = useRef(generateRandomItemInArray(celebrateImageOptions));
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (starsEarned > 0) {
+            dispatch(setStarsEarned(starsEarned));
+        }
+
+    }, [dispatch, starsEarned]);
+
     return (
         <div className="flex flex-col justify-center sm:pt-8">
             <Confetti 

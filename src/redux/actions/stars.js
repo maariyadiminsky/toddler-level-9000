@@ -4,7 +4,7 @@ import { setLocalStorageData } from "./localStorage";
 
 export const setStarsEarned = (pointsToAdd) => (
     async(dispatch, getState) => {
-        const { starsEarned, auth: { userId } } = getState();
+        const { localStorage: { starsEarned }, auth: { userId } } = getState();
 
         // add points
         dispatch({
