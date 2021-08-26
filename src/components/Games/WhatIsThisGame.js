@@ -46,6 +46,7 @@ import Loader from "../Loader";
 
 const INITIAL_STATE = {
     gameStarted: false,
+    gameEnded: false,
     roundStarted: false,
     roundsLeft: 5,
     words: [],
@@ -63,6 +64,7 @@ const reducer = (state, { type, payload}) => {
         return {
             ...state,
             gameStarted: true,
+            gameEnded: false,
             roundsLeft: payload
         }
     case START_NEW_ROUND:
@@ -82,7 +84,8 @@ const reducer = (state, { type, payload}) => {
     case COMPLETE_ALL_ROUNDS: {
         return { 
             ...state, 
-            ...INITIAL_STATE
+            ...INITIAL_STATE,
+            gameEnded: true
         }
     }
     case SET_WORDS:
@@ -128,7 +131,7 @@ const WhatIsThisGame = ({ wordType }) => {
     // local reducer since this data doesn't need to be in global state
     // but too complicated for simple useState
     const [{ 
-        gameStarted,
+        gameStarted, gameEnded,
         roundsLeft, roundStarted, 
         words, currentWord, wordsToChooseFrom,
         currentWordAudio, welcomeAudio, startAudio, gameCompleteAudio
@@ -289,10 +292,9 @@ const WhatIsThisGame = ({ wordType }) => {
 
     const randomImages = useRef([]);
 
-    if (true) {
-        return <GameCompleteModal />
-    }
-    else if ((loading && roundsLeft) || randomImages.length === 0) {
+    if (gameEnded) {
+        return <GameCompleteModal starsEarned={wordAmountToShowAtOneTime.current} />
+    } else if ((loading && roundsLeft) || randomImages.length === 0) {
         return <Loader />
     } else if (!gameStarted) {
         return <StartGameButton handleButtonClick={handleStartNewGame}/>
@@ -336,13 +338,17 @@ const WhatIsThisGame = ({ wordType }) => {
         ))
     );
 
-    const renderChoiceItems = () => (
-        isObjectExistAndNotEmpty(wordData) && isArrayExistAndNotEmpty(wordsToChooseFrom) && wordsToChooseFrom.map(item => (
-            <div key={item} onClick={() => handleCompleteRound(item)} className={`m-auto flex justify-center items-center content-center h-36 w-36 rounded-full fill-current bg-gradient-to-br ${getCustomCSSForWordsToChooseFrom(wordType, item)} shadow-lg hover:shadow-2xl`}>
-                {item}
-            </div>
-        ))
-    );
+    const renderChoiceItems = () => {
+        if (!isObjectExistAndNotEmpty(wordData) || !isArrayExistAndNotEmpty(wordData.images)) return;
+        
+        return (
+            isObjectExistAndNotEmpty(wordData) && isArrayExistAndNotEmpty(wordsToChooseFrom) && wordsToChooseFrom.map(item => (
+                <div key={item} onClick={() => handleCompleteRound(item)} className={`m-auto flex justify-center items-center content-center h-36 w-36 rounded-full fill-current bg-gradient-to-br ${getCustomCSSForWordsToChooseFrom(wordType, item)} shadow-lg hover:shadow-2xl`}>
+                    {item}
+                </div>
+            ))
+        );
+    }
 
     return (
         <div>
