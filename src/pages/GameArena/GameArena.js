@@ -1,5 +1,6 @@
 import React from "react";
 import GameArenaItem from "./GameArenaItem";
+import StarsEarned from "../../components/Stars/StarsEarned";
 
 import { gameArenaData } from "./data";
 
@@ -31,6 +32,7 @@ const GameArena = () => {
 
     return (
         <div className="container py-16">
+            <StarsEarned />
             <div className="grid grid-cols-3 gap-y-5 gap-x-7">
                 {renderGameArenaItems()}
             </div>
