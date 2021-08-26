@@ -14,9 +14,9 @@ const StarsToEarn = ({ starsTotal, emptyStars }) => {
 
         for (var i = 0; i < starsTotal; i++) {
             if (currentFullStarAmount === fullStarAmount) {
-                stars.push(<div>{EmptyStar(STAR_SIZE, false, i, false)}</div>);
+                stars.push(<div key={i}>{EmptyStar(STAR_SIZE, false, i, false)}</div>);
             } else {
-                stars.push(<div>{FullStar(i)}</div>);
+                stars.push(<div key={i}>{FullStar(i)}</div>);
 
                 currentFullStarAmount++;
             }
