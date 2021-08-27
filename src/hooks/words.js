@@ -42,8 +42,7 @@ export const useFetchWordData = (
                     stopLoading(error);
                 });
         } else stopLoading();
-    }, 
-    [
+    },[
         dispatch, 
         shouldFetchWordData,
         userId,

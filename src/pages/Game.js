@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 import WhatIsThisGame from "../components/Games/WhatIsThisGame";
 
@@ -10,13 +11,12 @@ import {
     SOCIAL_TYPE
 } from "../const";
 
-// todo: to find wordType, useParams
-
 const Game = () => {
-    // todo get game type based on url params
+    const { wordTypeId } = useParams();
+    
     return (
         <div className="container pb-28 pt-10 h-screen">
-            <WhatIsThisGame wordType={COLOR_TYPE} />
+            <WhatIsThisGame wordType={wordTypeId} />
         </div>
     );
 }

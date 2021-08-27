@@ -50,7 +50,7 @@ const INITIAL_STATE = {
     roundStarted: false,
     roundsLeft: 5,
     words: [],
-    currentWord: "green",
+    currentWord: "",
     wordsToChooseFrom: [],
     currentWordAudio: null,
     welcomeAudio: null,
@@ -256,7 +256,7 @@ const WhatIsThisGame = ({ wordType }) => {
                 payload: {
                     welcomeAudio: new Audio(getWelcomeAudio(wordType)),
                     startAudio: new Audio(getStartAudio(wordType)),
-                    gameComplete: new Audio(generateGameCompleteAudio(wordType))
+                    gameCompleteAudio: new Audio(generateGameCompleteAudio(wordType))
                 }
             })
         }
@@ -293,7 +293,12 @@ const WhatIsThisGame = ({ wordType }) => {
     const randomImages = useRef([]);
 
     if (gameEnded) {
-        return <GameCompleteModal starsEarned={wordAmountToShowAtOneTime.current} />
+        return (
+            <GameCompleteModal 
+                starsEarned={wordAmountToShowAtOneTime.current} 
+                gameCompleteAudio={gameCompleteAudio}
+            />
+        );
     } else if ((loading && roundsLeft) || randomImages.length === 0) {
         return <Loader />
     } else if (!gameStarted) {
@@ -343,7 +348,7 @@ const WhatIsThisGame = ({ wordType }) => {
         
         return (
             isObjectExistAndNotEmpty(wordData) && isArrayExistAndNotEmpty(wordsToChooseFrom) && wordsToChooseFrom.map(item => (
-                <div key={item} onClick={() => handleCompleteRound(item)} className={`m-auto flex justify-center items-center content-center h-36 w-36 rounded-full fill-current bg-gradient-to-br ${getCustomCSSForWordsToChooseFrom(wordType, item)} shadow-lg hover:shadow-2xl`}>
+                <div key={item} onClick={() => handleCompleteRound(item)} className={`m-auto poppins flex justify-center items-center content-center h-36 w-36 rounded-full fill-current bg-gradient-to-br ${getCustomCSSForWordsToChooseFrom(wordType, item)} shadow-lg hover:shadow-2xl`}>
                     {item}
                 </div>
             ))

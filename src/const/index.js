@@ -7,6 +7,7 @@ export const AUTH0_REDIRECT_URI_AFTER_LOGIN = window.location.origin;
 export const ROOT_PATH = "/";
 // later change to something like /games/:id
 export const GAME_PATH = "/games";
+export const CHOICE_GAME_PATH_GENERAL = `${GAME_PATH}/:wordTypeId`;
 export const CHOICE_GAME_PATH = (type) => `${GAME_PATH}/${type}`;
 
 // word types

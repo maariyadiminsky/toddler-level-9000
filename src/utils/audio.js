@@ -124,9 +124,9 @@ export const generateGameCompleteAudio = (wordType) => {
     return audioOptions;
 }
 
-const generateRandomAudioFromArr = (audioOptionsArr) => {
-    return generateRandomItemInArray(audioOptionsArr);
-}
+const generateRandomAudioFromArr = (audioOptionsArr) => (
+    generateRandomItemInArray(audioOptionsArr)
+);
 
 const completeGameSoundEffects = [
     Complete_1,
