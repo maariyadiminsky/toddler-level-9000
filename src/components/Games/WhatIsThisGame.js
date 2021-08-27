@@ -144,7 +144,7 @@ const WhatIsThisGame = ({ wordType }) => {
     const { loading, errors, wordData } = useFetchWordData(wordType, currentWord, fetchWordDataOptions(status));
 
     const hasWordAudio = useCallback(() => wordData && isArrayExistAndNotEmpty(wordData.audio), [wordData]);
-
+    
     // ===================================> setup
 
     const hasWordData = useCallback(() => isObjectExistAndNotEmpty(wordData), [wordData]);

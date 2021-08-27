@@ -38,9 +38,9 @@ import {
 import { setLocalStorageData } from "./localStorage";
 
 const fetchWordDataUnsplashParamOptions = {
-    "per_page": 10, // number of items returned
-    "content_filter": "high", // make sure results are child-appropriate,
-    "orientation": "squarish" // all images come back with same orientation
+    "per_page": 5, // number of items returned
+    "order_by": "relevant",
+    "orientation": "squarish", // all images come back with same orientation
 }
 
 const initial_response = {

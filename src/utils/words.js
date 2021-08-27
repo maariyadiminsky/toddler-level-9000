@@ -69,8 +69,9 @@ export const getCustomCSSForWordsToChooseFrom = (wordType, word) => {
                     return `from-${word}-300 to-${word}-600 text-white`;
             }
         case NUMBER_TYPE:
+        case ANIMAL_TYPE:
+        case FOOD_TYPE:
                 return "from-gray-50 to-gray-100 text-black font-bold";
-            break;
         default:
             throw new Error(WORD_TYPE_ERRORS.WORD_TYPE_DOES_NOT_EXIST(wordType));
     }

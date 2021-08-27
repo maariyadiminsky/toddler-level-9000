@@ -40,8 +40,8 @@ export const ANIMAL_WORDS = [
     "Horse", "Duck", "Lion", "Chicken", "Tiger", 
     "Bear", "Frog", "Bunny", "Camel", "Snake",
     "Giraffe", "Fox", "Deer", "Zebra", "Alligator", 
-    "Elephant", "Monkey", "Bird", "Gorilla", "Beaver",
-    "Wolf", "Mouse", "Fish", "Squirrel", "Buffalo"
+    "Elephant", "Monkey", "Bird", "Gorilla", "Octopus",
+    "Wolf", "Owl", "Fish", "Squirrel", "Buffalo"
 ];
 export const SOCIAL_WORDS = [
     "Hi", "Bye", "Yes", "No", "Thank you",
