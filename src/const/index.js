@@ -36,12 +36,12 @@ export const FOOD_WORDS = [
     "pizza", "strawberry", "juice", "watermelon"
 ];
 export const ANIMAL_WORDS = [
-    "Dog", "Cat", "Cow", "Pig", "Sheep", 
-    "Horse", "Duck", "Lion", "Chicken", "Tiger", 
-    "Bear", "Frog", "Bunny", "Camel", "Snake",
-    "Giraffe", "Fox", "Deer", "Zebra", "Alligator", 
-    "Elephant", "Monkey", "Bird", "Gorilla", "Octopus",
-    "Wolf", "Owl", "Fish", "Squirrel", "Buffalo"
+    "Dog", "Cat", "Pig", "Goat", 
+    "Horse", "Lion", "Tiger",
+    "Bear", "Frog", "Rabbit", "Snake",
+    "Zebra", "Alligator", "Yak",
+    "Elephant", "Monkey", "Octopus",
+    "Iguana", "Jellyfish", "Fish", "Fox"
 ];
 export const SOCIAL_WORDS = [
     "Hi", "Bye", "Yes", "No", "Thank you",

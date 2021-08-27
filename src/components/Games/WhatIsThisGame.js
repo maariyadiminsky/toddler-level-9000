@@ -9,9 +9,12 @@ import {
     generateRandomItem,
     generateRandomItems,
     getWordAmountToShowAtOneTime,
-    getCustomCSSForWordsToChooseFrom,
-    getCorrectImageURL
+    getCustomCSSForWordsToChooseFrom
 } from "../../utils/words";
+import { 
+    getCorrectImageURL,
+    getCorrectAnimalChoiceImageUrl 
+} from "../../utils/image";
 import { 
     getCorrectAudioUrl,
     getWelcomeAudio,
@@ -38,6 +41,14 @@ import {
 
     ERROR_IN_TYPES,
 } from "./types";
+
+import {
+    COLOR_TYPE,
+    ANIMAL_TYPE,
+    NUMBER_TYPE,
+    FOOD_TYPE,
+    SOCIAL_TYPE
+} from "../../const";
 
 import StarsToEarn from "../Stars/StarsToEarn";
 import StartGameButton from "../StartGameButton";
@@ -144,7 +155,7 @@ const WhatIsThisGame = ({ wordType }) => {
     const { loading, errors, wordData } = useFetchWordData(wordType, currentWord, fetchWordDataOptions(status));
 
     const hasWordAudio = useCallback(() => wordData && isArrayExistAndNotEmpty(wordData.audio), [wordData]);
-    
+
     // ===================================> setup
 
     const hasWordData = useCallback(() => isObjectExistAndNotEmpty(wordData), [wordData]);
@@ -346,13 +357,48 @@ const WhatIsThisGame = ({ wordType }) => {
     const renderChoiceItems = () => {
         if (!isObjectExistAndNotEmpty(wordData) || !isArrayExistAndNotEmpty(wordData.images)) return;
         
-        return (
-            isObjectExistAndNotEmpty(wordData) && isArrayExistAndNotEmpty(wordsToChooseFrom) && wordsToChooseFrom.map(item => (
-                <div key={item} onClick={() => handleCompleteRound(item)} className={`m-auto poppins flex justify-center items-center content-center h-36 w-36 rounded-full fill-current bg-gradient-to-br ${getCustomCSSForWordsToChooseFrom(wordType, item)} shadow-lg hover:shadow-2xl`}>
-                    {item}
-                </div>
-            ))
-        );
+        switch(wordType) {
+            case COLOR_TYPE:
+                const renderColorChoiceItems = (
+                    isObjectExistAndNotEmpty(wordData) && isArrayExistAndNotEmpty(wordsToChooseFrom) && wordsToChooseFrom.map(item => (
+                        <div 
+                            key={item} 
+                            onClick={() => handleCompleteRound(item)} 
+                            className={`m-auto poppins flex justify-center items-center content-center h-36 w-36 rounded-full fill-current bg-gradient-to-br ${getCustomCSSForWordsToChooseFrom(wordType, item)} shadow-lg hover:shadow-2xl`}
+                        >
+                            {item}
+                        </div>
+                    ))
+                );
+
+                return (
+                    <div className={`mt-16 mx-72 cursor-pointer grid grid-cols-${wordAmountToShowAtOneTime.current} gap-x-10`}>
+                        {renderColorChoiceItems}
+                    </div>
+                );
+            default:
+                // todo add method which takes word and spits out correct card
+                const renderDefaultCardItems = (
+                    isObjectExistAndNotEmpty(wordData) && isArrayExistAndNotEmpty(wordsToChooseFrom) && wordsToChooseFrom.map(item => (
+                        <div 
+                            key={item} 
+                            onClick={() => handleCompleteRound(item)} 
+                        >
+                            <img 
+                                alt={item}
+                                className="m-auto flex justify-center items-center content-center rounded-2xl fill-current bg-gradient-to-br shadow-lg hover:shadow-2xl"
+                                src={getCorrectAnimalChoiceImageUrl(item)}
+                            />
+                        </div>
+                    ))
+                );
+
+                return (
+                    <div className={`m-20 mt-12 grid cursor-pointer grid-cols-${wordAmountToShowAtOneTime.current} gap-x-7`}>
+                        {renderDefaultCardItems}
+                    </div>
+                );
+        }
     }
 
     return (
@@ -360,9 +406,7 @@ const WhatIsThisGame = ({ wordType }) => {
             <StarsToEarn starsTotal={wordAmountToShowAtOneTime.current} emptyStars={roundsLeft + 1} />
             {renderImagesWrapper()}
             <div className="container">
-                <div className={`mt-16 mx-72 cursor-pointer grid grid-cols-${wordAmountToShowAtOneTime.current} gap-x-10`}>
-                    {renderChoiceItems()}
-                </div>
+                {renderChoiceItems()}
             </div>
         </div>
     );
