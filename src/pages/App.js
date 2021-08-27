@@ -23,8 +23,8 @@ const App = () => {
     <div className="min-h-screen bg-indigo-500">
       <NavBar />
       <Route path={ROOT_PATH} exact component={GameArena} />
-      <Route path={CHOICE_GAME_PATH_GENERAL} exact component={Game} />
-      <ProtectedRoute path="/parent" exact component={() => <div>some component here</div>} />
+      <ProtectedRoute path={CHOICE_GAME_PATH_GENERAL} exact component={Game} />
+      <ProtectedRoute path="/parent" exact component={() => <div>some component here eventually</div>} />
     </div>
   );
 }
