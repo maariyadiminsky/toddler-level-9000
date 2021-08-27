@@ -357,9 +357,9 @@ const WhatIsThisGame = ({ wordType }) => {
     const getCustomCSSForWordsToChooseFromBasedOnType = () => {
         switch(wordType) {
             case ANIMAL_TYPE:
-                return "m-20 mt-12";
+                return "mt-12 m-20";
             case FOOD_TYPE:
-                return "mt-12 mx-72";
+                return "mt-10 mx-72";
             default:
                 return "";
         }

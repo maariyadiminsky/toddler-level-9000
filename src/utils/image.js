@@ -47,81 +47,81 @@ const getCorrectAnimalChoiceImageUrl = (word) => {
     useFirstAnimalImageUrl = true;
 
     switch(word) {
-        case "Dog":
+        case "dog":
             start = "2";
             end = "D";
             break;
-        case "Cat":
+        case "cat":
             end = "C";
             break;
-        case "Pig":
+        case "pig":
             end = "P";
             break;
-        case "Goat":
+        case "goat":
             end = "G";
             break;
-        case "Horse":
+        case "horse":
             start = "1";
             end = "H";
             break;
-        case "Lion":
+        case "lion":
             end = "L";
             break;
-        case "Tiger":
+        case "tiger":
             start = "1";
             end = "T";
             break;
-        case "Bear":
+        case "bear":
             start = "1";
             end = "B";
             break;
-        case "Frog":
+        case "frog":
             start = "2";
             end = "F";
             break;
-        case "Rabbit":
+        case "rabbit":
             start = "1";
             end = "R";
             break;
-        case "Snake":
+        case "snake":
             start = "1";
             end = "S";
             break;
-        case "Zebra":
+        case "zebra":
             start = "1";
             end = "Z";
             break;
-        case "Alligator":
+        case "alligator":
             end = "A";
             break;
-        case "Elephant":
+        case "elephant":
             start = "2";
             end = "E";
             break;
-        case "Monkey":
+        case "monkey":
             start = "2";
             end = "M";
             break;
-        case "Octopus":
+        case "octopus":
             end = "O";
             break;
-        case "Iguana":
+        case "iguana":
             start = "2";
             end = "I";
             break;
-        case "Jellyfish":
+        case "jellyfish":
             start = "2";
             end = "J";
             break;
-        case "Yak":
+        case "yak":
             end = "Y";
             break;
-        case "Fox":
+        case "fox":
             start = "1";
             end = "X";
             useFirstAnimalImageUrl = false;
             break;
-        case "Fish":
+        case "fish":
             start = "1";
             end = "F";
             useFirstAnimalImageUrl = false;

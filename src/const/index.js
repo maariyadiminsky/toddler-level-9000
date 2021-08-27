@@ -39,7 +39,7 @@ export const FOOD_WORDS = [
     "banana", "cheese", "bread", "fish", "milk",
     "pizza", "strawberry", "watermelon",
     "salad", "sushi", "tea", "water", "avocado",
-    "Carrot", "tomato", "apple"
+    "carrot", "tomato", "apple"
 ];
 export const ANIMAL_WORDS = [
     "dog", "cat", "pig", "goat", 
