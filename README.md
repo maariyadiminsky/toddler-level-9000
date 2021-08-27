@@ -1,9 +1,11 @@
 # Toddler Level 9000
-[![Vegeta-Over-9000-Meme](https://media.giphy.com/media/ixYRj3H9HOzWE/giphy.gif?cid=790b7611080fabba35498312af4c896a2f458943c071bc6a&rid=giphy.gif&ct=g)]()
+Get your child to LEVEL 9000 by teaching him/her their first 100 words!
 > ##### Table of Contents
-> * [Setup](#setup)
+> * [Setup(1-5 min)](#setup1-5-minutes)
 > * [Toddler Games](#toddler-games)
 > * [Important Notes](#important-notes)
+
+[![Vegeta-Over-9000-Meme](https://media.giphy.com/media/ixYRj3H9HOzWE/giphy.gif?cid=790b7611080fabba35498312af4c896a2f458943c071bc6a&rid=giphy.gif&ct=g)]()
 
 ## Is this you?
 * **Do you struggle** in getting your adorable baby to learn their first 100 words?
@@ -23,7 +25,6 @@ Well more specifically—
 
 [![Vegeta-Over-9000-Meme](https://media.giphy.com/media/oOfLwhLyRUoRW/giphy-downsized-large.gif?cid=790b761107d2071fe6039cdd32acce9dd8fae3dd5953ad0c&rid=giphy-downsized-large.gif&ct=g)]()
 
----
 ## Setup(1-5 minutes):
 1. Create an unsplash account.
 2. Create an app in your unsplash account. Be aware you are limited to 50 requests per hour on a demo app.
