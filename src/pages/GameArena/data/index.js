@@ -29,7 +29,7 @@ export const gameArenaData = [
         imageUrl: talk,
         altText: "talk",
         customDivClass: "",
-        customImgClass: "pt-7 w-96",
+        customImgClass: "m-auto pt-7 w-96",
         link: CHOICE_GAME_PATH(SOCIAL_TYPE)
     },
     {
@@ -61,7 +61,7 @@ export const gameArenaData = [
         imageUrl: colors,
         altText: "colors",
         customDivClass: "",
-        customImgClass: "w-80",
+        customImgClass: "m-auto w-80",
         link: CHOICE_GAME_PATH(COLOR_TYPE)
     },
     {
