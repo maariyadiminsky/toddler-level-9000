@@ -1,7 +1,7 @@
 {
   "name": "toddler-level-9000",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@auth0/auth0-react": "^1.6.0",
     "@craco/craco": "^6.2.0",
