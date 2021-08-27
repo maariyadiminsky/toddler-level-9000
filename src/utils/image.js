@@ -25,15 +25,26 @@ export const getCorrectImageURL = (url, wordType) => {
     }
 }
 
-let start = "";
+export const getCorrectImageUrlBasedOnType = (item, wordType) => {
+    switch(wordType) {
+        case ANIMAL_TYPE:
+            return getCorrectAnimalChoiceImageUrl(item);
+        case FOOD_TYPE:
+            return getCorrectFoodChoiceImageUrl(item);
+        default: 
+            return "";
+    }
+}
+
+let start = "0";
 let end = ""
 const ANIMAL_IMAGE_URL = (start, end) => `https://i${start}.wp.com/www.flashcardsforkindergarten.com/wp-content/uploads/2020/05/Animal-Flashcards-${end}.jpg?ssl=1`
 const ANIMAL_IMAGE_URL_2 = (start, end) => `https://i${start}.wp.com/www.flashcardsforkindergarten.com/wp-content/uploads/2020/05/${end}-alphabet-flashcards.jpg?ssl=1`
-let useFirstImageUrl = true;
-export const getCorrectAnimalChoiceImageUrl = (word) => {
-    start = "";
+let useFirstAnimalImageUrl = true;
+const getCorrectAnimalChoiceImageUrl = (word) => {
+    start = "0";
     end = "";
-    useFirstImageUrl = true;
+    useFirstAnimalImageUrl = true;
 
     switch(word) {
         case "Dog":
@@ -41,15 +52,12 @@ export const getCorrectAnimalChoiceImageUrl = (word) => {
             end = "D";
             break;
         case "Cat":
-            start = "0";
             end = "C";
             break;
         case "Pig":
-            start = "0";
             end = "P";
             break;
         case "Goat":
-            start = "0";
             end = "G";
             break;
         case "Horse":
@@ -57,7 +65,6 @@ export const getCorrectAnimalChoiceImageUrl = (word) => {
             end = "H";
             break;
         case "Lion":
-            start = "0";
             end = "L";
             break;
         case "Tiger":
@@ -85,7 +92,6 @@ export const getCorrectAnimalChoiceImageUrl = (word) => {
             end = "Z";
             break;
         case "Alligator":
-            start = "0";
             end = "A";
             break;
         case "Elephant":
@@ -97,7 +103,6 @@ export const getCorrectAnimalChoiceImageUrl = (word) => {
             end = "M";
             break;
         case "Octopus":
-            start = "0";
             end = "O";
             break;
         case "Iguana":
@@ -109,24 +114,106 @@ export const getCorrectAnimalChoiceImageUrl = (word) => {
             end = "J";
             break;
         case "Yak":
-            start = "0";
             end = "Y";
             break;
         case "Fox":
             start = "1";
             end = "X";
+            useFirstAnimalImageUrl = false;
             break;
         case "Fish":
             start = "1";
             end = "F";
-            useFirstImageUrl = false;
+            useFirstAnimalImageUrl = false;
             break;
         default:
             start = "";
             end = "";
-            useFirstImageUrl = false;
             break;
     }
 
-    return useFirstImageUrl ? ANIMAL_IMAGE_URL(start, end) : ANIMAL_IMAGE_URL_2(start, end);
+    return useFirstAnimalImageUrl ? ANIMAL_IMAGE_URL(start, end) : ANIMAL_IMAGE_URL_2(start, end);
+}
+
+let foodType = "food";
+const FOOD_IMAGE_URL = (start, end, foodType) => `https://i${start}.wp.com/www.flashcardsforkindergarten.com/wp-content/uploads/2020/06/${foodType}-flashcard-${end}.jpg?ssl=1`
+const getCorrectFoodChoiceImageUrl = (word) => {
+    start = "0";
+    end = "";
+    foodType = "food";
+
+    switch(word) {
+        case "Bread":
+            end = "bread";
+            break;
+        case "Cheese":
+            start = "2";
+            end = "cheese";
+            break;
+        case "Fish":
+            end = "fish";
+            break;
+        case "Pizza":
+            end = "pizza";
+            break;
+        case "Salad":
+            end = "salad";
+            break;
+        case "Sushi":
+            end = "sushi";
+            break;
+        case "Tea":
+            end = "tea";
+            foodType = "drink";
+            break;
+        case "Milk":
+            end = "milk";
+            foodType = "drink";
+            break;
+        case "Water":
+            start = "2";
+            end = "water";
+            foodType = "drink";
+            break;
+        case "Avocado":
+            start = "1";
+            end = "avocado";
+            foodType = "fruit";
+            break;
+        case "Carrot":
+            end = "carrot";
+            foodType = "vegetable";
+            break;
+        case "Tomato":
+            start = "1";
+            end = "tomato";
+            foodType = "vegetable";
+            break;
+        case "Apple":
+            start = "1";
+            end = "apple";
+            foodType = "fruit";
+            break;
+        case "Banana":
+            start = "2";
+            end = "banana";
+            foodType = "fruit";
+            break;
+        case "Strawberry":
+            start = "1";
+            end = "strawberry";
+            foodType = "fruit";
+            break;
+        case "Watermelon":
+            start = "1";
+            end = "watermelon";
+            foodType = "fruit";
+            break;
+        default:
+            start = "";
+            end = "";
+            break;
+    }
+
+    return FOOD_IMAGE_URL(start, end, foodType);
 }

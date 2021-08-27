@@ -11,12 +11,23 @@ import {
     SOCIAL_TYPE
 } from "../const";
 
+// note: temp function created while I'm still developing rest of the games
+const canRenderGame = (wordType) => {
+    switch(wordType) {
+        case COLOR_TYPE:
+        case ANIMAL_TYPE:
+        case FOOD_TYPE:
+            return true;
+        default:
+            return false;
+    }
+}
 const Game = () => {
     const { wordTypeId } = useParams();
     
     return (
         <div className="container pb-28 pt-10 h-screen">
-            <WhatIsThisGame wordType={wordTypeId} />
+            {canRenderGame ? <WhatIsThisGame wordType={wordTypeId} /> : "Sorry this game is not ready yet. Please select another."}
         </div>
     );
 }

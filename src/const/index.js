@@ -28,12 +28,14 @@ export const NUMBER_WORDS = [
 ];
 
 export const COLOR_WORDS = [
-    "red", "blue", "yellow", "white", "black",
-    "pink", "purple", "brown", "orange", "green"
+    "Red", "Blue", "Yellow", "White", "Black",
+    "Pink", "Purple", "Brown", "Orange", "Green"
 ];
 export const FOOD_WORDS = [
-    "banana", "cheese", "bread", "eggs", "milk",
-    "pizza", "strawberry", "juice", "watermelon"
+    "Banana", "Cheese", "Bread", "Fish", "Milk",
+    "Pizza", "Strawberry", "Watermelon",
+    "Salad", "Sushi", "Tea", "Water", "Avocado",
+    "Carrot", "Tomato", "Apple"
 ];
 export const ANIMAL_WORDS = [
     "Dog", "Cat", "Pig", "Goat", 

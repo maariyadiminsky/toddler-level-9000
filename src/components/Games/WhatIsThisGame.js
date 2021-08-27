@@ -13,7 +13,7 @@ import {
 } from "../../utils/words";
 import { 
     getCorrectImageURL,
-    getCorrectAnimalChoiceImageUrl 
+    getCorrectImageUrlBasedOnType
 } from "../../utils/image";
 import { 
     getCorrectAudioUrl,
@@ -354,6 +354,16 @@ const WhatIsThisGame = ({ wordType }) => {
         ))
     );
 
+    const getCustomCSSForWordsToChooseFromBasedOnType = () => {
+        switch(wordType) {
+            case ANIMAL_TYPE:
+                return "m-20 mt-12";
+            case FOOD_TYPE:
+                return "mt-12 mx-72";
+            default:
+                return "";
+        }
+    }
     const renderChoiceItems = () => {
         if (!isObjectExistAndNotEmpty(wordData) || !isArrayExistAndNotEmpty(wordData.images)) return;
         
@@ -387,14 +397,14 @@ const WhatIsThisGame = ({ wordType }) => {
                             <img 
                                 alt={item}
                                 className="m-auto flex justify-center items-center content-center rounded-2xl fill-current bg-gradient-to-br shadow-lg hover:shadow-2xl"
-                                src={getCorrectAnimalChoiceImageUrl(item)}
+                                src={getCorrectImageUrlBasedOnType(item, wordType)}
                             />
                         </div>
                     ))
                 );
 
                 return (
-                    <div className={`m-20 mt-12 grid cursor-pointer grid-cols-${wordAmountToShowAtOneTime.current} gap-x-7`}>
+                    <div className={`${getCustomCSSForWordsToChooseFromBasedOnType()} grid cursor-pointer grid-cols-${wordAmountToShowAtOneTime.current} gap-x-7`}>
                         {renderDefaultCardItems}
                     </div>
                 );

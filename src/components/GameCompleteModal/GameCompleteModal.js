@@ -18,7 +18,8 @@ const GameCompleteModal = ({ starsEarned = 0, gameCompleteAudio }) => {
 
     const dispatch = useDispatch();
 
-    console.log(gameCompleteAudio, celebrateSoundEffect.current);
+    // todo: bug here, will fix later
+    // console.log(gameCompleteAudio, celebrateSoundEffect.current);
     useEffect(() => {
         if (starsEarned > 0) {
             dispatch(setStarsEarned(starsEarned));

@@ -9,7 +9,7 @@ const StartGameButton = ({ handleButtonClick }) => {
         handleButtonClick();
     }
     return (
-        <div className={`flex justify-center mt-12 h-96 flex-wrap content-center animate-${disable ? "none" : "pulse"} disabled:animate-none`}>
+        <div className={`flex justify-center mt-32 h-96 flex-wrap content-center animate-${disable ? "none" : "pulse"} disabled:animate-none`}>
             <button  
                 onClick={handleClick} 
                 disabled={disable}
