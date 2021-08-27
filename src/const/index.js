@@ -32,34 +32,34 @@ export const NUMBER_WORDS = [
 ];
 
 export const COLOR_WORDS = [
-    "Red", "Blue", "Yellow", "White", "Black",
-    "Pink", "Purple", "Brown", "Orange", "Green"
+    "red", "blue", "yellow", "white", "black",
+    "pink", "purple", "brown", "orange", "green"
 ];
 export const FOOD_WORDS = [
-    "Banana", "Cheese", "Bread", "Fish", "Milk",
-    "Pizza", "Strawberry", "Watermelon",
-    "Salad", "Sushi", "Tea", "Water", "Avocado",
-    "Carrot", "Tomato", "Apple"
+    "banana", "cheese", "bread", "fish", "milk",
+    "pizza", "strawberry", "watermelon",
+    "salad", "sushi", "tea", "water", "avocado",
+    "Carrot", "tomato", "apple"
 ];
 export const ANIMAL_WORDS = [
-    "Dog", "Cat", "Pig", "Goat", 
-    "Horse", "Lion", "Tiger",
-    "Bear", "Frog", "Rabbit", "Snake",
-    "Zebra", "Alligator", "Yak",
-    "Elephant", "Monkey", "Octopus",
-    "Iguana", "Jellyfish", "Fish", "Fox"
+    "dog", "cat", "pig", "goat", 
+    "horse", "lion", "tiger",
+    "bear", "frog", "rabbit", "snake",
+    "zebra", "alligator", "yak",
+    "elephant", "monkey", "octopus",
+    "iguana", "jellyfish", "fish", "fox"
 ];
 export const SOCIAL_WORDS = [
-    "Hi", "Bye", "Yes", "No", "Thank you",
-    "Sorry", "Eat", "Sleep", "Pee", "Poo",
-    "Hug", "Kiss", "Play", "Tickle", "Love",
-    "Cry", "Smile", "Sit", "Stand", "Dance",
-    "Careful", "Day", "Night", "Run", "Stop",
-    "Drink", "Walk", "Bath", "See", "Moon"
+    "hi", "bye", "yes", "no", "thank you",
+    "sorry", "eat", "sleep", "pee", "poo",
+    "hug", "kiss", "play", "tickle", "love",
+    "cry", "smile", "sit", "stand", "dance",
+    "careful", "day", "night", "run", "stop",
+    "drink", "walk", "bath", "see", "moon"
 ];
 export const BODY_WORDS = [
-    "Eyes", "Nose", "Lips", "Mouth", "Ears",
-    "Hair", "Hands", "Fingers", "Legs", "Feet"
+    "eyes", "nose", "lips", "mouth", "ears",
+    "hair", "hands", "fingers", "legs", "feet"
 ];
 
 // errors

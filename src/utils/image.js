@@ -127,8 +127,6 @@ const getCorrectAnimalChoiceImageUrl = (word) => {
             useFirstAnimalImageUrl = false;
             break;
         default:
-            start = "";
-            end = "";
             break;
     }
 
@@ -137,81 +135,53 @@ const getCorrectAnimalChoiceImageUrl = (word) => {
 
 let foodType = "food";
 const FOOD_IMAGE_URL = (start, end, foodType) => `https://i${start}.wp.com/www.flashcardsforkindergarten.com/wp-content/uploads/2020/06/${foodType}-flashcard-${end}.jpg?ssl=1`
-const getCorrectFoodChoiceImageUrl = (word) => {
+const getCorrectFoodChoiceImageUrl = (word = "") => {
     start = "0";
-    end = "";
+    end = word;
     foodType = "food";
 
     switch(word) {
-        case "Bread":
-            end = "bread";
-            break;
-        case "Cheese":
+        case "cheese":
             start = "2";
-            end = "cheese";
             break;
-        case "Fish":
-            end = "fish";
-            break;
-        case "Pizza":
-            end = "pizza";
-            break;
-        case "Salad":
-            end = "salad";
-            break;
-        case "Sushi":
-            end = "sushi";
-            break;
-        case "Tea":
-            end = "tea";
+        case "tea":
             foodType = "drink";
             break;
-        case "Milk":
-            end = "milk";
+        case "milk":
             foodType = "drink";
             break;
-        case "Water":
+        case "water":
             start = "2";
-            end = "water";
             foodType = "drink";
             break;
-        case "Avocado":
+        case "avocado":
             start = "1";
-            end = "avocado";
             foodType = "fruit";
             break;
-        case "Carrot":
-            end = "carrot";
+        case "carrot":
             foodType = "vegetable";
             break;
-        case "Tomato":
+        case "tomato":
             start = "1";
-            end = "tomato";
             foodType = "vegetable";
             break;
-        case "Apple":
+        case "apple":
             start = "1";
-            end = "apple";
             foodType = "fruit";
             break;
-        case "Banana":
+        case "banana":
             start = "2";
-            end = "banana";
             foodType = "fruit";
             break;
-        case "Strawberry":
+        case "strawberry":
             start = "1";
-            end = "strawberry";
             foodType = "fruit";
             break;
-        case "Watermelon":
+        case "watermelon":
             start = "1";
-            end = "watermelon";
             foodType = "fruit";
             break;
         default:
-            start = "";
-            end = "";
             break;
     }
 
