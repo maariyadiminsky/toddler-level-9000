@@ -27,7 +27,7 @@ const Game = () => {
     
     return (
         <div className="container pb-28 pt-10 h-screen">
-            {canRenderGame ? <WhatIsThisGame wordType={wordTypeId} /> : "Sorry this game is not ready yet. Please select another."}
+            {canRenderGame(wordTypeId) ? <WhatIsThisGame wordType={wordTypeId} /> : "Sorry this game is WIP. Please select another."}
         </div>
     );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./css/GameArenaItem.css";
 
@@ -6,15 +7,18 @@ const GameArenaItem = ({
     imageUrl,
     altText = "",
     customDivClass = "", 
-    customImgClass = ""
+    customImgClass = "",
+    link="/"
 }) => {
     return (
         <div className={`game-arena-item ${customDivClass}`}>
-            <img 
-                className={customImgClass === "" ? "min-w-full" : customImgClass} 
-                src={imageUrl} 
-                alt={altText}
-            />
+            <Link to={link}>
+                <img 
+                    className={customImgClass === "" ? "min-w-full" : customImgClass} 
+                    src={imageUrl} 
+                    alt={altText}
+                />
+            </Link>
         </div>
     );
 };

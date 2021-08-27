@@ -17,7 +17,8 @@ const GameArena = () => {
             imageUrl, 
             altText, 
             customDivClass, 
-            customImgClass
+            customImgClass,
+            link
         }) => (
             <GameArenaItem
                 key={id}
@@ -25,6 +26,7 @@ const GameArena = () => {
                 altText={altText}
                 customDivClass={customDivClass}
                 customImgClass={customImgClass}
+                link={link}
             />
         ))
     );

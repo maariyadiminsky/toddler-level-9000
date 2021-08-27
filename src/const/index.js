@@ -18,6 +18,10 @@ export const FOOD_TYPE = "food";
 export const SOCIAL_TYPE = "social";
 export const BODY_TYPE = "body";
 
+export const MATCH_GAME = "matchGame";
+export const REFRIGERATOR_GAME = "refrigeratorGame";
+export const BASKET_GAME = "basketGame";
+
 export const SOCIAL_TYPE_FIRST = "firstTenWords";
 export const SOCIAL_TYPE_SECOND = "secondTenWords";
 export const SOCIAL_TYPE_THIRD = "thirdTenWords";
