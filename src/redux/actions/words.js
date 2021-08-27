@@ -3,6 +3,10 @@ import {
     dictionaryAPI, 
     toddlerSocialWordsAPI
 } from "../../api";
+import {
+    getCorrectWordToFetchImageFromType,
+    getCorrectWordToFetchAudioFromType
+} from "../../utils/words";
 import { 
     UNSPLASH_SEARCH_PHOTOS_ENDPOINT,
     DICTIONARY_WORD_ENDPOINT,
@@ -92,9 +96,9 @@ export const fetchWordData = (
 const fetchMainWord = (wordType, word) => (
     async(dispatch, getState) => {
         // first fetch image data
-        const imageData = await fetchImageDataForMainWord(word, dispatch);
+        const imageData = await fetchImageDataForMainWord(getCorrectWordToFetchImageFromType(word, wordType), dispatch);
         // second fetch audio data
-        const audioData = await fetchAudioDataForMainWord(word, dispatch);
+        const audioData = await fetchAudioDataForMainWord(getCorrectWordToFetchAudioFromType(word, wordType), dispatch);
 
         // set the data in redux
         if (imageData && audioData) {

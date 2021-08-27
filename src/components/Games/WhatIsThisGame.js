@@ -139,7 +139,7 @@ const WhatIsThisGame = ({ wordType }) => {
 
     // fetch data from local storage
     const { status } = useGetLocalStorageData();
-    
+
     // checks if data is in local storage, otherwise fetch from API
     const { loading, errors, wordData } = useFetchWordData(wordType, currentWord, fetchWordDataOptions(status));
 
