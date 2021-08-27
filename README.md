@@ -24,10 +24,10 @@ Well more specifically—
 [![Vegeta-Over-9000-Meme](https://media.giphy.com/media/oOfLwhLyRUoRW/giphy-downsized-large.gif?cid=790b761107d2071fe6039cdd32acce9dd8fae3dd5953ad0c&rid=giphy-downsized-large.gif&ct=g)]()
 
 ## Setup(1-5 minutes):
-1. Create an [Unsplash account dev account](https://unsplash.com/developers).
+1. Create an [Unsplash dev account](https://unsplash.com/developers).
 2. Create an app in your unsplash account. Be aware you are limited to 50 requests per hour on a demo app.
-3. Add your client id to an .env.local file(see .env.local.example for reference).
-4. Setup 0Auth account. [Follow steps 1-3 only](https://lo-victoria.com/a-quick-beginners-guide-to-set-up-auth0-react).
+3. Add your client id to an `.env.local` file(see `.env.local.example` for reference).
+4. Setup 0Auth account. [Follow steps 1-3 only](https://lo-victoria.com/a-quick-beginners-guide-to-set-up-auth0-react#step-1-sign-up-for-an-account).
 5. `yarn install` then `yarn start` to start the server.
 
 # Toddler Games
