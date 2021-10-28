@@ -6,9 +6,7 @@ import WhatIsThisGame from "../components/Games/WhatIsThisGame";
 import {
     COLOR_TYPE,
     ANIMAL_TYPE,
-    NUMBER_TYPE,
     FOOD_TYPE,
-    SOCIAL_TYPE
 } from "../const";
 
 // note: temp function created while I'm still developing rest of the games

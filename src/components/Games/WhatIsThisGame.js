@@ -45,9 +45,7 @@ import {
 import {
     COLOR_TYPE,
     ANIMAL_TYPE,
-    NUMBER_TYPE,
     FOOD_TYPE,
-    SOCIAL_TYPE
 } from "../../const";
 
 import StarsToEarn from "../Stars/StarsToEarn";
@@ -223,6 +221,8 @@ const WhatIsThisGame = ({ wordType }) => {
 
     const handleStartNewRound = useCallback(() => {
         if (gameStarted && currentWord && hasWords() && hasWordsToChooseFrom()) {
+            // play the start audio only once at the start of the game;
+            const shouldPlayStartAudio = () => roundsLeft === wordAmountToShowAtOneTime.current;
 
             dispatch({ 
                 type: START_NEW_ROUND 
@@ -230,7 +230,11 @@ const WhatIsThisGame = ({ wordType }) => {
 
             wait(500).then(() => shouldPlayStartAudio() && startAudio.play());
         }
-    }, [gameStarted, currentWord, hasWords, hasWordsToChooseFrom, startAudio]);
+    }, [
+        gameStarted, hasWords,
+        currentWord, roundsLeft, startAudio,
+        hasWordsToChooseFrom
+    ]);
 
     const handleCompleteRound = (word) => {
         if (currentWordAudio && word === currentWord) {
@@ -243,10 +247,7 @@ const WhatIsThisGame = ({ wordType }) => {
                     })
                 ));
         }
-    }  
-
-    // play the start audio only once at the start of the game;
-    const shouldPlayStartAudio = () => roundsLeft === wordAmountToShowAtOneTime.current;
+    }
 
     // ==========> audio 
 
@@ -258,7 +259,7 @@ const WhatIsThisGame = ({ wordType }) => {
             })
         }
 
-    }, [wordData?.audio, hasWordAudio])
+    }, [wordData?.audio, hasWordAudio, wordType])
 
     useEffect(() => {
         if (!welcomeAudio) {

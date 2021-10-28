@@ -1,19 +1,7 @@
 import {
-    COLOR_TYPE,
     ANIMAL_TYPE,
-    NUMBER_TYPE,
     FOOD_TYPE,
-    SOCIAL_TYPE,
-    BODY_TYPE,
-
-    NUMBER_WORDS,
-    FOOD_WORDS,
-    COLOR_WORDS,
-    ANIMAL_WORDS,
-    SOCIAL_WORDS,
-    BODY_WORDS,
-
-    WORD_TYPE_ERRORS
+    SOCIAL_TYPE
 } from "../const";
 
 export const getCorrectImageURL = (url, wordType) => {

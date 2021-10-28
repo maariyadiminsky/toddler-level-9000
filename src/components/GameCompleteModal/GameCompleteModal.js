@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Confetti from "react-confetti";
 
 import { setStarsEarned } from "../../redux/actions/stars";
-import { generateRandomItemInArray, wait } from "../../utils";
+import { generateRandomItemInArray } from "../../utils";
 import { generateCompleteSoundEffect } from "../../utils/audio";
 
 import catCelebrate from "./images/catCelebrate.png";
@@ -24,11 +24,14 @@ const GameCompleteModal = ({ starsEarned = 0, gameCompleteAudio }) => {
         if (starsEarned > 0) {
             dispatch(setStarsEarned(starsEarned));
 
-            gameCompleteAudio && gameCompleteAudio.play();
+            if (gameCompleteAudio) {
+                gameCompleteAudio.play();
+            }
+
             celebrateSoundEffect.current && celebrateSoundEffect.current.play();
         }
 
-    }, [dispatch, starsEarned]);
+    }, [dispatch, starsEarned, gameCompleteAudio]);
 
     return (
         <Fragment>

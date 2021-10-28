@@ -3,15 +3,7 @@ import { Route } from "react-router-dom";
 import ProtectedRoute from "../components/hoc/auth/ProtectedRoute";
 import {
   ROOT_PATH,
-  CHOICE_GAME_PATH,
-  CHOICE_GAME_PATH_GENERAL,
-
-  COLOR_TYPE,
-  ANIMAL_TYPE,
-  NUMBER_TYPE,
-  FOOD_TYPE,
-  SOCIAL_TYPE,
-  BODY_TYPE,
+  CHOICE_GAME_PATH_GENERAL
 } from "../const";
 
 import NavBar from "../components/NavBar/NavBar";
