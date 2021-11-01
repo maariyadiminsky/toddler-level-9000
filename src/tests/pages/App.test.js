@@ -16,8 +16,8 @@ describe("App", () => {
         render(<App />);
 
         // game arena should render game choices on initial load
-        const gameTypeFood = screen.getByAltText(`${gameArenaData[0].altText}`);
-        const gameTypeColors = screen.getByAltText(`${gameArenaData[1].altText}`);
+        const gameTypeFood = screen.getByAltText(gameArenaData[0].altText);
+        const gameTypeColors = screen.getByAltText(gameArenaData[1].altText);
 
         expect(gameTypeFood).toBeInTheDocument();
         expect(gameTypeColors).toBeInTheDocument();

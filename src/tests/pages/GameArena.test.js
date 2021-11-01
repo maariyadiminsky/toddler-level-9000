@@ -7,8 +7,8 @@ describe("GameArena", () => {
         render(<GameArena />);
 
         // if games render its safe to assume GameArena component is rendered
-        const gameTypeFood = screen.getByAltText(`${gameArenaData[0].altText}`);
-        const gameTypeColors = screen.getByAltText(`${gameArenaData[1].altText}`);
+        const gameTypeFood = screen.getByAltText(gameArenaData[0].altText);
+        const gameTypeColors = screen.getByAltText(gameArenaData[1].altText);
 
         expect(gameTypeFood).toBeInTheDocument();
         expect(gameTypeColors).toBeInTheDocument();

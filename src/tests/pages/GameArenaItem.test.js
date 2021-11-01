@@ -18,7 +18,7 @@ describe("GameArenaItem", () => {
         );
 
         // if image alt text for passed data exists it safe to assume GameArenaItem component is rendered
-        const imageAltText = screen.getByAltText(`${gameArenaSampleItem.altText}`);
+        const imageAltText = screen.getByAltText(gameArenaSampleItem.altText);
 
         expect(imageAltText).toBeInTheDocument();
     });

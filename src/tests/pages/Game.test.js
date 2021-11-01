@@ -11,7 +11,7 @@ describe("Game", () => {
         const gamePathNotAvailable = CHOICE_GAME_PATH(SOCIAL_TYPE);
         render(<Game />, { route: gamePathNotAvailable });
 
-        const gameNotAvailableTextElement = screen.getByText(`${GAME_NOT_AVAILABLE_TEMP_MESSAGE}`);
+        const gameNotAvailableTextElement = screen.getByText(GAME_NOT_AVAILABLE_TEMP_MESSAGE);
 
         expect(gameNotAvailableTextElement).toBeInTheDocument();
     });
