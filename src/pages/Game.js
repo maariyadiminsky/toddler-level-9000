@@ -7,6 +7,7 @@ import {
     COLOR_TYPE,
     ANIMAL_TYPE,
     FOOD_TYPE,
+    GAME_NOT_AVAILABLE_TEMP_MESSAGE
 } from "../const";
 
 // note: temp function created while I'm still developing rest of the games
@@ -25,7 +26,7 @@ const Game = () => {
     
     return (
         <div className="container pb-28 pt-10 h-screen">
-            {canRenderGame(wordTypeId) ? <WhatIsThisGame wordType={wordTypeId} /> : "Sorry this game is WIP. Please select another."}
+            {canRenderGame(wordTypeId) ? <WhatIsThisGame wordType={wordTypeId} /> : GAME_NOT_AVAILABLE_TEMP_MESSAGE}
         </div>
     );
 }

@@ -6,7 +6,7 @@ import Auth0ProviderWithHistory from "./components/hoc/auth/Auth0ProviderWithHis
 
 import store from "./redux/store";
 
-import './index.css';
+import "./index.css";
 
 import App from "./pages/App";
 

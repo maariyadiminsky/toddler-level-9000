@@ -1,4 +1,9 @@
-import React, { useEffect, useRef, useReducer, useCallback } from "react";
+import React, { 
+    useEffect, 
+    useRef, 
+    useReducer, 
+    useCallback 
+} from "react";
 import without from "lodash/without";
 
 import { useGetLocalStorageData } from "../../hooks/localStorage";
@@ -316,9 +321,7 @@ const WhatIsThisGame = ({ wordType }) => {
     } else if (!gameStarted) {
         return <StartGameButton handleButtonClick={handleStartNewGame}/>
     } else if (errors) {
-        return (
-            <div>{errors}</div>
-        );
+        return <div>{errors}</div>;
     }
 
     const renderImagesWrapper = () => {

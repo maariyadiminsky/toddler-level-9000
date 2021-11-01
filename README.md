@@ -63,7 +63,7 @@ My priority for this project was just to complete some games so my kid can start
 I’m aware of these issues, they will be fixed when I have time to work on this project further:
 1. I need to debounce requests—currently some rerenders are making multiple requests to the same asset source.
 2. Some loading jumps despite adding a loader and checking if data returned, have to look a bit deeper into this later. Also need to move loader more in the middle.
-3. Add tests.
+3. Add more tests.
 4. Possibly use another API—Unsplash API unfortunately returns incorrect images once in awhile. So I would say currently it’s about 90% accurate in returning images that match the word. If you plan to use a part or all of this project for your own. I would advise using some other image API to return more relevant images. 
 5. I didn’t focus too much on responsiveness since this game is meant to be played on a laptop/desktop with a toddler.
 6. Need to do lots of code clean up in some components(especially the WhatIsThisGame Component).
