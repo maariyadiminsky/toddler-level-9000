@@ -21,6 +21,7 @@ const canRenderGame = (wordType) => {
             return false;
     }
 }
+
 const Game = () => {
     const { wordTypeId } = useParams();
     

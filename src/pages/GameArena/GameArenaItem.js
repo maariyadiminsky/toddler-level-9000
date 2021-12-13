@@ -9,18 +9,16 @@ const GameArenaItem = ({
     customDivClass = '', 
     customImgClass = '',
     link='/'
-}) => {
-    return (
-        <div className={`game-arena-item ${customDivClass}`}>
-            <Link to={link}>
-                <img 
-                    className={customImgClass === '' ? 'min-w-full' : customImgClass} 
-                    src={imageUrl} 
-                    alt={altText}
-                />
-            </Link>
-        </div>
-    );
-};
+}) => (
+    <div className={`game-arena-item ${customDivClass}`}>
+        <Link to={link}>
+            <img 
+                className={customImgClass === '' ? 'min-w-full' : customImgClass} 
+                src={imageUrl} 
+                alt={altText}
+            />
+        </Link>
+    </div>
+);
 
 export default GameArenaItem
