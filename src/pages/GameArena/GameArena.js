@@ -4,13 +4,6 @@ import GameArenaItem from './GameArenaItem';
 import { gameArenaData } from './data';
 
 const GameArena = () => {
-    // todo: create a loader and replace here
-    if (gameArenaData.length === 0) {
-        return (
-            <div>Loading...</div>
-        );
-    }
-
     const renderGameArenaItems = () => (
         gameArenaData.map(({
             id, 
