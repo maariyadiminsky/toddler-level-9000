@@ -56,7 +56,7 @@ import {
 import StarsToEarn from '../Stars/StarsToEarn';
 import StartGameButton from '../StartGameButton';
 import GameCompleteModal from '../GameCompleteModal/GameCompleteModal';
-import Loader from '../Loader';
+import Loader from '../Loader/Loader';
 
 const INITIAL_STATE = {
     gameStarted: false,
