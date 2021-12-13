@@ -1,4 +1,3 @@
-import { useReducer } from 'react';
 import without from 'lodash/without';
 
 import {
@@ -15,9 +14,9 @@ import {
     SET_CURRENT_WORD_AUDIO,
 
     ERROR_IN_TYPES,
-} from '../components/Games/types';
+} from '../../../components/Games/types';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
     gameStarted: false,
     gameEnded: false,
     roundStarted: false,
@@ -31,7 +30,7 @@ const INITIAL_STATE = {
     gameCompleteAudio: null,
 };
 
-const reducer = (state, { type, payload}) => {
+export default (state, { type, payload}) => {
   switch (type) {
     case START_NEW_GAME: 
         return {
@@ -93,22 +92,4 @@ const reducer = (state, { type, payload}) => {
     default:
       throw new Error(ERROR_IN_TYPES.TYPE_DOES_NOT_EXIST('WhatIsThisGame'));
   }
-}
-
-export const useWhatIsThisGameReducer = () => {
-    // local reducer since this data doesn't need to be in global state
-    // but too complicated for simple useState
-    const [{ 
-        gameStarted, gameEnded,
-        roundsLeft, roundStarted, 
-        words, currentWord, wordsToChooseFrom,
-        currentWordAudio, welcomeAudio, startAudio, gameCompleteAudio
-    }, dispatch] = useReducer(reducer, INITIAL_STATE);
-
-    return [{ 
-        gameStarted, gameEnded,
-        roundsLeft, roundStarted, 
-        words, currentWord, wordsToChooseFrom,
-        currentWordAudio, welcomeAudio, startAudio, gameCompleteAudio
-    }, dispatch];
 }
