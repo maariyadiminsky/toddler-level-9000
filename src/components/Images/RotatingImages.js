@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getCorrectImageURL } from '../../../utils/image';
+import { getCorrectImageURL } from '../../utils/image';
 
 const RotatingImages = ({ images, wordType }) => (
     images.map(({ id, altText, imageUrl }) => (

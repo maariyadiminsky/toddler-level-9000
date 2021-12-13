@@ -1,17 +1,17 @@
 import React from 'react';
 
 import { isArrayExistAndNotEmpty, isObjectExistAndNotEmpty} from '../../utils';
-import { generateRandomItems } from '../../../utils/words';
+import { generateRandomItems } from '../../utils/words';
 
 import RotatingImages from './RotatingImages';
 
-const RandomImageGenerator = (data, randomImagesRef, wordType) => {
-    if (!isObjectExistAndNotEmpty(data) || !isArrayExistAndNotEmpty(data.images)) return;
+const RandomImageGenerator = ({ data, randomImagesRef, wordType }) => {
+    if (!isObjectExistAndNotEmpty(data) || !isArrayExistAndNotEmpty(data.images)) return null;
 
     // generates 3 - 5 random images out of the 10 returned from the API
     randomImagesRef.current = generateRandomItems(data.images, 3);
 
-    if (randomImagesRef.current.length === 0) return;
+    if (randomImagesRef.current.length === 0) return null;
 
     return (
         <div className="container px-36">

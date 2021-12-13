@@ -15,7 +15,7 @@ import {
     SET_CURRENT_WORD_AUDIO,
 
     ERROR_IN_TYPES,
-} from '../types';
+} from '../components/Games/types';
 
 const INITIAL_STATE = {
     gameStarted: false,
