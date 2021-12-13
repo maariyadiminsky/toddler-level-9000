@@ -1,15 +1,15 @@
-import React, { Fragment, useRef, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import Confetti from "react-confetti";
+import React, { Fragment, useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import Confetti from 'react-confetti';
 
-import { setStarsEarned } from "../../redux/actions/stars";
-import { generateRandomItemInArray } from "../../utils";
-import { generateCompleteSoundEffect } from "../../utils/audio";
+import { setStarsEarned } from '../../redux/actions/stars';
+import { generateRandomItemInArray } from '../../utils';
+import { generateCompleteSoundEffect } from '../../utils/audio';
 
-import catCelebrate from "./images/catCelebrate.png";
-import catCool from "./images/catCool.png";
-import catHappy from "./images/catHappy.png";
-import catLove from "./images/catLove.png";
+import catCelebrate from './images/catCelebrate.png';
+import catCool from './images/catCool.png';
+import catHappy from './images/catHappy.png';
+import catLove from './images/catLove.png';
 
 const celebrateImageOptions = [catCelebrate, catCool, catHappy, catLove];
 const GameCompleteModal = ({ starsEarned = 0, gameCompleteAudio }) => {
@@ -46,7 +46,7 @@ const GameCompleteModal = ({ starsEarned = 0, gameCompleteAudio }) => {
                     <div className="relative px-5 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
                         <div className="max-w-md mx-auto">
                             <div>
-                                <h1 className="font-poppins font-semibold text-center text-6xl mb-3 text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-purple-600">{`${"You did it!".toUpperCase()}`}</h1>
+                                <h1 className="font-poppins font-semibold text-center text-6xl mb-3 text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-purple-600">{`${'You did it!'.toUpperCase()}`}</h1>
                                 <div className="font-poppins text-center text-3xl pb-3">
                                     You earned <span className="font-semibold text-yellow-300">{starsEarned} stars!</span>
                                     </div>

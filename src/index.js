@@ -1,14 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import Auth0ProviderWithHistory from "./components/hoc/auth/Auth0ProviderWithHistory";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import Auth0ProviderWithHistory from './components/hoc/auth/Auth0ProviderWithHistory';
 
-import store from "./redux/store";
+import store from './redux/store';
 
-import "./index.css";
+import './index.css';
 
-import App from "./pages/App";
+import App from './pages/App';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -18,5 +18,5 @@ ReactDOM.render(
         </Auth0ProviderWithHistory>
       </BrowserRouter>
   </Provider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );

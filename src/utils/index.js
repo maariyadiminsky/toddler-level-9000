@@ -1,4 +1,4 @@
-import isEmpty from "lodash/isEmpty";
+import isEmpty from 'lodash/isEmpty';
 
 export const isArrayExistAndNotEmpty = (arr) => arr && arr.length !== 0;
 

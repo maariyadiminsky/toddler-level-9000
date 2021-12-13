@@ -1,10 +1,10 @@
-import { SET_USER_ID } from "./types";
-import { hasKeyExistInLocalStorage } from "../../utils/localStorage";
-import { setLocalStorageData } from "./localStorage";
+import { SET_USER_ID } from './types';
+import { hasKeyExistInLocalStorage } from '../../utils/localStorage';
+import { setLocalStorageData } from './localStorage';
 
 export const setUserId = (userId) => (
     async(dispatch) => {
-        userId = userId.includes("|") ? userId.split("|").pop() : userId;
+        userId = userId.includes('|') ? userId.split('|').pop() : userId;
 
         // set user id
         dispatch({

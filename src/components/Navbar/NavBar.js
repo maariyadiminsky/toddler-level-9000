@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 
-import AuthButton from "../AuthButton";
-import StarsEarned from "../Stars/StarsEarned";
+import AuthButton from '../AuthButton';
+import StarsEarned from '../Stars/StarsEarned';
 
-import { GAME_PATH } from "../../const";
+import { GAME_PATH } from '../../const';
 
-import logo from "./logo.png";
+import logo from './logo.png';
 
 const NavBar = () => {
     const { pathname } = useLocation();

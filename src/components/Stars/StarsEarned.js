@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import EmptyStar from "./svg/EmptyStar";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import EmptyStar from './svg/EmptyStar';
 
-import { useGetLocalStorageData } from "../../hooks/localStorage";
-import { getStarsEarnedSelector } from "../../redux/selectors/localStorage";
-import { RESPONSE_SUCCESS } from "../../redux/actions/types";
+import { useGetLocalStorageData } from '../../hooks/localStorage';
+import { getStarsEarnedSelector } from '../../redux/selectors/localStorage';
+import { RESPONSE_SUCCESS } from '../../redux/actions/types';
 
 const FullStar = () => EmptyStar(20, true);
 const StarsEarned = () => {

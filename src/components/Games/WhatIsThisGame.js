@@ -3,34 +3,34 @@ import React, {
     useRef, 
     useReducer, 
     useCallback 
-} from "react";
-import without from "lodash/without";
+} from 'react';
+import without from 'lodash/without';
 
-import { useGetLocalStorageData } from "../../hooks/localStorage";
-import { useFetchWordData } from "../../hooks/words";
-import { RESPONSE_SUCCESS } from "../../redux/actions/types";
+import { useGetLocalStorageData } from '../../hooks/localStorage';
+import { useFetchWordData } from '../../hooks/words';
+import { RESPONSE_SUCCESS } from '../../redux/actions/types';
 import { 
     getNewWordsArray,
     generateRandomItem,
     generateRandomItems,
     getWordAmountToShowAtOneTime,
     getCustomCSSForWordsToChooseFrom
-} from "../../utils/words";
+} from '../../utils/words';
 import { 
     getCorrectImageURL,
     getCorrectImageUrlBasedOnType
-} from "../../utils/image";
+} from '../../utils/image';
 import { 
     getCorrectAudioUrl,
     getWelcomeAudio,
     getStartAudio,
     generateGameCompleteAudio
-} from "../../utils/audio";
+} from '../../utils/audio';
 import { 
     isArrayExistAndNotEmpty,
     isObjectExistAndNotEmpty,
     wait
-} from "../../utils/";
+} from '../../utils/';
 import {
     START_NEW_GAME,
     START_NEW_ROUND,
@@ -45,18 +45,18 @@ import {
     SET_CURRENT_WORD_AUDIO,
 
     ERROR_IN_TYPES,
-} from "./types";
+} from './types';
 
 import {
     COLOR_TYPE,
     ANIMAL_TYPE,
     FOOD_TYPE,
-} from "../../const";
+} from '../../const';
 
-import StarsToEarn from "../Stars/StarsToEarn";
-import StartGameButton from "../StartGameButton";
-import GameCompleteModal from "../GameCompleteModal/GameCompleteModal";
-import Loader from "../Loader";
+import StarsToEarn from '../Stars/StarsToEarn';
+import StartGameButton from '../StartGameButton';
+import GameCompleteModal from '../GameCompleteModal/GameCompleteModal';
+import Loader from '../Loader';
 
 const INITIAL_STATE = {
     gameStarted: false,
@@ -64,7 +64,7 @@ const INITIAL_STATE = {
     roundStarted: false,
     roundsLeft: 5,
     words: [],
-    currentWord: "",
+    currentWord: '',
     wordsToChooseFrom: [],
     currentWordAudio: null,
     welcomeAudio: null,
@@ -91,7 +91,7 @@ const reducer = (state, { type, payload}) => {
         return { 
             ...state, 
             roundStarted: false,
-            currentWord: "",
+            currentWord: '',
             wordsToChooseFrom: []
         }
     }
@@ -132,7 +132,7 @@ const reducer = (state, { type, payload}) => {
             currentWordAudio: payload
         };
     default:
-      throw new Error(ERROR_IN_TYPES.TYPE_DOES_NOT_EXIST("WhatIsThisGame"));
+      throw new Error(ERROR_IN_TYPES.TYPE_DOES_NOT_EXIST('WhatIsThisGame'));
   }
 }
 
@@ -345,7 +345,7 @@ const WhatIsThisGame = ({ wordType }) => {
         images.map(({ id, altText, imageUrl }) => (
             <div key={id}>
                 <div 
-                    className={"bg-white rounded-2xl shadow-lg hover:animate-ping hover:shadow-2xl hover:rotate-45 hover:scale-75 transform transition duration-300"}
+                    className={'bg-white rounded-2xl shadow-lg hover:animate-ping hover:shadow-2xl hover:rotate-45 hover:scale-75 transform transition duration-300'}
                 >
                     <img
                         key={id}
@@ -361,11 +361,11 @@ const WhatIsThisGame = ({ wordType }) => {
     const getCustomCSSForWordsToChooseFromBasedOnType = () => {
         switch(wordType) {
             case ANIMAL_TYPE:
-                return "mt-12 m-20";
+                return 'mt-12 m-20';
             case FOOD_TYPE:
-                return "mt-10 mx-72";
+                return 'mt-10 mx-72';
             default:
-                return "";
+                return '';
         }
     }
     const renderChoiceItems = () => {

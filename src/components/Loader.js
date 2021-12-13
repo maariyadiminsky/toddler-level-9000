@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const getSmileSVG = (color) => (
     <svg 
@@ -15,18 +15,18 @@ const getSmileSVG = (color) => (
 );
 
 const Loader = () => {
-    const mainClass = "h-10 w-10 m-6 mr-1 rounded-full";
+    const mainClass = 'h-10 w-10 m-6 mr-1 rounded-full';
 
     return (
         <div className="flex justify-center mt-12 h-96 flex-wrap content-center animate-pulse">
             <div className={`${mainClass} bg-pink-500 animate-bounce`}>
-                {getSmileSVG("pink-600")}
+                {getSmileSVG('pink-600')}
             </div>
             <div className={`${mainClass} bg-yellow-200 animate-bounce200`}>
-                {getSmileSVG("yellow-400")}
+                {getSmileSVG('yellow-400')}
             </div>
             <div className={`${mainClass} bg-green-300 animate-bounce400`}>
-                {getSmileSVG("green-400")}
+                {getSmileSVG('green-400')}
             </div>
         </div>
     );

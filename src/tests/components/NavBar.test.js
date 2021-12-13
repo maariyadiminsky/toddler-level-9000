@@ -1,12 +1,12 @@
-import { render, screen } from "../utils";
-import NavBar from "../../components/NavBar/NavBar";
+import { render, screen } from '../utils';
+import NavBar from '../../components/NavBar/NavBar';
 import {
     CHOICE_GAME_PATH,
     COLOR_TYPE
-} from "../../const";
+} from '../../const';
 
-describe("NavBar", () => {
-    test("renders NavBar component", () => {
+describe('NavBar', () => {
+    test('renders NavBar component', () => {
         render(<NavBar />);
 
         const parentsLink = screen.getByText(/Parents/i);
@@ -14,7 +14,7 @@ describe("NavBar", () => {
         expect(parentsLink).toBeInTheDocument();
     });
 
-    test("doesn't render StarsEarned if on a game page", () => {
+    test('doesn\'t render StarsEarned if on a game page', () => {
         const gamePathExample = CHOICE_GAME_PATH(COLOR_TYPE);
         render(<NavBar />, { route: gamePathExample});
 

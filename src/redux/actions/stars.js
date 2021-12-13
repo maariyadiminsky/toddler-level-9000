@@ -1,6 +1,6 @@
-import { SET_STARS_EARNED } from "./types";
+import { SET_STARS_EARNED } from './types';
 
-import { setLocalStorageData } from "./localStorage";
+import { setLocalStorageData } from './localStorage';
 
 export const setStarsEarned = (pointsToAdd) => (
     async(dispatch, getState) => {

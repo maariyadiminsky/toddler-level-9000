@@ -6,7 +6,7 @@ import {
     FETCH_ERROR_TYPES,
     RESPONSE_SUCCESS,
     RESPONSE_ERROR
-} from "./types";
+} from './types';
 
 // note: localStorage check exists to makes sure browser 
 // has a localStorage / user not using incognito mode
@@ -82,5 +82,5 @@ export const setLocalStorageData = (userId) => {
 }
 
 const showLocalStorageMissingErrorInBrowser = () => {
-    console.log("ERROR! You need to use a browser that has localStorage or exit Incognito Mode to play. Thanks!");
+    console.log('ERROR! You need to use a browser that has localStorage or exit Incognito Mode to play. Thanks!');
 }

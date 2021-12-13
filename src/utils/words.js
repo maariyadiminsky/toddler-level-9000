@@ -14,9 +14,9 @@ import {
     BODY_WORDS,
 
     WORD_TYPE_ERRORS
-} from "../const";
+} from '../const';
 
-import { generateRandomNumber } from "./";
+import { generateRandomNumber } from './';
 
 export const getNewWordsArray = (wordType) => {
     switch(wordType) {
@@ -55,23 +55,23 @@ export const getCustomCSSForWordsToChooseFrom = (wordType, word) => {
     switch(wordType) {
         case COLOR_TYPE:
             switch(word) {
-                case "black":
-                    return "from-gray-800 to-gray-900 text-white";
-                case "white":
-                    return "from-gray-50 to-gray-100 text-gray-600";
-                case "orange":
-                    return "from-yellow-400 to-yellow-600 text-white";
-                case "brown":
-                    return "from-yellow-700 to-yellow-900 text-white";
-                case "yellow":
-                    return "from-yellow-300 to-yellow-400 text-white";
+                case 'black':
+                    return 'from-gray-800 to-gray-900 text-white';
+                case 'white':
+                    return 'from-gray-50 to-gray-100 text-gray-600';
+                case 'orange':
+                    return 'from-yellow-400 to-yellow-600 text-white';
+                case 'brown':
+                    return 'from-yellow-700 to-yellow-900 text-white';
+                case 'yellow':
+                    return 'from-yellow-300 to-yellow-400 text-white';
                 default:
                     return `from-${word}-300 to-${word}-600 text-white`;
             }
         case NUMBER_TYPE:
         case ANIMAL_TYPE:
         case FOOD_TYPE:
-                return "from-gray-50 to-gray-100 text-black font-bold";
+                return 'from-gray-50 to-gray-100 text-black font-bold';
         default:
             throw new Error(WORD_TYPE_ERRORS.WORD_TYPE_DOES_NOT_EXIST(wordType));
     }
@@ -131,27 +131,27 @@ export const getCorrectWordToFetchAudioFromType = (word, wordType) => {
         case NUMBER_TYPE:
             switch(word) {
                 case 1:
-                    return "one";
+                    return 'one';
                 case 2:
-                    return "two";
+                    return 'two';
                 case 3:
-                    return "three";
+                    return 'three';
                 case 4:
-                    return "four";
+                    return 'four';
                 case 5:
-                    return "five";
+                    return 'five';
                 case 6:
-                    return "six";
+                    return 'six';
                 case 7:
-                    return "seven";
+                    return 'seven';
                 case 8:
-                    return "eight";
+                    return 'eight';
                 case 9: 
-                    return "nine";
+                    return 'nine';
                 case 10:
-                    return "ten";
+                    return 'ten';
                 default:
-                    return "zero"
+                    return 'zero'
             }
         default:
             return word;

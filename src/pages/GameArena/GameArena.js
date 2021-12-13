@@ -1,7 +1,7 @@
-import React from "react";
-import GameArenaItem from "./GameArenaItem";
+import React from 'react';
+import GameArenaItem from './GameArenaItem';
 
-import { gameArenaData } from "./data";
+import { gameArenaData } from './data';
 
 const GameArena = () => {
     // todo: create a loader and replace here

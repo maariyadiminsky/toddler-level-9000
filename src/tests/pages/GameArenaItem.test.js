@@ -1,9 +1,9 @@
-import { render, screen } from "../utils";
-import GameArenaItem from "../../pages//GameArena/GameArenaItem";
-import { gameArenaData } from "../../pages/GameArena/data";
+import { render, screen } from '../utils';
+import GameArenaItem from '../../pages//GameArena/GameArenaItem';
+import { gameArenaData } from '../../pages/GameArena/data';
 
-describe("GameArenaItem", () => {
-    test("renders GameArenaItem component", () => {
+describe('GameArenaItem', () => {
+    test('renders GameArenaItem component', () => {
         const gameArenaSampleItem = gameArenaData[0];
 
         render(

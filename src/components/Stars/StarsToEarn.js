@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import EmptyStar from "./svg/EmptyStar";
+import EmptyStar from './svg/EmptyStar';
 
 const STAR_SIZE = 20;
 const FullStar = (i) => EmptyStar(STAR_SIZE, true, i);

@@ -1,5 +1,5 @@
-import React from "react";
-import { useAuth } from "../hooks/auth";
+import React from 'react';
+import { useAuth } from '../hooks/auth';
 
 const AuthButton = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth();

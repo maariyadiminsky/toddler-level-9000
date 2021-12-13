@@ -1,9 +1,9 @@
-import { render, screen } from "../utils";
-import GameArena from "../../pages/GameArena/GameArena";
-import { gameArenaData } from "../../pages/GameArena/data";
+import { render, screen } from '../utils';
+import GameArena from '../../pages/GameArena/GameArena';
+import { gameArenaData } from '../../pages/GameArena/data';
 
-describe("GameArena", () => {
-    test("renders GameArena component", () => {
+describe('GameArena', () => {
+    test('renders GameArena component', () => {
         render(<GameArena />);
 
         // if games render its safe to assume GameArena component is rendered

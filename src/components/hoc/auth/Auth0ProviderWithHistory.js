@@ -1,12 +1,12 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import { Auth0Provider } from "@auth0/auth0-react";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 import { 
   AUTH0_AUDIENCE, 
   AUTH0_SCOPE,
   AUTH0_REDIRECT_URI_AFTER_LOGIN
-} from "../../../const";
+} from '../../../const';
 
 const Auth0ProviderWithHistory = ({ children }) => {
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;

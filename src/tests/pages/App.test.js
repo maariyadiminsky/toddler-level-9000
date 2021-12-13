@@ -1,9 +1,9 @@
-import { render, screen } from "../utils";
-import App from "../../pages/App";
-import { gameArenaData } from "../../pages/GameArena/data";
+import { render, screen } from '../utils';
+import App from '../../pages/App';
+import { gameArenaData } from '../../pages/GameArena/data';
 
-describe("App", () => {
-    test("renders App component", () => {
+describe('App', () => {
+    test('renders App component', () => {
         render(<App />);
 
         // if navbar renders its safe to assume App component is rendered
@@ -12,7 +12,7 @@ describe("App", () => {
         expect(parentsLinkInNavbar).toBeInTheDocument();
     });
 
-    test("renders games to choose on initial load", () => {
+    test('renders games to choose on initial load', () => {
         render(<App />);
 
         // game arena should render game choices on initial load

@@ -1,7 +1,7 @@
-import { SET_USER_ID } from "../actions/types";
+import { SET_USER_ID } from '../actions/types';
 
 const INITIAL_STATE = {
-    userId: ""
+    userId: ''
 };
 
 export default (state = INITIAL_STATE, { type, payload }) => {

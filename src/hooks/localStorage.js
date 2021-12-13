@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useAuth } from "./auth";
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useAuth } from './auth';
 
 import { 
     getLocalStorageData, 
     setLocalStorageData 
-} from "../redux/actions/localStorage";
+} from '../redux/actions/localStorage';
 
 export const useGetLocalStorageData = () => {
     const [response, setResponse] = useState({});
