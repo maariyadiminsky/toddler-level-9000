@@ -1,9 +1,6 @@
-import React, { 
-    useEffect, 
-    useRef, 
-    useCallback 
-} from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
+import { useAudio } from '../../../hooks/audio';
 import { useWhatIsThisGameReducer } from '../../../hooks/games';
 import { useGetLocalStorageData } from '../../../hooks/localStorage';
 import { useFetchWordData } from '../../../hooks/words';
@@ -14,17 +11,7 @@ import {
     generateRandomItems,
     getWordAmountToShowAtOneTime,
 } from '../../../utils/words';
-import { 
-    getCorrectAudioUrl,
-    getWelcomeAudio,
-    getStartAudio,
-    generateGameCompleteAudio
-} from '../../../utils/audio';
-import { 
-    isArrayExistAndNotEmpty,
-    isObjectExistAndNotEmpty,
-    wait
-} from '../../../utils';
+import { isArrayExistAndNotEmpty, wait } from '../../../utils';
 import {
     START_NEW_GAME,
     START_NEW_ROUND,
@@ -71,7 +58,6 @@ const WhatIsThisGame = ({ wordType }) => {
 
     // ===================================> setup
 
-    const hasWordData = useCallback(() => isObjectExistAndNotEmpty(wordData), [wordData]);
     const hasWords = useCallback(() => isArrayExistAndNotEmpty(words), [words]);
     const hasWordsToChooseFrom = useCallback(() => isArrayExistAndNotEmpty(wordsToChooseFrom), [wordsToChooseFrom]);
     
@@ -166,29 +152,8 @@ const WhatIsThisGame = ({ wordType }) => {
 
     // ==========> audio 
 
-    useEffect(()=> {
-        if (hasWordAudio()) {
-            dispatch({
-                type: SET_CURRENT_WORD_AUDIO,
-                payload: new Audio(getCorrectAudioUrl(wordData.audio[0], wordType))
-            })
-        }
-
-    }, [wordData?.audio, hasWordAudio, wordType])
-
-    useEffect(() => {
-        if (!welcomeAudio) {
-            dispatch({
-                type: SET_AUDIO,
-                payload: {
-                    welcomeAudio: new Audio(getWelcomeAudio(wordType)),
-                    startAudio: new Audio(getStartAudio(wordType)),
-                    gameCompleteAudio: new Audio(generateGameCompleteAudio(wordType))
-                }
-            })
-        }
-    }, [welcomeAudio, wordData?.audio, wordType, hasWordData])
-    
+    useAudio(hasWordAudio(), wordData?.audio, wordType, SET_CURRENT_WORD_AUDIO, dispatch);
+    useAudio(!welcomeAudio, wordData?.audio, wordType, SET_AUDIO, dispatch);
 
     // ==========> words
     
