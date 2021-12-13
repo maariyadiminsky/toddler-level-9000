@@ -1,36 +1,32 @@
 import React, { 
     useEffect, 
     useRef, 
-    useReducer, 
     useCallback 
 } from 'react';
-import without from 'lodash/without';
 
-import { useGetLocalStorageData } from '../../hooks/localStorage';
-import { useFetchWordData } from '../../hooks/words';
-import { RESPONSE_SUCCESS } from '../../redux/actions/types';
+import { useWhatIsThisGameReducer } from '../../../hooks/games';
+import { useGetLocalStorageData } from '../../../hooks/localStorage';
+import { useFetchWordData } from '../../../hooks/words';
+import { RESPONSE_SUCCESS } from '../../../redux/actions/types';
 import { 
     getNewWordsArray,
     generateRandomItem,
     generateRandomItems,
     getWordAmountToShowAtOneTime,
     getCustomCSSForWordsToChooseFrom
-} from '../../utils/words';
-import { 
-    getCorrectImageURL,
-    getCorrectImageUrlBasedOnType
-} from '../../utils/image';
+} from '../../../utils/words';
+import { getCorrectImageUrlBasedOnType } from '../../../utils/image';
 import { 
     getCorrectAudioUrl,
     getWelcomeAudio,
     getStartAudio,
     generateGameCompleteAudio
-} from '../../utils/audio';
+} from '../../../utils/audio';
 import { 
     isArrayExistAndNotEmpty,
     isObjectExistAndNotEmpty,
     wait
-} from '../../utils/';
+} from '../../../utils';
 import {
     START_NEW_GAME,
     START_NEW_ROUND,
@@ -43,98 +39,19 @@ import {
 
     SET_AUDIO,
     SET_CURRENT_WORD_AUDIO,
-
-    ERROR_IN_TYPES,
-} from './types';
+} from '../types';
 
 import {
     COLOR_TYPE,
     ANIMAL_TYPE,
     FOOD_TYPE,
-} from '../../const';
+} from '../../../const';
 
-import StarsToEarn from '../Stars/StarsToEarn';
-import StartGameButton from '../StartGameButton/StartGameButton';
-import GameCompleteModal from '../GameCompleteModal/GameCompleteModal';
-import Loader from '../Loader/Loader';
-
-const INITIAL_STATE = {
-    gameStarted: false,
-    gameEnded: false,
-    roundStarted: false,
-    roundsLeft: 5,
-    words: [],
-    currentWord: '',
-    wordsToChooseFrom: [],
-    currentWordAudio: null,
-    welcomeAudio: null,
-    startAudio: null,
-    gameCompleteAudio: null,
-};
-
-const reducer = (state, { type, payload}) => {
-  switch (type) {
-    case START_NEW_GAME: 
-        return {
-            ...state,
-            gameStarted: true,
-            gameEnded: false,
-            roundsLeft: payload
-        }
-    case START_NEW_ROUND:
-        return { 
-            ...state, 
-            roundStarted: true,
-            roundsLeft: state.roundsLeft - 1, 
-        }
-    case COMPLETE_ROUND: {
-        return { 
-            ...state, 
-            roundStarted: false,
-            currentWord: '',
-            wordsToChooseFrom: []
-        }
-    }
-    case COMPLETE_ALL_ROUNDS: {
-        return { 
-            ...state, 
-            ...INITIAL_STATE,
-            gameEnded: true
-        }
-    }
-    case SET_WORDS:
-        return { 
-            ...state, 
-            words: [...payload] 
-        }
-    case SET_CURRENT_WORD:
-        return { 
-            ...state,
-            currentWord: payload,
-            words: without(state.words, payload)
-        }
-    case SET_WORDS_TO_CHOOSE_FROM: {
-        return {
-            ...state,
-            wordsToChooseFrom: [...payload]
-        }
-    }
-    case SET_AUDIO:
-        return { 
-            ...state, 
-            welcomeAudio: payload.welcomeAudio,
-            startAudio: payload.startAudio,
-            gameCompleteAudio: payload.gameCompleteAudio,
-        };
-    case SET_CURRENT_WORD_AUDIO:
-        return { 
-            ...state, 
-            currentWordAudio: payload
-        };
-    default:
-      throw new Error(ERROR_IN_TYPES.TYPE_DOES_NOT_EXIST('WhatIsThisGame'));
-  }
-}
+import RandomImageGenerator from '../../Images/RandomImageGenerator';
+import StarsToEarn from '../../Stars/StarsToEarn';
+import StartGameButton from '../../StartGameButton/StartGameButton';
+import GameCompleteModal from '../../GameCompleteModal/GameCompleteModal';
+import Loader from '../../Loader/Loader';
 
 const fetchWordDataOptions = (status) => ({
     isLocalStorageUpdatedWithData: (status === RESPONSE_SUCCESS)
@@ -149,7 +66,7 @@ const WhatIsThisGame = ({ wordType }) => {
         roundsLeft, roundStarted, 
         words, currentWord, wordsToChooseFrom,
         currentWordAudio, welcomeAudio, startAudio, gameCompleteAudio
-    }, dispatch] = useReducer(reducer, INITIAL_STATE);
+    }, dispatch] = useWhatIsThisGameReducer();
 
     // fetch data from local storage
     const { status } = useGetLocalStorageData();
@@ -324,40 +241,6 @@ const WhatIsThisGame = ({ wordType }) => {
         return <div>{errors}</div>;
     }
 
-    const renderImagesWrapper = () => {
-        if (!isObjectExistAndNotEmpty(wordData) || !isArrayExistAndNotEmpty(wordData.images)) return;
-
-        // generates 3 - 5 random images out of the 10 returned from the API
-        randomImages.current = generateRandomItems(wordData.images, 3);
-
-        if (randomImages.current.length === 0) return;
-
-        return (
-            <div className="container px-36">
-                <div className="cursor-pointer grid grid-cols-3 gap-y-5 gap-x-10">
-                    {renderImageItems(randomImages.current)}
-                </div>
-            </div>
-        );
-    }
-
-    const renderImageItems = (images) => (
-        images.map(({ id, altText, imageUrl }) => (
-            <div key={id}>
-                <div 
-                    className={'bg-white rounded-2xl shadow-lg hover:animate-ping hover:shadow-2xl hover:rotate-45 hover:scale-75 transform transition duration-300'}
-                >
-                    <img
-                        key={id}
-                        className="min-w-full rounded-2xl"
-                        src={getCorrectImageURL(imageUrl, wordType)} 
-                        alt={altText}
-                    />
-                </div>
-            </div>
-        ))
-    );
-
     const getCustomCSSForWordsToChooseFromBasedOnType = () => {
         switch(wordType) {
             case ANIMAL_TYPE:
@@ -418,7 +301,11 @@ const WhatIsThisGame = ({ wordType }) => {
     return (
         <div>
             <StarsToEarn starsTotal={wordAmountToShowAtOneTime.current} emptyStars={roundsLeft + 1} />
-            {renderImagesWrapper()}
+                <RandomImageGenerator 
+                    data={wordData} 
+                    randomImagesRef={randomImages} 
+                    wordType={wordType} 
+                />
             <div className="container">
                 {renderChoiceItems()}
             </div>

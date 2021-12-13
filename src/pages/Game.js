@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import WhatIsThisGame from '../components/Games/WhatIsThisGame';
+import WhatIsThisGame from '../components/Games/WhatIsThis/WhatIsThisGame';
 
 import {
     COLOR_TYPE,
