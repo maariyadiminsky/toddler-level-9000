@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import AuthButton from '../AuthButton';
 import StarsEarned from '../Stars/StarsEarned';
 
-import { useShowStars } from '../../hooks/stars';
+import { useShouldShowOnPathsExcept } from '../../hooks';
+import { GAME_PATH } from '../../const';
 
 import logo from './logo.png';
 
 const NavBar = () => {
-    const [shouldShowStars] = useShowStars();
+    const pathToExclude = GAME_PATH;
+    const [shouldShow] = useShouldShowOnPathsExcept(pathToExclude);
 
     return (
         <nav className="p-3 bg-indigo-600">
@@ -21,7 +23,7 @@ const NavBar = () => {
                         alt="logo"
                     />
                 </Link>
-                {shouldShowStars && <StarsEarned />}
+                {shouldShow && <StarsEarned />}
                 <AuthButton />
             </div>
         </nav>
