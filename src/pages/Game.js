@@ -1,14 +1,14 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-import WhatIsThisGame from "../components/Games/WhatIsThisGame";
+import WhatIsThisGame from '../components/Games/WhatIsThisGame';
 
 import {
     COLOR_TYPE,
     ANIMAL_TYPE,
     FOOD_TYPE,
     GAME_NOT_AVAILABLE_TEMP_MESSAGE
-} from "../const";
+} from '../const';
 
 // note: temp function created while I'm still developing rest of the games
 const canRenderGame = (wordType) => {
