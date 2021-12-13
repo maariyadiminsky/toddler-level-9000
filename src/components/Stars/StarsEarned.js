@@ -2,22 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import EmptyStar from './svg/EmptyStar';
 
-import { useGetLocalStorageData } from '../../hooks/localStorage';
+import { useShouldShowIfResponseSuccess } from '../../hooks';
 import { getStarsEarnedSelector } from '../../redux/selectors/localStorage';
-import { RESPONSE_SUCCESS } from '../../redux/actions/types';
 
 const FullStar = () => EmptyStar(20, true);
 const StarsEarned = () => {
-    // fetch data from local storage
-    const { status } = useGetLocalStorageData();
-
     const starsEarned = useSelector(getStarsEarnedSelector);
-    
-    const [shouldShow, setShouldShow] = useState(false);
-
-    useEffect(() => {
-        setShouldShow(status === RESPONSE_SUCCESS);
-    }, [status])
+    const [shouldShow] = useShouldShowIfResponseSuccess();
 
     return shouldShow && (
         <div className="flex justify-center flex-wrap content-center">
