@@ -10,6 +10,11 @@ export const GAME_PATH = '/games';
 export const CHOICE_GAME_PATH_GENERAL = `${GAME_PATH}/:wordTypeId`;
 export const CHOICE_GAME_PATH = (type) => `${GAME_PATH}/${type}`;
 
+// svg types
+export const SVG_TYPES = {
+    SMILE: 'smile' 
+}
+
 // word types
 export const COLOR_TYPE = 'colors';
 export const ANIMAL_TYPE = 'animals';

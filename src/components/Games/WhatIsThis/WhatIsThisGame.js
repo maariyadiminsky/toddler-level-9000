@@ -26,7 +26,7 @@ const WhatIsThisGame = ({ wordType }) => {
     // ===================================> data fetching
 
     const wordAmountToShowAtOneTime = useRef(getWordAmountToShowAtOneTime(wordType));
-    
+
     // local reducer since this data doesn't need to be in global state
     // but too complicated for simple useState
     const [{ 

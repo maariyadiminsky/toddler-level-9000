@@ -18,7 +18,7 @@ import {
     SET_WORDS,
     SET_CURRENT_WORD,
     SET_WORDS_TO_CHOOSE_FROM,
-} from '../../components/Games/types';
+} from '../../../components/Games/types';
 
 export const useWhatIsThisGameReducer = (wordType, wordAmountToShowAtOneTime) => {
     // local reducer since this data doesn't need to be in global state
@@ -32,29 +32,6 @@ export const useWhatIsThisGameReducer = (wordType, wordAmountToShowAtOneTime) =>
 
     const hasWords = useCallback(() => isArrayExistAndNotEmpty(words), [words]);
     const hasWordsToChooseFrom = useCallback(() => isArrayExistAndNotEmpty(wordsToChooseFrom), [wordsToChooseFrom]);
-
-    // if rounds left
-    useEffect(() => {
-        if (roundStarted) return;
-
-        if (roundsLeft) {
-            // initial setup
-            getWordsToPractice();
-            generateWordToPractice();
-            generateWordsToChooseFrom();
-
-            // start round
-            handleStartNewRound();
-        } else {
-            dispatch({
-                type: COMPLETE_ALL_ROUNDS
-            })
-        }
-    }, [
-        roundStarted, roundsLeft,
-        words, currentWord, wordsToChooseFrom, wordData,
-        getWordsToPractice, generateWordToPractice, generateWordsToChooseFrom, handleStartNewRound
-    ]);
 
     const getWordsToPractice = useCallback(() => {
         // set words child will practice
@@ -87,7 +64,7 @@ export const useWhatIsThisGameReducer = (wordType, wordAmountToShowAtOneTime) =>
                 isWordsToChooseFromGenerated.current = false;
             }
         }
-    }, [currentWord, words, hasWordsToChooseFrom, hasWords]);
+    }, [currentWord, words, hasWordsToChooseFrom, hasWords, wordAmountToShowAtOneTime]);
 
     const generateWordToPractice = useCallback(() => {
         // generate a random word child will need to choose correctly
@@ -113,7 +90,7 @@ export const useWhatIsThisGameReducer = (wordType, wordAmountToShowAtOneTime) =>
     }, [
         gameStarted, hasWords,
         currentWord, roundsLeft, startAudio,
-        hasWordsToChooseFrom
+        hasWordsToChooseFrom, wordAmountToShowAtOneTime
     ]);
 
 
@@ -144,6 +121,29 @@ export const useWhatIsThisGameReducer = (wordType, wordAmountToShowAtOneTime) =>
                 ));
         }
     }
+
+    // if rounds left
+    useEffect(() => {
+        if (roundStarted) return;
+
+        if (roundsLeft) {
+            // initial setup
+            getWordsToPractice();
+            generateWordToPractice();
+            generateWordsToChooseFrom();
+
+            // start round
+            handleStartNewRound();
+        } else {
+            dispatch({
+                type: COMPLETE_ALL_ROUNDS
+            })
+        }
+    }, [
+        roundStarted, roundsLeft,
+        words, currentWord, wordsToChooseFrom,
+        getWordsToPractice, generateWordToPractice, generateWordsToChooseFrom, handleStartNewRound
+    ]);
 
     return [{ 
         gameStarted, gameEnded,
