@@ -10,8 +10,7 @@ import { GAME_PATH } from '../../const';
 import logo from './logo.png';
 
 const NavBar = () => {
-    const pathToExclude = GAME_PATH;
-    const [shouldShow] = useShouldShowOnPathsExcept(pathToExclude);
+    const [shouldShow] = useShouldShowOnPathsExcept(GAME_PATH);
 
     return (
         <nav className="p-3 bg-indigo-600">
