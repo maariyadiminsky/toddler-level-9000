@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 import AuthButton from '../AuthButton';
 import StarsEarned from '../Stars/StarsEarned';
 
-import { GAME_PATH } from '../../const';
+import { useShowStars } from '../../hooks/stars';
 
 import logo from './logo.png';
 
 const NavBar = () => {
-    const { pathname } = useLocation();
-    const [shouldShowStars, setShouldShowStars] = useState(() => false);
-
-    useEffect(() => {
-        setShouldShowStars(!pathname.includes(GAME_PATH));
-    }, [pathname])
+    const [shouldShowStars] = useShowStars();
 
     return (
         <nav className="p-3 bg-indigo-600">
