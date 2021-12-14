@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { ANIMAL_TYPE, FOOD_TYPE } from '../../../const';
+import { DEFAULT, ANIMAL_TYPE, FOOD_TYPE } from '../../../const';
 
 import SquareChoiceItem from './SquareChoiceItem';
 
-const getCustomCSSForWordsToChooseFromBasedOnType = (type) => {
+const getCustomCSSForWordsToChooseFromBasedOnType = (type = DEFAULT.STRING) => {
     switch(type) {
         case ANIMAL_TYPE:
             return 'mt-12 m-20';
@@ -15,9 +15,9 @@ const getCustomCSSForWordsToChooseFromBasedOnType = (type) => {
     }
 }
 
-const SquareChoiceItems = ({ items, type, amountToShowAtOneTimeRef, handleCompleteRoundCallback }) => (
+const SquareChoiceItems = ({ items = DEFAULT.NULL, type = DEFAULT.STRING, amountToShowAtOneTimeRef = DEFAULT.NULL, handleCompleteRoundCallback = DEFAULT.NULL }) => (
     <div className={`${getCustomCSSForWordsToChooseFromBasedOnType(type)} grid cursor-pointer grid-cols-${amountToShowAtOneTimeRef.current} gap-x-7`}>
-        {items.map(item => (
+        {items && items.map((item = DEFAULT.STRING) => (
             <SquareChoiceItem
                 key={item} 
                 item={item}

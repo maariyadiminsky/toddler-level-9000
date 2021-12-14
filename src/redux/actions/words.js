@@ -2,11 +2,11 @@ import {
     unsplashAPI, 
     dictionaryAPI, 
     toddlerSocialWordsAPI
-} from "../../api";
+} from '../../api';
 import {
     getCorrectWordToFetchImageFromType,
     getCorrectWordToFetchAudioFromType
-} from "../../utils/words";
+} from '../../utils/words';
 import { 
     UNSPLASH_SEARCH_PHOTOS_ENDPOINT,
     DICTIONARY_WORD_ENDPOINT,
@@ -15,7 +15,7 @@ import {
     TODDLER_SOCIAL_WORDS_THIRD_WORDS_ENDPOINT,
 
     FETCH_ERROR_TYPES
-} from "../../api/const";
+} from '../../api/const';
 import { 
     GET_MAIN_WORD_DATA,
     GET_SOCIAL_WORD_DATA,
@@ -23,8 +23,10 @@ import {
 
     RESPONSE_SUCCESS,
     RESPONSE_ERROR
-} from "./types";
+} from './types';
 import { 
+    DEFAULT,
+    ROOT_PATH,
     COLOR_TYPE,
     ANIMAL_TYPE,
     NUMBER_TYPE,
@@ -33,24 +35,22 @@ import {
     SOCIAL_TYPE_FIRST,
     SOCIAL_TYPE_SECOND,
     SOCIAL_TYPE_THIRD
-} from "../../const";
+} from '../../const';
 
-import { setLocalStorageData } from "./localStorage";
+import { setLocalStorageData } from './localStorage';
 
 const fetchWordDataUnsplashParamOptions = {
-    "per_page": 5, // number of items returned
-    "order_by": "relevant",
-    "orientation": "squarish", // all images come back with same orientation
+    'per_page': 5, // number of items returned
+    'order_by': 'relevant',
+    'orientation': 'squarish', // all images come back with same orientation
 }
 
 const initial_response = {
     status: RESPONSE_ERROR,
     data: {},
-    error: ""
+    error: ''
 }
-export const fetchWordData = (
-    wordType, 
-    word = "", 
+export const fetchWordData = (wordType = DEFAULT.STRING, word = DEFAULT.STRING, 
     options = {
         // there are 3 endpoints, each with 10 words
         // this lets them know which 10 words you want
@@ -93,7 +93,7 @@ export const fetchWordData = (
     }
 )
 
-const fetchMainWord = (wordType, word) => (
+const fetchMainWord = (wordType = DEFAULT.STRING, word = DEFAULT.STRING) => (
     async(dispatch, getState) => {
         // first fetch image data
         const imageData = await fetchImageDataForMainWord(getCorrectWordToFetchImageFromType(word, wordType), dispatch);
@@ -123,7 +123,7 @@ const fetchMainWord = (wordType, word) => (
     }
 );
 
-const fetchSocialWords = ({ socialType }) => (
+const fetchSocialWords = ({ socialType = DEFAULT.STRING }) => (
     async(dispatch, getState) => {
         const endpoint = findEndpointForSocialWordType(socialType);
         const data = await fetchSocialWordsData(endpoint, dispatch);
@@ -145,10 +145,10 @@ const fetchSocialWords = ({ socialType }) => (
     }
 )
 
-const fetchImageDataForMainWord = (word, dispatch) => (
+const fetchImageDataForMainWord = (word = DEFAULT.STRING, dispatch = DEFAULT.NULL) => (
     unsplashAPI.get(UNSPLASH_SEARCH_PHOTOS_ENDPOINT, {
         params: {
-            "query": word,
+            'query': word,
             ...fetchWordDataUnsplashParamOptions
         }
     }).then(({ data: { results }}) => 
@@ -170,7 +170,7 @@ const fetchImageDataForMainWord = (word, dispatch) => (
     })
 );
 
-const fetchAudioDataForMainWord = (word, dispatch) => (
+const fetchAudioDataForMainWord = (word = DEFAULT.STRING, dispatch = DEFAULT.NULL) => (
     dictionaryAPI.get(DICTIONARY_WORD_ENDPOINT(word))
         .then(({ data }) => {
             if (data && data[0].phonetics && data[0].phonetics.length > 0) {
@@ -188,7 +188,7 @@ const fetchAudioDataForMainWord = (word, dispatch) => (
         })
 );
 
-const fetchSocialWordsData = (endpoint, dispatch) => (
+const fetchSocialWordsData = (endpoint = ROOT_PATH, dispatch = DEFAULT.NULL) => (
     toddlerSocialWordsAPI.get(endpoint)
     .then(({ data }) => {
         if (!data || data.length === 0) {
@@ -203,7 +203,7 @@ const fetchSocialWordsData = (endpoint, dispatch) => (
     })
 );
 
-const findEndpointForSocialWordType = (type) => {
+const findEndpointForSocialWordType = (type = DEFAULT.NULL) => {
     switch(type) {
         case SOCIAL_TYPE_SECOND:
             return TODDLER_SOCIAL_WORDS_SECOND_WORDS_ENDPOINT;

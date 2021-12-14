@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { isArrayExistAndNotEmpty, isObjectExistAndNotEmpty } from '../../../utils';
-import { COLOR_TYPE } from '../../../const';
+import { DEFAULT, COLOR_TYPE } from '../../../const';
 
 import CircleChoiceItems from '../ChoiceItems/CircleChoiceItems';
 import SquareChoiceItems from '../ChoiceItems/SquareChoiceItems';
 
-const ChoiceItems = ({ data, type, wordsToChooseFrom, amountToShowAtOneTimeRef, handleCompleteRoundCallback }) => {
+const ChoiceItems = ({ data = DEFAULT.UNDEFINED, type = DEFAULT.STRING, wordsToChooseFrom = DEFAULT.NULL, amountToShowAtOneTimeRef = DEFAULT.NULL, handleCompleteRoundCallback = DEFAULT.NULL }) => {
     if (!isObjectExistAndNotEmpty(data) || !isArrayExistAndNotEmpty(data.images) || !isArrayExistAndNotEmpty(wordsToChooseFrom)) return null;
     
     switch(type) {

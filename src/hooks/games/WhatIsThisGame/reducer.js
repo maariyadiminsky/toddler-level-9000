@@ -1,5 +1,7 @@
 import without from 'lodash/without';
 
+import { DEFAULT } from '../../../const';
+
 import {
     START_NEW_GAME,
     START_NEW_ROUND,
@@ -30,7 +32,7 @@ export const INITIAL_STATE = {
     gameCompleteAudio: null,
 };
 
-export default (state, { type, payload}) => {
+export default (state = DEFAULT.OBJECT, { type = DEFAULT.STRING, payload = DEFAULT.NULL}) => {
   switch (type) {
     case START_NEW_GAME: 
         return {

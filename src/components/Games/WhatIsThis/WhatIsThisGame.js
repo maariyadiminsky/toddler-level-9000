@@ -12,6 +12,7 @@ import {
     SET_CURRENT_WORD_AUDIO,
 } from '../types';
 
+import { DEFAULT } from '../../../const';
 import RandomImageGenerator from '../../Images/RandomImageGenerator';
 import ChoiceItems from '../ChoiceItems/ChoiceItems';
 import StarsToEarn from '../../Stars/StarsToEarn';
@@ -19,10 +20,10 @@ import StartGameButton from '../../StartGameButton/StartGameButton';
 import GameCompleteModal from '../../GameCompleteModal/GameCompleteModal';
 import Loader from '../../Loader/Loader';
 
-const fetchWordDataOptions = (status) => ({
+const fetchWordDataOptions = (status = DEFAULT.STRING) => ({
     isLocalStorageUpdatedWithData: (status === RESPONSE_SUCCESS)
 });
-const WhatIsThisGame = ({ wordType }) => {
+const WhatIsThisGame = ({ wordType = DEFAULT.STRING }) => {
     // ===================================> data fetching
 
     const wordAmountToShowAtOneTime = useRef(getWordAmountToShowAtOneTime(wordType));

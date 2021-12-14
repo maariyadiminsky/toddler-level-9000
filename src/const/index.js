@@ -74,3 +74,16 @@ export const WORD_TYPE_ERRORS = {
 
 // warnings
 export const GAME_NOT_AVAILABLE_TEMP_MESSAGE = 'Sorry this game is WIP. Please select another.';
+
+// default param types
+export const DEFAULT = {
+    STRING: null,
+    NUMBER: null,
+    ARRAY: [],
+    OBJECT: {},
+    BOOL_FALSE: false,
+    BOOL_TRUE: true,
+    FUNCTION: () => null,
+    NULL: null,
+    UNDEFINED: undefined,
+};

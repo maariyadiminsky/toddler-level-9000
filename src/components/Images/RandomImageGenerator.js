@@ -1,11 +1,12 @@
 import React from 'react';
 
+import { DEFAULT } from '../../const';
 import { isArrayExistAndNotEmpty, isObjectExistAndNotEmpty} from '../../utils';
 import { generateRandomItems } from '../../utils/words';
 
 import RotatingImages from './RotatingImages';
 
-const RandomImageGenerator = ({ data, randomImagesRef, wordType }) => {
+const RandomImageGenerator = ({ data = DEFAULT.UNDEFINED, randomImagesRef = DEFAULT.NULL, wordType = DEFAULT.STRING }) => {
     if (!isObjectExistAndNotEmpty(data) || !isArrayExistAndNotEmpty(data.images)) return null;
 
     // generates 3 - 5 random images out of the 10 returned from the API

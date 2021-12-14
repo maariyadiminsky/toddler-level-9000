@@ -1,8 +1,9 @@
 import React from 'react';
 
+import { DEFAULT } from '../../../const';
 import { getCorrectImageUrlBasedOnType } from '../../../utils/image';
 
-const SquareChoiceItem = ({ item, handleCompleteRoundCallback, type }) => (
+const SquareChoiceItem = ({ item = DEFAULT.STRING, type = DEFAULT.STRING, handleCompleteRoundCallback = DEFAULT.NULL }) => (
     <div onClick={() => handleCompleteRoundCallback(item)} >
         <img 
             alt={item}

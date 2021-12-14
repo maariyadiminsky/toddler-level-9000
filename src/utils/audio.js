@@ -27,6 +27,7 @@ import Complete_3 from '../components/Games/audio/Complete_3.mp3';
 import { generateRandomItemInArray } from './index';
 
 import {
+    DEFAULT,
     COLOR_TYPE,
     ANIMAL_TYPE,
     NUMBER_TYPE,
@@ -35,7 +36,7 @@ import {
     BODY_TYPE
 } from '../const';
 
-export const getWelcomeAudio = (wordType) => {
+export const getWelcomeAudio = (wordType = DEFAULT.STRING) => {
     switch(wordType) {
         case COLOR_TYPE:
             return LetsPlayAGame_Boy;
@@ -54,7 +55,7 @@ export const getWelcomeAudio = (wordType) => {
     }
 }
 
-export const getStartAudio = (wordType) => {
+export const getStartAudio = (wordType = DEFAULT.STRING) => {
     switch(wordType) {
         case COLOR_TYPE:
             return WhatColorDoYouSee_Boy;
@@ -94,7 +95,7 @@ export const manGameCompleteAudio = [
 ];
 
 let audioOptions = [];
-export const generateGameCompleteAudio = (wordType) => {
+export const generateGameCompleteAudio = (wordType = DEFAULT.STRING) => {
     audioOptions = [];
     
     switch(wordType) {
@@ -124,7 +125,7 @@ export const generateGameCompleteAudio = (wordType) => {
     return audioOptions;
 }
 
-const generateRandomAudioFromArr = (audioOptionsArr) => (
+const generateRandomAudioFromArr = (audioOptionsArr = DEFAULT.NULL) => (
     generateRandomItemInArray(audioOptionsArr)
 );
 
@@ -137,7 +138,7 @@ export const generateCompleteSoundEffect = () => {
     return generateRandomItemInArray(completeGameSoundEffects);
 }
 
-export const getCorrectAudioUrl = (sound, wordType) => {
+export const getCorrectAudioUrl = (sound = DEFAULT.STRING, wordType = DEFAULT.STRING) => {
     switch(wordType) {
         case SOCIAL_TYPE:
             return `https://docs.google.com/uc?export=open&id=${sound}`;

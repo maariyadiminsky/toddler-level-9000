@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import WhatIsThisGame from '../components/Games/WhatIsThis/WhatIsThisGame';
 
 import {
+    DEFAULT,
     COLOR_TYPE,
     ANIMAL_TYPE,
     FOOD_TYPE,
@@ -11,7 +12,7 @@ import {
 } from '../const';
 
 // note: temp function created while I'm still developing rest of the games
-const canRenderGame = (wordType) => {
+const canRenderGame = (wordType = DEFAULT.STRING) => {
     switch(wordType) {
         case COLOR_TYPE:
         case ANIMAL_TYPE:

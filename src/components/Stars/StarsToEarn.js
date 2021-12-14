@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { DEFAULT } from '../../const';
+
 import EmptyStar from './svg/EmptyStar';
 
 const STAR_SIZE = 20;
-const FullStar = (i) => EmptyStar(STAR_SIZE, true, i);
-const StarsToEarn = ({ starsTotal, emptyStars }) => {
+const FullStar = (i = DEFAULT.NULL) => EmptyStar(STAR_SIZE, true, i);
+const StarsToEarn = ({ starsTotal = 0, emptyStars = 0 }) => {
     const findFullStarAmount = () => starsTotal - emptyStars;
 
     const renderStars = () => {

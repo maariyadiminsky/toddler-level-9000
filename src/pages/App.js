@@ -10,6 +10,7 @@ import NavBar from '../components/NavBar/NavBar';
 import GameArena from './GameArena/GameArena';
 import Game from './Game';
 
+// todo: parent section is WIP
 const App = () => {
   return (
     <div className="min-h-screen bg-indigo-500">

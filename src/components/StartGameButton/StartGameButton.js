@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
+import { DEFAULT } from '../../const';
+
 import Arrow from './svg/Arrow';
 
-const shouldDisableButtonAnimationCSS = (disable) => disable ? 'none' : 'pulse';
-const StartGameButton = ({ handleButtonClick }) => {
+const shouldDisableButtonAnimationCSS = (disable = DEFAULT.BOOL_FALSE) => disable ? 'none' : 'pulse';
+const StartGameButton = ({ handleButtonClick = DEFAULT.NULL }) => {
     const [disable, setDisable] = useState(false);
 
     const handleClick = () => {

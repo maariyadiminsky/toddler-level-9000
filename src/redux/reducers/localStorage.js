@@ -5,11 +5,13 @@ import {
     GET_SOCIAL_WORD_DATA,
 
     SET_STARS_EARNED
-} from "../actions/types";
+} from '../actions/types';
+
+import { DEFAULT } from '../../const';
 
 const INITIAL_STATE = {
-    date: "", // date last saved
-    parentCode: "0000", // code to access parent dashboard. Can be letters and numbers.
+    date: '', // date last saved
+    parentCode: '0000', // code to access parent dashboard. Can be letters and numbers.
     starsEarned: 0, // earn stars when completing tasks / understanding words
     masteredWords: {
         colors: [],
@@ -25,7 +27,7 @@ const INITIAL_STATE = {
     social: {}
 } 
 
-export default (state = INITIAL_STATE, { type, payload }) => {
+export default (state = INITIAL_STATE, { type = DEFAULT.STRING, payload = DEFAULT.NULL }) => {
     switch(type) {
         case GET_LOCAL_STORAGE_DATA:
             return { ...state, ...payload };

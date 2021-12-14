@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { DEFAULT } from '../const';
 import { 
     getCorrectAudioUrl,
     getWelcomeAudio,
@@ -8,7 +9,7 @@ import {
 } from '../utils/audio';
 import { SET_AUDIO, SET_CURRENT_WORD_AUDIO } from '../components/Games/types';
 
-export const useAudio = (truthyCheck, audio, wordType, sideEffectType, dispatch) => {
+export const useAudio = (truthyCheck = DEFAULT.BOOL_FALSE, audio = DEFAULT.UNDEFINED, wordType = DEFAULT.STRING, sideEffectType = DEFAULT.STRING, dispatch = DEFAULT.NULL) => {
     useEffect(() => {
         if (truthyCheck) {
             if (sideEffectType === SET_CURRENT_WORD_AUDIO) {

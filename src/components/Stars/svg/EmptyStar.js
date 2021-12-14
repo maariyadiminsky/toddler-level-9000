@@ -1,10 +1,12 @@
-import FilledStar from "./FilledStar";
+import FilledStar from './FilledStar';
 
-export default (size = 14, fillStar = false, id=1, shouldAnimate = true) => {
+import { DEFAULT } from '../../../const';
+
+export default (size = 14, fillStar = DEFAULT.BOOL_FALSE, id = 1, shouldAnimate = DEFAULT.BOOL_TRUE) => {
     const animationCSS = () => {
-        if (!shouldAnimate) return "";
+        if (!shouldAnimate) return DEFAULT.STRING;
 
-        return fillStar ? "animate-wiggle" : "animate-pulse";
+        return fillStar ? 'animate-wiggle' : 'animate-pulse';
     }
 
     return (

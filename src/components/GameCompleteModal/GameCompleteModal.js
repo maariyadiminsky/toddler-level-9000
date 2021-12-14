@@ -6,20 +6,20 @@ import { setStarsEarned } from '../../redux/actions/stars';
 import { generateRandomItemInArray } from '../../utils';
 import { generateCompleteSoundEffect } from '../../utils/audio';
 
+import { DEFAULT } from '../../const';
+
 import catCelebrate from './images/catCelebrate.png';
 import catCool from './images/catCool.png';
 import catHappy from './images/catHappy.png';
 import catLove from './images/catLove.png';
 
 const celebrateImageOptions = [catCelebrate, catCool, catHappy, catLove];
-const GameCompleteModal = ({ starsEarned = 0, gameCompleteAudio }) => {
+const GameCompleteModal = ({ starsEarned = 0, gameCompleteAudio = DEFAULT.UNDEFINED }) => {
     const celebrateImage = useRef(generateRandomItemInArray(celebrateImageOptions));
     const celebrateSoundEffect = useRef(new Audio(generateCompleteSoundEffect()));
 
     const dispatch = useDispatch();
 
-    // todo: bug here, will fix later
-    // console.log(gameCompleteAudio, celebrateSoundEffect.current);
     useEffect(() => {
         if (starsEarned > 0) {
             dispatch(setStarsEarned(starsEarned));

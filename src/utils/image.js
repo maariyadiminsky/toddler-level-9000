@@ -1,10 +1,11 @@
 import {
+    DEFAULT,
     ANIMAL_TYPE,
     FOOD_TYPE,
     SOCIAL_TYPE
 } from '../const';
 
-export const getCorrectImageURL = (url, wordType) => {
+export const getCorrectImageURL = (url = DEFAULT.STRING, wordType = DEFAULT.STRING) => {
     switch(wordType) {
         case SOCIAL_TYPE:
             return `https://docs.google.com/uc?export=open&id=${url}`;
@@ -13,7 +14,7 @@ export const getCorrectImageURL = (url, wordType) => {
     }
 }
 
-export const getCorrectImageUrlBasedOnType = (item, wordType) => {
+export const getCorrectImageUrlBasedOnType = (item = DEFAULT.STRING, wordType = DEFAULT.STRING) => {
     switch(wordType) {
         case ANIMAL_TYPE:
             return getCorrectAnimalChoiceImageUrl(item);
@@ -23,16 +24,15 @@ export const getCorrectImageUrlBasedOnType = (item, wordType) => {
             return '';
     }
 }
-
-let start = '0';
-let end = ''
-const ANIMAL_IMAGE_URL = (start, end) => `https://i${start}.wp.com/www.flashcardsforkindergarten.com/wp-content/uploads/2020/05/Animal-Flashcards-${end}.jpg?ssl=1`
-const ANIMAL_IMAGE_URL_2 = (start, end) => `https://i${start}.wp.com/www.flashcardsforkindergarten.com/wp-content/uploads/2020/05/${end}-alphabet-flashcards.jpg?ssl=1`
-let useFirstAnimalImageUrl = true;
-const getCorrectAnimalChoiceImageUrl = (word) => {
+let start = '0'
+let end = DEFAULT.STRING;
+const ANIMAL_IMAGE_URL = (start = '0', end = DEFAULT.STRING) => `https://i${start}.wp.com/www.flashcardsforkindergarten.com/wp-content/uploads/2020/05/Animal-Flashcards-${end}.jpg?ssl=1`
+const ANIMAL_IMAGE_URL_2 = (start = '0', end = DEFAULT.STRING) => `https://i${start}.wp.com/www.flashcardsforkindergarten.com/wp-content/uploads/2020/05/${end}-alphabet-flashcards.jpg?ssl=1`
+let useFirstAnimalImageUrl = DEFAULT.BOOL_TRUE;
+const getCorrectAnimalChoiceImageUrl = (word = DEFAULT.STRING) => {
     start = '0';
-    end = '';
-    useFirstAnimalImageUrl = true;
+    end = DEFAULT.STRING;
+    useFirstAnimalImageUrl = DEFAULT.BOOL_TRUE;
 
     switch(word) {
         case 'dog':
@@ -122,8 +122,8 @@ const getCorrectAnimalChoiceImageUrl = (word) => {
 }
 
 let foodType = 'food';
-const FOOD_IMAGE_URL = (start, end, foodType) => `https://i${start}.wp.com/www.flashcardsforkindergarten.com/wp-content/uploads/2020/06/${foodType}-flashcard-${end}.jpg?ssl=1`
-const getCorrectFoodChoiceImageUrl = (word = '') => {
+const FOOD_IMAGE_URL = (start = DEFAULT.STRING, end = DEFAULT.STRING, foodType = DEFAULT.STRING) => `https://i${start}.wp.com/www.flashcardsforkindergarten.com/wp-content/uploads/2020/06/${foodType}-flashcard-${end}.jpg?ssl=1`
+const getCorrectFoodChoiceImageUrl = (word = DEFAULT.STRING) => {
     start = '0';
     end = word;
     foodType = 'food';

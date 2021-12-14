@@ -3,7 +3,9 @@ import { Route } from 'react-router-dom';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
 import Loader from '../../Loader/Loader';
 
-const ProtectedRoute = ({ component, ...args }) => (
+import { DEFAULT } from '../../../const';
+
+const ProtectedRoute = ({ component = DEFAULT.FUNCTION, ...args }) => (
   <Route
     component={withAuthenticationRequired(component, {
       onRedirecting: () => <Loader />

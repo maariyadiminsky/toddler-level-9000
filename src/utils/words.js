@@ -1,4 +1,5 @@
 import {
+    DEFAULT,
     COLOR_TYPE,
     ANIMAL_TYPE,
     NUMBER_TYPE,
@@ -18,7 +19,7 @@ import {
 
 import { generateRandomNumber } from './';
 
-export const getNewWordsArray = (wordType) => {
+export const getNewWordsArray = (wordType = DEFAULT.STRING) => {
     switch(wordType) {
         case NUMBER_TYPE:
             return [...NUMBER_WORDS];
@@ -37,7 +38,7 @@ export const getNewWordsArray = (wordType) => {
     }
 }
 
-export const getWordAmountToShowAtOneTime = (wordType) => {
+export const getWordAmountToShowAtOneTime = (wordType = DEFAULT.STRING) => {
     switch(wordType) {
         case NUMBER_TYPE:
         case FOOD_TYPE:
@@ -51,7 +52,7 @@ export const getWordAmountToShowAtOneTime = (wordType) => {
     }
 }
 
-export const getCustomCSSForWordsToChooseFrom = (wordType, word) => {
+export const getCustomCSSForWordsToChooseFrom = (wordType = DEFAULT.STRING, word = DEFAULT.STRING) => {
     switch(wordType) {
         case COLOR_TYPE:
             switch(word) {
@@ -77,7 +78,7 @@ export const getCustomCSSForWordsToChooseFrom = (wordType, word) => {
     }
 }
 
-export const generateRandomItem = (items, removeDuplicates = false, randomNumberLimit = items?.length) => {
+export const generateRandomItem = (items = DEFAULT.NULL, removeDuplicates = DEFAULT.BOOL_FALSE, randomNumberLimit = items?.length) => {
     let randomNum = generateRandomNumber(randomNumberLimit);
 
     if (removeDuplicates) {
@@ -92,13 +93,13 @@ export const generateRandomItem = (items, removeDuplicates = false, randomNumber
 }
 
 // so 0 - 5 would include 0 and 5
-export const generateRandomNumberBetween = (min, max) => {
+export const generateRandomNumberBetween = (min = 0, max = 0) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // to make sure the same item isn't added twice
 let indexAlreadyAddedInResultArr = {};
-export const generateRandomItems = (items, amount, includeThisItem = null) => {
+export const generateRandomItems = (items = DEFAULT.NULL, amount = 0, includeThisItem = DEFAULT.NULL) => {
     let result = [];
     indexAlreadyAddedInResultArr = {};
 
@@ -117,7 +118,7 @@ export const generateRandomItems = (items, amount, includeThisItem = null) => {
     return result;
 }
 
-export const getCorrectWordToFetchImageFromType = (word, wordType) => {
+export const getCorrectWordToFetchImageFromType = (word = DEFAULT.STRING, wordType = DEFAULT.STRING) => {
     switch(wordType) {
         case NUMBER_TYPE:
             return `number ${word}`;
@@ -126,7 +127,7 @@ export const getCorrectWordToFetchImageFromType = (word, wordType) => {
     }
 }
 
-export const getCorrectWordToFetchAudioFromType = (word, wordType) => {
+export const getCorrectWordToFetchAudioFromType = (word = DEFAULT.STRING, wordType = DEFAULT.STRING) => {
     switch(wordType) {
         case NUMBER_TYPE:
             switch(word) {

@@ -4,9 +4,11 @@ import { Provider } from 'react-redux';
 import store from '../../redux/store';
 import { BrowserRouter } from 'react-router-dom';
 
+import { DEFAULT } from '../../const'
+
 import '@testing-library/jest-dom';
 
-const Providers = ({ children }) => (
+const Providers = ({ children = DEFAULT.FUNCTION }) => (
     <Provider store={store}>
       <BrowserRouter>
         {children}
@@ -14,7 +16,7 @@ const Providers = ({ children }) => (
     </Provider>
 );
 
-const customRender = (ui, options) => {
+const customRender = (ui = DEFAULT.NULL, options = DEFAULT.NULL) => {
   if (options && options.route) {
     window.history.pushState({}, '', options.route);
   }

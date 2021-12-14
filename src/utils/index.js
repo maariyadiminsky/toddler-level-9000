@@ -1,8 +1,10 @@
 import isEmpty from 'lodash/isEmpty';
 
-export const isArrayExistAndNotEmpty = (arr) => arr && arr.length !== 0;
+import { DEFAULT } from '../const';
 
-export const isObjectExistAndNotEmpty = (obj) => obj !== undefined && !isEmpty(obj);
+export const isArrayExistAndNotEmpty = (arr = DEFAULT.NULL) => arr && arr.length !== 0;
+
+export const isObjectExistAndNotEmpty = (obj = DEFAULT.UNDEFINED) => obj !== undefined && !isEmpty(obj);
 
 /* 
     - use case example: 
@@ -16,14 +18,14 @@ export const isObjectExistAndNotEmpty = (obj) => obj !== undefined && !isEmpty(o
         wait(2000)
         .then(() => // do something after 2 seconds)
 */
-export const wait = (milliseconds) => {
+export const wait = (milliseconds = DEFAULT.NULL) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 };
 
-export const generateRandomNumber = (limit) => {
+export const generateRandomNumber = (limit = DEFAULT.NULL) => {
     return Math.floor(Math.random() * limit);
 }
 
-export const generateRandomItemInArray = (arr) => (
-    arr[generateRandomNumber(arr.length)]
+export const generateRandomItemInArray = (arr = DEFAULT.NULL) => (
+    arr ? arr[generateRandomNumber(arr.length)] : DEFAULT.STRING
 );

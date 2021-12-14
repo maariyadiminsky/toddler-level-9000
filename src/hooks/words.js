@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import { fetchWordData } from '../redux/actions/words';
 import { getUserIdSelector } from '../redux/selectors/auth';
 import { getWordTypeDataSelector } from '../redux/selectors/localStorage';
-import { SOCIAL_TYPE_FIRST } from '../const';
+import { DEFAULT, SOCIAL_TYPE_FIRST } from '../const';
 
 export const useFetchWordData = (
     wordType, 
@@ -15,7 +15,7 @@ export const useFetchWordData = (
         socialType: SOCIAL_TYPE_FIRST
     }
 ) => {
-    const [state, setState] = useState({ loading: true, errors: ''  });
+    const [state, setState] = useState({ loading: DEFAULT.BOOL_TRUE, errors: DEFAULT.STRING  });
 
     const dispatch = useDispatch();
 
@@ -26,12 +26,12 @@ export const useFetchWordData = (
         options.isLocalStorageUpdatedWithData && userId && (!wordData || isEmpty(wordData))
     ,[options.isLocalStorageUpdatedWithData, userId, wordData]);
     
-    const stopLoading = useCallback((errors = '') => {
-        setState(({ loading: false, errors: errors }));
+    const stopLoading = useCallback((errors = DEFAULT.STRING) => {
+        setState(({ loading: DEFAULT.BOOL_FALSE, errors: errors }));
     }, [state.loading]);
 
     useEffect(() => {
-        setState(({ loading: true, errors: '' }));
+        setState(({ loading: DEFAULT.BOOL_TRUE, errors: DEFAULT.STRING }));
 
         // if word type doesn't exist in localStorage then fetch it
         if (shouldFetchWordData()) {

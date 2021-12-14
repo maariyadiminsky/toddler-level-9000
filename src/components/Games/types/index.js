@@ -1,3 +1,5 @@
+import { DEFAULT } from '../../../const';
+
 // game
 export const START_NEW_GAME = 'game/startNewGame';
 export const START_NEW_ROUND = 'games/startNewRound';
@@ -14,5 +16,5 @@ export const SET_AUDIO = 'games/setAudio';
 export const SET_CURRENT_WORD_AUDIO = 'games/setCurrentWordAudio';
 
 export const ERROR_IN_TYPES = {
-    TYPE_DOES_NOT_EXIST: (componentName) => `ERROR IN ${componentName} Component: Type does not exist!`
+    TYPE_DOES_NOT_EXIST: (componentName = DEFAULT.STRING) => `ERROR IN ${componentName} Component: Type does not exist!`
 }

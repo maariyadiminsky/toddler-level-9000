@@ -2,7 +2,9 @@ import { SET_USER_ID } from './types';
 import { hasKeyExistInLocalStorage } from '../../utils/localStorage';
 import { setLocalStorageData } from './localStorage';
 
-export const setUserId = (userId) => (
+import { DEFAULT } from '../../const';
+
+export const setUserId = (userId = DEFAULT.STRING) => (
     async(dispatch) => {
         userId = userId.includes('|') ? userId.split('|').pop() : userId;
 

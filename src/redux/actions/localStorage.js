@@ -8,9 +8,11 @@ import {
     RESPONSE_ERROR
 } from './types';
 
+import { DEFAULT } from '../../const';
+
 // note: localStorage check exists to makes sure browser 
 // has a localStorage / user not using incognito mode
-export const getLocalStorageData = (userId) => {
+export const getLocalStorageData = (userId = DEFAULT.STRING) => {
     if (window.localStorage) {
         return async(dispatch) => {
             let data;
@@ -47,7 +49,7 @@ export const getLocalStorageData = (userId) => {
     } else showLocalStorageMissingErrorInBrowser();
 }
 
-export const setLocalStorageData = (userId) => {
+export const setLocalStorageData = (userId = DEFAULT.STRING) => {
     if (window.localStorage) {
         return async(dispatch, getState) => {
             const { localStorage } = getState();

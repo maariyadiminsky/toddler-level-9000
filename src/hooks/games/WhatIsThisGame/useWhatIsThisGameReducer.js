@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useRef, useCallback } from 'react';
 
+import { DEFAULT } from '../../../const';
 import { isArrayExistAndNotEmpty, wait } from '../../../utils';
 import { 
     getNewWordsArray,
@@ -20,7 +21,7 @@ import {
     SET_WORDS_TO_CHOOSE_FROM,
 } from '../../../components/Games/types';
 
-export const useWhatIsThisGameReducer = (wordType, wordAmountToShowAtOneTime) => {
+export const useWhatIsThisGameReducer = (wordType = DEFAULT.STRING, wordAmountToShowAtOneTime = DEFAULT.NULL) => {
     // local reducer since this data doesn't need to be in global state
     // but too complicated for simple useState
     const [{ 
@@ -109,7 +110,7 @@ export const useWhatIsThisGameReducer = (wordType, wordAmountToShowAtOneTime) =>
         }
     }
 
-    const handleCompleteRound = (word) => {
+    const handleCompleteRound = (word = DEFAULT.STRING) => {
         if (currentWordAudio && word === currentWord) {
             currentWordAudio.play();
 
