@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { DEFAULT } from '../../../const';
 
@@ -16,5 +17,14 @@ const CircleChoiceItems = ({ items = DEFAULT.NULL, amountToShowAtOneTimeRef = DE
         ))}
     </div>
 );
+
+CircleChoiceItems.propTypes = {
+    type: PropTypes.string.isRequired,
+    items: PropTypes.arrayOf(PropTypes.string).isRequired,
+    handleCompleteRoundCallback: PropTypes.func.isRequired,
+    amountToShowAtOneTimeRef: PropTypes.shape({
+        current: PropTypes.number.isRequired
+    }).isRequired,
+};
 
 export default CircleChoiceItems;

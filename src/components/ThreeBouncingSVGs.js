@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { DEFAULT } from '../const';
 
@@ -21,5 +22,17 @@ const ThreeBouncingSVGs = ({ data = DEFAULT.NULL }) => (
         />
     ))
 );
+
+ThreeBouncingSVGs.propTypes = {
+    data: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            svgType: PropTypes.string.isRequired,
+            color: PropTypes.string.isRequired,
+            wrapperColor: PropTypes.string.isRequired,
+            bounceAmount: PropTypes.string.isRequired
+        })
+    ).isRequired,
+};
 
 export default ThreeBouncingSVGs;

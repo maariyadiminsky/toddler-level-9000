@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default (color) => (
+const Smile = (color) => (
     <svg 
         xmlns="http://www.w3.org/2000/svg" 
         className={`flex text-${color} justify-center h-10 w-10`} 
@@ -13,3 +14,9 @@ export default (color) => (
          />
     </svg>
 );
+
+Smile.propTypes = {
+    color: PropTypes.string.isRequired,
+}
+
+export default Smile;

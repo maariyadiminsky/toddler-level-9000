@@ -1,8 +1,10 @@
-import FilledStar from './FilledStar';
+import PropTypes from 'prop-types';
 
 import { DEFAULT } from '../../../const';
 
-export default (size = 14, fillStar = DEFAULT.BOOL_FALSE, id = 1, shouldAnimate = DEFAULT.BOOL_TRUE) => {
+import FilledStar from './FilledStar';
+
+const EmptyStar = (size = 14, fillStar = DEFAULT.BOOL_FALSE, id = 1, shouldAnimate = DEFAULT.BOOL_TRUE) => {
     const animationCSS = () => {
         if (!shouldAnimate) return DEFAULT.STRING;
 
@@ -28,3 +30,11 @@ export default (size = 14, fillStar = DEFAULT.BOOL_FALSE, id = 1, shouldAnimate 
         </svg>
     );
 }
+
+EmptyStar.propTypes = {
+    size: PropTypes.number,
+    fillStar: PropTypes.bool,
+    shouldAnimate: PropTypes.bool,
+};
+
+export default EmptyStar;

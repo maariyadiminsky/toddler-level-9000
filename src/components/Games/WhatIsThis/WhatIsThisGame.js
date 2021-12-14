@@ -1,4 +1,5 @@
 import React, { Fragment, useRef, useCallback } from 'react';
+import PropTypes from 'prop-types';
 
 import { useAudio } from '../../../hooks/audio';
 import { useWhatIsThisGameReducer } from '../../../hooks/games/WhatIsThisGame/useWhatIsThisGameReducer';
@@ -88,5 +89,9 @@ const WhatIsThisGame = ({ wordType = DEFAULT.STRING }) => {
         </Fragment>
     );
 }
+
+WhatIsThisGame.propTypes = {
+    wordType: PropTypes.string.isRequired,
+};
 
 export default WhatIsThisGame;

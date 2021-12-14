@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { DEFAULT } from '../../const';
 
@@ -26,5 +27,9 @@ const StartGameButton = ({ handleButtonClick = DEFAULT.NULL }) => {
         </div>
     );
 }
+
+StartGameButton.propTypes = {
+    handleButtonClick: PropTypes.func.isRequired,
+};
 
 export default StartGameButton;

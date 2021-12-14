@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { DEFAULT } from '../../const';
 import { isArrayExistAndNotEmpty, isObjectExistAndNotEmpty} from '../../utils';
@@ -21,6 +22,38 @@ const RandomImageGenerator = ({ data = DEFAULT.UNDEFINED, randomImagesRef = DEFA
             </div>
         </div>
     );
+}
+
+RandomImageGenerator.propTypes = {
+    wordType: PropTypes.string.isRequired,
+    randomImagesRef: PropTypes.shape({
+        current: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.string.isRequired,
+                altText: PropTypes.string,
+                imageUrl: PropTypes.string.isRequired,
+                credit: PropTypes.shape({
+                    imageLink: PropTypes.string.isRequired,
+                    profileLink: PropTypes.string.isRequired,
+                    name: PropTypes.string.isRequired,
+                })
+            })
+        ),
+    }).isRequired,
+    data: PropTypes.shape({
+        images: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.string.isRequired,
+                altText: PropTypes.string,
+                imageUrl: PropTypes.string.isRequired,
+                credit: PropTypes.shape({
+                    imageLink: PropTypes.string.isRequired,
+                    profileLink: PropTypes.string.isRequired,
+                    name: PropTypes.string.isRequired,
+                })
+            })
+        )
+    }),
 }
 
 export default RandomImageGenerator;

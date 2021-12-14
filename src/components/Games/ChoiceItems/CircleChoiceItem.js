@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { DEFAULT } from '../../../const';
 import { getCustomCSSForWordsToChooseFrom } from '../../../utils/words';
@@ -11,5 +12,11 @@ const CircleChoiceItem = ({ item = DEFAULT.STRING, type = DEFAULT.STRING, handle
         {item}
     </div>
 );
+
+CircleChoiceItem.propTypes = {
+    item: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    handleCompleteRoundCallback: PropTypes.func.isRequired,
+};
 
 export default CircleChoiceItem;

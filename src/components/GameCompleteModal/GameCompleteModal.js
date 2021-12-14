@@ -1,6 +1,7 @@
 import React, { Fragment, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Confetti from 'react-confetti';
+import PropTypes from 'prop-types';
 
 import { setStarsEarned } from '../../redux/actions/stars';
 import { generateRandomItemInArray } from '../../utils';
@@ -63,5 +64,12 @@ const GameCompleteModal = ({ starsEarned = 0, gameCompleteAudio = DEFAULT.UNDEFI
         </Fragment>
     );
 }
+
+GameCompleteModal.propTypes = {
+    starsEarned: PropTypes.number.isRequired,
+    gameCompleteAudio: PropTypes.shape({
+        play: PropTypes.func.isRequired,
+    }),
+};
 
 export default GameCompleteModal;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { DEFAULT } from '../../const';
 
@@ -33,5 +34,10 @@ const StarsToEarn = ({ starsTotal = 0, emptyStars = 0 }) => {
         </div>
     );
 }
+
+StarsToEarn.propTypes = {
+    starsTotal: PropTypes.number,
+    emptyStars: PropTypes.number
+};
 
 export default StarsToEarn;
