@@ -1,6 +1,7 @@
 import { render, screen } from '../utils';
-import App from '../../pages/App';
-import { gameArenaData } from '../../pages/GameArena/data';
+import { gameArenaData } from '../GameArena/data';
+
+import App from './';
 
 describe('App', () => {
     test('renders App component', () => {

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import GameArenaItem from '../../components/GameArena/GameArenaItem';
 
 import { DEFAULT, ROOT_PATH } from '../../const';

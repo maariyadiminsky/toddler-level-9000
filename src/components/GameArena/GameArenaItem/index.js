@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { DEFAULT, ROOT_PATH } from '../../const';
+import { DEFAULT, ROOT_PATH } from '../../../const';
 
-import './css/GameArenaItem.css';
+import './GameArenaItem.css';
 
 const GameArenaItem = ({ imageUrl = DEFAULT.STRING, altText = DEFAULT.STRING, customDivClass = DEFAULT.STRING,  customImgClass = DEFAULT.STRING, link = ROOT_PATH }) => (
     <div className={`game-arena-item ${customDivClass}`}>

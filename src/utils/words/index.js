@@ -15,9 +15,9 @@ import {
     BODY_WORDS,
 
     WORD_TYPE_ERRORS
-} from '../const';
+} from '../../const';
 
-import { generateRandomNumber } from './';
+import { generateRandomNumber } from '../';
 
 export const getNewWordsArray = (wordType = DEFAULT.STRING) => {
     switch(wordType) {

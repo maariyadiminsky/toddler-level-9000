@@ -1,9 +1,10 @@
-import { render, screen } from '../utils';
-import NavBar from '../../components/NavBar/NavBar';
+import { render, screen } from '../../tests/utils';
 import {
     CHOICE_GAME_PATH,
     COLOR_TYPE
 } from '../../const';
+
+import NavBar from './';
 
 describe('NavBar', () => {
     test('renders NavBar component', () => {

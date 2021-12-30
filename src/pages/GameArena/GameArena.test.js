@@ -1,6 +1,7 @@
-import { render, screen } from '../utils';
-import GameArena from '../../pages/GameArena/GameArena';
-import { gameArenaData } from '../../pages/GameArena/data';
+import { render, screen } from '../../utils';
+import { gameArenaData } from './data';
+
+import GameArena from './';
 
 describe('GameArena', () => {
     test('renders GameArena component', () => {

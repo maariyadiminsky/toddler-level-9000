@@ -1,30 +1,30 @@
-import LetsPlayAGame_Girl from '../components/Games/audio/LetsPlayAGame_Girl.mp3';
-import LetsPlayAGame_Boy from '../components/Games/audio/LetsPlayAGame_Boy.mp3';
-import LetsPlayAGame_Man from '../components/Games/audio/LetsPlayAGame_Man.mp3';
-import LetsLearnSomeSocialWords_Girl from '../components/Games/audio/LetsLearnSomeSocialWords_Girl.mp3';
+import LetsPlayAGame_Girl from '../../components/Games/audio/LetsPlayAGame_Girl.mp3';
+import LetsPlayAGame_Boy from '../../components/Games/audio/LetsPlayAGame_Boy.mp3';
+import LetsPlayAGame_Man from '../../components/Games/audio/LetsPlayAGame_Man.mp3';
+import LetsLearnSomeSocialWords_Girl from '../../components/Games/audio/LetsLearnSomeSocialWords_Girl.mp3';
 
-import WhatAnimalDoYouSee_Girl from '../components/Games/audio/WhatAnimalDoYouSee_Girl.mp3';
-import WhatColorDoYouSee_Boy from '../components/Games/audio/WhatColorDoYouSee_Boy.mp3';
-import WhatFoodItemDoYouSee_Man from '../components/Games/audio/WhatFoodItemDoYouSee_Man.mp3';
-import WhatNumberIsThat_Man from '../components/Games/audio/WhatNumberIsThat_Man.mp3';
+import WhatAnimalDoYouSee_Girl from '../../components/Games/audio/WhatAnimalDoYouSee_Girl.mp3';
+import WhatColorDoYouSee_Boy from '../../components/Games/audio/WhatColorDoYouSee_Boy.mp3';
+import WhatFoodItemDoYouSee_Man from '../../components/Games/audio/WhatFoodItemDoYouSee_Man.mp3';
+import WhatNumberIsThat_Man from '../../components/Games/audio/WhatNumberIsThat_Man.mp3';
 
-import GoodJob_Boy from '../components/Games/audio/GoodJob_Boy.mp3';
-import HoorayYouGotThemAll_Girl from '../components/Games/audio/HoorayYouGotThemAll_Girl.mp3';
-import NiceJob_Girl from '../components/Games/audio/NiceJob_Girl.mp3';
-import NiceJob_Man from '../components/Games/audio/NiceJob_Man.mp3';
-import WowNiceJob_Boy from '../components/Games/audio/WowNiceJob_Boy.mp3';
-import WowNiceWork_Girl from '../components/Games/audio/WowNiceWork_Girl.mp3';
-import WowYouGotThemAll_Man from '../components/Games/audio/WowYouGotThemAll_Man.mp3';
-import YayYouDidIt_Girl from '../components/Games/audio/YayYouDidIt_Girl.mp3';
-import YesYouGotThemAll_Boy from '../components/Games/audio/YesYouGotThemAll_Boy.mp3';
-import YouDidIt_Boy from '../components/Games/audio/YouDidIt_Boy.mp3';
-import YouDidIt_Man from '../components/Games/audio/YouDidIt_Man.mp3';
+import GoodJob_Boy from '../../components/Games/audio/GoodJob_Boy.mp3';
+import HoorayYouGotThemAll_Girl from '../../components/Games/audio/HoorayYouGotThemAll_Girl.mp3';
+import NiceJob_Girl from '../../components/Games/audio/NiceJob_Girl.mp3';
+import NiceJob_Man from '../../components/Games/audio/NiceJob_Man.mp3';
+import WowNiceJob_Boy from '../../components/Games/audio/WowNiceJob_Boy.mp3';
+import WowNiceWork_Girl from '../../components/Games/audio/WowNiceWork_Girl.mp3';
+import WowYouGotThemAll_Man from '../../components/Games/audio/WowYouGotThemAll_Man.mp3';
+import YayYouDidIt_Girl from '../../components/Games/audio/YayYouDidIt_Girl.mp3';
+import YesYouGotThemAll_Boy from '../../components/Games/audio/YesYouGotThemAll_Boy.mp3';
+import YouDidIt_Boy from '../../components/Games/audio/YouDidIt_Boy.mp3';
+import YouDidIt_Man from '../../components/Games/audio/YouDidIt_Man.mp3';
 
-import Complete_1 from '../components/Games/audio/Complete_1.mp3';
-import Complete_2 from '../components/Games/audio/Complete_2.mp3';
-import Complete_3 from '../components/Games/audio/Complete_3.mp3';
+import Complete_1 from '../../components/Games/audio/Complete_1.mp3';
+import Complete_2 from '../../components/Games/audio/Complete_2.mp3';
+import Complete_3 from '../../components/Games/audio/Complete_3.mp3';
 
-import { generateRandomItemInArray } from './index';
+import { generateRandomItemInArray } from '../';
 
 import {
     DEFAULT,
@@ -34,7 +34,7 @@ import {
     FOOD_TYPE,
     SOCIAL_TYPE,
     BODY_TYPE
-} from '../const';
+} from '../../const';
 
 export const getWelcomeAudio = (wordType = DEFAULT.STRING) => {
     switch(wordType) {

@@ -3,7 +3,7 @@ import {
     ANIMAL_TYPE,
     FOOD_TYPE,
     SOCIAL_TYPE
-} from '../const';
+} from '../../const';
 
 export const getCorrectImageURL = (url = DEFAULT.STRING, wordType = DEFAULT.STRING) => {
     switch(wordType) {

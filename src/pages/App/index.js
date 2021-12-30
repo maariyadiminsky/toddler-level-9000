@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import ProtectedRoute from '../components/hoc/auth/ProtectedRoute';
+import ProtectedRoute from '../../components/hoc/auth/ProtectedRoute';
 import {
   ROOT_PATH,
   CHOICE_GAME_PATH_GENERAL
-} from '../const';
+} from '../../const';
 
-import NavBar from '../components/NavBar/NavBar';
-import GameArena from './GameArena/GameArena';
-import Game from './Game';
+import NavBar from '../../components/NavBar';
+import GameArena from '../GameArena';
+import Game from '../Game';
 
 // todo: parent section is WIP
 const App = () => (
