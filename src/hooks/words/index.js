@@ -2,10 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
-import { fetchWordData } from '../redux/actions/words';
-import { getUserIdSelector } from '../redux/selectors/auth';
-import { getWordTypeDataSelector } from '../redux/selectors/localStorage';
-import { DEFAULT, SOCIAL_TYPE_FIRST } from '../const';
+import { fetchWordData } from '../../redux/actions/words';
+import { getUserIdSelector } from '../../redux/selectors/auth';
+import { getWordTypeDataSelector } from '../../redux/selectors/localStorage';
+import { DEFAULT, SOCIAL_TYPE_FIRST } from '../../const';
 
 export const useFetchWordData = (
     wordType, 

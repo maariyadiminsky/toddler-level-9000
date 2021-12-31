@@ -10,7 +10,6 @@ import {
 
 import {
     NUMBERS,
-    NUMBERS_ARR,
     NUMBER_WORDS,
     COLORS,
     ANIMALS,

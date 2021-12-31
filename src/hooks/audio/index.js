@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 
-import { DEFAULT } from '../const';
+import { DEFAULT } from '../../const';
 import { 
     getCorrectAudioUrl,
     getWelcomeAudio,
     getStartAudio,
     generateGameCompleteAudio
-} from '../utils/audio';
-import { SET_AUDIO, SET_CURRENT_WORD_AUDIO } from '../components/Games/types';
+} from '../../utils/audio';
+import { SET_AUDIO, SET_CURRENT_WORD_AUDIO } from '../../components/Games/types';
 
 export const useAudio = (truthyCheck = DEFAULT.BOOL_FALSE, audio = DEFAULT.UNDEFINED, wordType = DEFAULT.STRING, sideEffectType = DEFAULT.STRING, dispatch = DEFAULT.NULL) => {
     useEffect(() => {
