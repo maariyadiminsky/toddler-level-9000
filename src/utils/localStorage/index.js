@@ -1,3 +1,3 @@
 import { DEFAULT } from '../../const';
 
-export const hasKeyExistInLocalStorage = (key = DEFAULT.STRING) => localStorage.getItem(key);
+export const getKeyExistInLocalStorage = (key = DEFAULT.STRING) => localStorage.getItem(key);

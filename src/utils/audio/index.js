@@ -122,14 +122,14 @@ export const generateGameCompleteAudio = (wordType = DEFAULT.STRING) => {
         return generateRandomAudioFromArr(audioOptions);
     }
 
-    return audioOptions;
+    return null;
 }
 
 const generateRandomAudioFromArr = (audioOptionsArr = DEFAULT.NULL) => (
     generateRandomItemInArray(audioOptionsArr)
 );
 
-const completeGameSoundEffects = [
+export const completeGameSoundEffects = [
     Complete_1,
     Complete_2,
     Complete_3
@@ -138,11 +138,13 @@ export const generateCompleteSoundEffect = () => {
     return generateRandomItemInArray(completeGameSoundEffects);
 }
 
+export const GENERAL_URL = (sound) => `https://${sound}`;
+export const ALTERNATIVE_URL = (sound) => `https://docs.google.com/uc?export=open&id=${sound}`;
 export const getCorrectAudioUrl = (sound = DEFAULT.STRING, wordType = DEFAULT.STRING) => {
     switch(wordType) {
         case SOCIAL_TYPE:
-            return `https://docs.google.com/uc?export=open&id=${sound}`;
+            return ALTERNATIVE_URL(sound);
         default:
-            return `https://${sound}`;
+            return GENERAL_URL(sound);
     }
 }
