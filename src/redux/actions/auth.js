@@ -1,5 +1,5 @@
 import { SET_USER_ID } from './types';
-import { hasKeyExistInLocalStorage } from '../../utils/localStorage';
+import { getKeyExistInLocalStorage } from '../../utils/localStorage';
 import { setLocalStorageData } from './localStorage';
 
 import { DEFAULT } from '../../const';
@@ -15,7 +15,7 @@ export const setUserId = (userId = DEFAULT.STRING) => (
         });
 
         // set userId doesn't exist in localStorage
-        if (!hasKeyExistInLocalStorage(userId)) {
+        if (!getKeyExistInLocalStorage(userId)) {
             dispatch(setLocalStorageData(userId));
         }
     }

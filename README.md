@@ -73,3 +73,7 @@ I’m aware of these issues, they will be fixed when I have time to work on this
 8. Add all strings into const variables. I'm not ok with directly injecting strings in the long-term.
 9. Fix browser warnings.
 10. If you have browser’s console open you’ll notice the confetti isn’t full page. Close your the console, refresh the page and it should work again. It's because this component is basing the width and height on the window.innerHeight/width and it doesn't update unless refreshed/change page.
+
+## Tests
+* `yarn test a` to test all files.
+* `yarn test -- [component/page/utils method name].test.js` to test a specific file.
