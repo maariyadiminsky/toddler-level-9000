@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DEFAULT, ANIMAL_TYPE, FOOD_TYPE } from '../../../const';
+import { DEFAULT, ANIMAL_TYPE, FOOD_TYPE } from '../../../../const';
 
-import SquareChoiceItem from './SquareChoiceItem';
+import SquareChoiceItem from '../SquareChoiceItem';
 
 const getCustomCSSForWordsToChooseFromBasedOnType = (type = DEFAULT.STRING) => {
     switch(type) {

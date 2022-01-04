@@ -244,7 +244,7 @@ export const MOCK = {
 
 // default param types
 export const DEFAULT = {
-    STRING: null,
+    STRING: '',
     NUMBER: null,
     ARRAY: [],
     OBJECT: {},

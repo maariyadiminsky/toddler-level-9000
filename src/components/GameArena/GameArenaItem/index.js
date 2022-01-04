@@ -6,11 +6,13 @@ import { DEFAULT, ROOT_PATH } from '../../../const';
 
 import './GameArenaItem.css';
 
+export const customDivClassTry = (customDivClass) => `game-arena-item ${customDivClass}`;
+export const customImgClassTry = (customImgClass) => customImgClass === '' ? 'min-w-full' : customImgClass;
 const GameArenaItem = ({ imageUrl = DEFAULT.STRING, altText = DEFAULT.STRING, customDivClass = DEFAULT.STRING,  customImgClass = DEFAULT.STRING, link = ROOT_PATH }) => (
-    <div className={`game-arena-item ${customDivClass}`}>
+    <div className={customDivClassTry(customDivClass)}>
         <Link to={link}>
             <img 
-                className={customImgClass === '' ? 'min-w-full' : customImgClass} 
+                className={customImgClassTry(customImgClass)} 
                 src={imageUrl} 
                 alt={altText}
             />

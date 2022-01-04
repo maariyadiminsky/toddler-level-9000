@@ -1,25 +1,35 @@
-import { render, screen } from '../utils';
-import GameArenaItem from '../../pages//GameArena/GameArenaItem';
-import { gameArenaData } from '../../pages/GameArena/data';
+import { render } from '../../../tests/utils';
+
+import { gameArenaData } from '../../../pages/GameArena/data';
+import GameArenaItem, { customDivClassTry, customImgClassTry } from './';
 
 describe('GameArenaItem', () => {
-    test('renders GameArenaItem component', () => {
-        const gameArenaSampleItem = gameArenaData[0];
+    it('renders component', () => {
+        const { id, imageUrl, altText, customDivClass, customImgClass, link } = gameArenaData[0];
 
-        render(
+        const { container, getByRole } = render(
             <GameArenaItem 
-                key={gameArenaSampleItem.id}
-                imageUrl={gameArenaSampleItem.imageUrl}
-                altText={gameArenaSampleItem.altText}
-                customDivClass={gameArenaSampleItem.customDivClass}
-                customImgClass={gameArenaSampleItem.customImgClass}
-                link={gameArenaSampleItem.link}
+                key={id}
+                imageUrl={imageUrl}
+                altText={altText}
+                customDivClass={customDivClass}
+                customImgClass={customImgClass}
+                link={link}
             />
         );
 
-        // if image alt text for passed data exists it safe to assume GameArenaItem component is rendered
-        const imageAltText = screen.getByAltText(gameArenaSampleItem.altText);
-
-        expect(imageAltText).toBeInTheDocument();
+        // const imageAltText = getByAltText(altText);
+        const wrapperDiv = container.firstChild;
+        const linkEl = getByRole('link');
+        const image = getByRole('img');
+        
+        expect(wrapperDiv).toBeInTheDocument();
+        expect(wrapperDiv).toHaveClass(customDivClassTry(customDivClass));
+        expect(linkEl).toBeInTheDocument();
+        expect(linkEl).toHaveAttribute('href', link);
+        expect(image).toBeInTheDocument();
+        expect(image).toHaveAttribute('src', imageUrl);
+        expect(image).toHaveAttribute('alt', altText);
+        expect(image).toHaveClass(customImgClassTry(customImgClass));
     });
 });

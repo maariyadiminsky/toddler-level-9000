@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DEFAULT } from '../../../const';
-import { getCorrectImageUrlBasedOnType } from '../../../utils/image';
+import { DEFAULT } from '../../../../const';
+import { getCorrectImageUrlBasedOnType } from '../../../../utils/image';
 
 const SquareChoiceItem = ({ item = DEFAULT.STRING, type = DEFAULT.STRING, handleCompleteRoundCallback = DEFAULT.NULL }) => (
     <div onClick={() => handleCompleteRoundCallback(item)} >

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DEFAULT } from '../../../const';
-import { getCustomCSSForWordsToChooseFrom } from '../../../utils/words';
+import { DEFAULT } from '../../../../const';
+import { getCustomCSSForWordsToChooseFrom } from '../../../../utils/words';
 
 const CircleChoiceItem = ({ item = DEFAULT.STRING, type = DEFAULT.STRING, handleCompleteRoundCallback = DEFAULT.NULL }) => (
     <div 

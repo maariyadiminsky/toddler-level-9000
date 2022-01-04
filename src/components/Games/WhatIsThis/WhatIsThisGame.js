@@ -18,7 +18,7 @@ import RandomImageGenerator from '../../Images/RandomImageGenerator';
 import ChoiceItems from '../ChoiceItems/ChoiceItems';
 import StarsToEarn from '../../Stars/StarsToEarn';
 import StartGameButton from '../../StartGameButton/StartGameButton';
-import GameCompleteModal from '../../GameCompleteModal/GameCompleteModal';
+import GameCompleteModal from '../../GameCompleteModal';
 import Loader from '../../Loader/Loader';
 
 const fetchWordDataOptions = (status = DEFAULT.STRING) => ({

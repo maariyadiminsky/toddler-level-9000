@@ -1,4 +1,9 @@
-import { useEffect, useReducer, useRef, useCallback } from 'react';
+import { 
+    useEffect, 
+    useReducer, 
+    useRef, 
+    useCallback 
+} from 'react';
 
 import { DEFAULT } from '../../../const';
 import { isArrayExistAndNotEmpty, wait } from '../../../utils';

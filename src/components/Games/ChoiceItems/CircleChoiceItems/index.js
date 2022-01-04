@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DEFAULT } from '../../../const';
+import { DEFAULT } from '../../../../const';
 
-import CircleChoiceItem from './CircleChoiceItem';
+import CircleChoiceItem from '../CircleChoiceItem';
 
 const CircleChoiceItems = ({ items = DEFAULT.NULL, amountToShowAtOneTimeRef = DEFAULT.NULL, handleCompleteRoundCallback = DEFAULT.NULL, type = DEFAULT.STRING }) => (
     <div className={`mt-16 mx-72 cursor-pointer grid grid-cols-${amountToShowAtOneTimeRef.current} gap-x-10`}>
