@@ -26,7 +26,7 @@ export const useGetLocalStorageData = () => {
     return response;
 }
 
-export const useSetLocalStorageData = () => {
+export const useSetLocalStorageUserId = () => {
     const dispatch = useDispatch();
 
     const { userId } = useAuth();

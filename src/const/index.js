@@ -237,6 +237,11 @@ export const WORD_TYPE_ERRORS = {
 // warnings
 export const GAME_NOT_AVAILABLE_TEMP_MESSAGE = 'Sorry this game is WIP. Please select another.';
 
+export const MOCK = {
+    EXISTS: 'Exists!',
+    PATH: '/somePath',
+}
+
 // default param types
 export const DEFAULT = {
     STRING: null,

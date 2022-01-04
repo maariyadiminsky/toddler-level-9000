@@ -8,7 +8,7 @@ import { DEFAULT } from '../../const'
 
 import '@testing-library/jest-dom';
 
-const Providers = ({ children = DEFAULT.FUNCTION }) => (
+export const Providers = ({ children = DEFAULT.FUNCTION }) => (
     <Provider store={store}>
       <BrowserRouter>
         {children}

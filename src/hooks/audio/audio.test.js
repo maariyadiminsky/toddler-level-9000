@@ -32,8 +32,19 @@ describe('audio custom hooks', () => {
             expect(dispatch).toHaveBeenCalledTimes(2);
         });
 
+        it('doesn\'t call dispatch if passes invalid side effect', () => {
+            const truthyValue = true;
+            const invalidSideEffect = 'some random invalid side effect';
+
+            renderHook(() => {
+                useAudio(truthyValue, wordData?.audio, COLOR_TYPE, invalidSideEffect, dispatch);
+            });
+
+            expect(dispatch).toHaveBeenCalledTimes(0);
+        });
+
         it('doesn\'t call dispatch if truthy value is false', () => {
-            const truthyValue = false
+            const truthyValue = false;
 
             renderHook(() => {
                 useAudio(truthyValue, wordData?.audio, COLOR_TYPE, SET_AUDIO, dispatch);
