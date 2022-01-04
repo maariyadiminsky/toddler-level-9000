@@ -58,7 +58,9 @@ Well more specifically—
 7. Through word into the basket game.
 
 ### Other Notes/Todo:
-My priority for this project was just to complete some games so my kid can start learning. Usually I would take more time to focus on things like code cleanup, responsiveness and tests etc. after. For now these extra things are WIP while I work on another project.
+My priority for this project was just to complete some games so my kid can start learning. Usually I would take more time to focus on things like code cleanup, responsiveness etc. after. For now these extra things are WIP while I work on another project.
+
+Update: Adding tests in [this PR](https://github.com/maariyadiminsky/toddler-level-9000/pull/4), WIP.
 
 I’m aware of these issues, they will be fixed when I have time to work on this project further:
 1. I need to debounce requests—currently some rerenders are making multiple requests to the same asset source.
